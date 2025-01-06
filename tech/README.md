@@ -1,7 +1,8 @@
 # Technicial English Class Notes
 > Book: Career Paths - Information Technology, Virginia Evans, Express Publishing\
-> Pages: 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 51, 52
-
+> Midterm Pages: 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 51, 52
+> Final Pages: 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 45, 46, 47, 48, image1, image2, image3, image4, image5, image6
+# Midterm
 ## Page 6, 7
 - Software
   > EN: Programs/instructions added to computers\
@@ -274,3 +275,300 @@
 - SATA
   > EN: A type of cable used to connect disks\
   > TR: Diskleri bağlamak için kullanılan bir kablo türü
+
+# Final
+## Page 22, 23
+- URL
+  > EN: The address of a website\
+  > TR: Bir web sitesinin adresi
+- Meta Tag
+  > EN: Information about a website\
+  > TR: Bir web sitesi hakkında bilgi
+- Search Engine
+  > EN: A program that finds information on the internet\
+  > TR: İnternette bilgi bulan bir program
+- Hyperlink
+  > EN: A link to another website\
+  > TR: Başka bir web sitesine bağlantı
+- HTTP
+  > EN: A system that sends web pages to your computer\
+  > TR: Web sayfalarını bilgisayarınıza gönderen bir sistem
+- HTML
+  > EN: A language used to create web pages\
+  > TR: Web sayfaları oluşturmak için kullanılan bir dil
+- Web Browser
+  > EN: A program that displays web pages\
+  > TR: Web sayfalarını gösteren bir program
+- Web Host
+  > EN: A company that stores web pages\
+  > TR: Web sayfalarını depolayan bir şirket
+- Website
+  > EN: A group of web pages\
+  > TR: Web sayfalarının bir grubu
+- WWW
+  > EN: A system that connects web pages\
+  > TR: Web sayfalarını bağlayan bir sistem
+
+## Page 24, 25
+- Resolution
+  > EN: The number of pixels on a screen\
+  > TR: Bir ekrandaki piksellerin sayısı
+- Crop
+  > EN: To cut part of an image\
+  > TR: Bir resmin bir kısmını kesmek
+- Contrast
+  > EN: The difference between light and dark\
+  > TR: Işık ve karanlık arasındaki fark
+- Graphic editing program
+  > EN: A program that changes images\
+  > TR: Resimleri değiştiren bir program
+- Exposure
+  > EN: The amount of light in a photo\
+  > TR: Bir fotoğraftaki ışık miktarı
+- Resize
+  > EN: To change the size of an image\
+  > TR: Bir resmin boyutunu değiştirmek
+- JPEG
+  > EN: A type of image file\
+  > TR: Bir resim dosyası türü
+- Pixel
+  > EN: A small dot on a screen\
+  > TR: Bir ekrandaki küçük nokta
+- Tint
+  > EN: A small amount of color\
+  > TR: Küçük bir renk miktarı
+
+## Page 26, 27
+- Formula
+  > EN: A set of instructions\
+  > TR: Bir dizi talimat
+- Table
+  > EN: A set of data in rows and columns\
+  > TR: Satırlar ve sütunlar halindeki bir veri seti
+- Spreadsheet
+  > EN: A program that creates tables\
+  > TR: Tablolar oluşturan bir program
+- Cell
+  > EN: A box in a table\
+  > TR: Bir tabloda bir kutu
+- Database
+  > EN: A program that stores data\
+  > TR: Verileri depolayan bir program
+- Field
+  > EN: A category of data\
+  > TR: Bir veri kategorisi
+- Query
+  > EN: A question about data\
+  > TR: Verilerle ilgili bir soru
+- Function
+  > EN: A formula that does a specific task\
+  > TR: Belirli bir görevi yapan bir formül
+- Operator
+  > EN: A symbol that performs a task\
+  > TR: Bir görevi yerine getiren bir sembol
+- Worksheet
+  > EN: A page in a spreadsheet\
+  > TR: Bir elektronik tabloda bir sayfa
+- Sort
+  > EN: To put data in order\
+  > TR: Verileri sıraya koymak
+
+## Page 28, 29
+- Web Design
+  > EN: The process of creating a website\
+  > TR: Bir web sitesi oluşturma süreci
+- Web Development
+  > EN: The process of creating a website\
+  > TR: Bir web sitesi oluşturma süreci
+- Navigation
+  > EN: The way you move around a website\
+  > TR: Bir web sitesinde dolaşma şekli
+- Coding
+  > EN: Writing instructions for a website\
+  > TR: Bir web sitesi için talimat yazma
+- Functionality
+  > EN: The way a website works\
+  > TR: Bir web sitesinin çalışma şekli
+- Usability
+  > EN: How easy a website is to use\
+  > TR: Bir web sitesinin ne kadar kolay kullanıldığı
+- Visibility
+  > EN: How easy a website is to find\
+  > TR: Bir web sitesinin ne kadar kolay bulunduğu
+- CSS
+  > EN: A language used to design websites\
+  > TR: Web siteleri tasarlamak için kullanılan bir dil
+- Appearance
+  > EN: The way a website looks\
+  > TR: Bir web sitesinin göründüğü şekil
+- Content
+  > EN: The information on a website\
+  > TR: Bir web sitesindeki bilgi
+
+## Page 30, 31
+- Offset Lithography
+  > EN: A printing process\
+  > TR: Bir baskı süreci
+- Electronic Paper
+  > EN: A type of paper that can display images\
+  > TR: Görüntüler gösterebilen bir kağıt türü
+- Electrostatic Printing
+  > EN: A printing process\
+  > TR: Bir baskı süreci
+- Clip Art
+  > EN: Images that can be used in documents\
+  > TR: Belgelerde kullanılabilen resimler
+- Page Layout
+  > EN: The way a page is arranged\
+  > TR: Bir sayfanın düzenlendiği şekil
+- Desktop Publishing
+  > EN: The process of creating documents\
+  > TR: Belgeler oluşturma süreci
+- Graphic Communication
+  > EN: The process of creating images\
+  > TR: Görüntüler oluşturma süreci
+- Design
+  > EN: The way something looks\
+  > TR: Bir şeyin göründüğü şekil
+- Compherensive Layout
+  > EN: A plan for a document\
+  > TR: Bir belge için bir plan
+
+## Page 32, 33
+- Webcam
+  > EN: A camera that sends images to a computer\
+  > TR: Bir bilgisayara görüntü gönderen bir kamera
+- Dedicated System
+  > EN: A computer that does one job\
+  > TR: Bir işi yapan bir bilgisayar
+- Video Conference
+  > EN: A meeting that takes place over the internet\
+  > TR: İnternet üzerinden gerçekleşen bir toplantı
+- Multipoint Video Conference
+  > EN: A meeting that takes place over the internet\
+  > TR: İnternet üzerinden gerçekleşen bir toplantı
+- Document Sharing
+  > EN: A system that allows people to work on the same document\
+  > TR: İnsanların aynı belge üzerinde çalışmasına izin veren bir sistem
+- Monitor
+  > EN: A device that displays images\
+  > TR: Görüntüleri gösteren bir cihaz
+- Video Bridge
+  > EN: A device that connects video conferences\
+  > TR: Video konferansları birleştiren bir cihaz
+- Echo Cancellation
+  > EN: A system that removes background noise\
+  > TR: Arka plan gürültüsünü kaldıran bir sistem
+
+## Page 34, 35
+- E-Commerce
+  > EN: Buying and selling things on the internet\
+  > TR: İnternet üzerinden alışveriş yapma
+- Traffic
+  > EN: The number of people who visit a website\
+  > TR: Bir web sitesini ziyaret eden insanların sayısı
+- FAQ
+  > EN: A list of common questions and answers\
+  > TR: Sıkça sorulan soruların ve cevapların bir listesi
+- Shopping Cart
+  > EN: A system that holds items you want to buy\
+  > TR: Satın almak istediğiniz öğeleri tutan bir sistem
+- Brick and Mortar
+  > EN: A physical store\
+  > TR: Fiziksel bir mağaza
+- Affiliate
+  > EN: A company that sells another company's products\
+  > TR: Başka bir şirketin ürünlerini satan bir şirket
+- Banner
+  > EN: An advertisement on a website\
+  > TR: Bir web sitesindeki bir reklam
+- Page View
+  > EN: The number of times a page is visited\
+  > TR: Bir sayfanın ziyaret edildiği sayı
+- Digital Certificate
+  > EN: A code that proves a website is secure\
+  > TR: Bir web sitesinin güvenli olduğunu kanıtlayan bir kod
+- Certificate Authority
+  > EN: A company that provides digital certificates\
+  > TR: Dijital sertifikalar sağlayan bir şirket
+
+## Page 45, 46
+- Motherboard
+  > EN: A slotted board with circuits and ports\
+  > TR: Devreler ve portlarla yuvalı bir kart
+- RAM
+  > EN: A short term, quick memory source\
+  > TR: Kısa süreli, hızlı bellek kaynağı
+- Virtual Memory
+  > EN: A system that uses hard drive space as memory\
+  > TR: Sabit disk alanını bellek olarak kullanan bir sistem
+- CPU
+  > EN: A part that completes tasks for the computer\
+  > TR: Bilgisayar için görevleri tamamlayan bir parça
+- Hard Drive
+  > EN: A part used to store large amounts of data\
+  > TR: Büyük miktarda veri depolamak için kullanılan bir parça
+- DIMM
+  > EN: A type of memory\
+  > TR: Bir bellek türü
+- MB
+  > EN: A unit of memory\
+  > TR: Bir bellek birimi
+- Bit size
+  > EN: The amount of data a computer can process\
+  > TR: Bir bilgisayarın işleyebileceği veri miktarı
+- Bus Speed
+  > EN: The speed at which data travels\
+  > TR: Verinin seyahat ettiği hız
+- Mhz
+  > EN: A unit of speed\
+  > TR: Bir hız birimi
+- SIMM
+  > EN: A type of memory\
+  > TR: Bir bellek türü
+- Paging File
+  > EN: A file that stores data\
+  > TR: Veri depolayan bir dosya
+
+## Page 47, 48
+- C
+  > EN: A programming language\
+  > TR: Bir programlama dili
+- C++
+  > EN: A programming language\
+  > TR: Bir programlama dili
+- Java
+  > EN: A programming language\
+  > TR: Bir programlama dili
+- C#
+  > EN: A programming language\
+  > TR: Bir programlama dili
+- Assembler
+  > EN: A programming language\
+  > TR: Bir programlama dili
+- Basic
+  > EN: A programming language\
+  > TR: Bir programlama dili
+- Compiler
+  > EN: A program that changes code into a program\
+  > TR: Kodu bir programa dönüştüren bir program
+- Linker
+  > EN: A program that connects parts of a program\
+  > TR: Bir programın parçalarını birleştiren bir program
+- Machine Code
+  > EN: A language that a computer understands\
+  > TR: Bir bilgisayarın anladığı bir dil
+- CPU
+  > EN: A part that completes tasks for the computer\
+  > TR: Bilgisayar için görevleri tamamlayan bir parça
+- Multi-threading
+  > EN: A system that allows a computer to do many things at once\
+  > TR: Bir bilgisayarın aynı anda birçok şey yapmasına izin veren bir sistem
+
+## Image 1, 2, 3, 4, 5, 6
+![alt text](1.png)
+![alt text](2.png)
+![alt text](3.png)
+![alt text](4.png)
+![alt text](5.png)
+![alt text](6.png)
