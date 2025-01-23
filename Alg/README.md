@@ -43,7 +43,7 @@
 |10<sup>2</sup>|2|100|200|10000|1000000|1048576|1.1240007277776077e+301|
 |10<sup>3</sup>|3|1000|3000|1000000|1000000000|1073741824|9.332621544394415e+157|
 
-![Graph](Alg\Images\orderofgrowthgraph.png)
+![Graph](Images/orderofgrowthgraph.png)
 
 ### Order of Growth Notation
 #### Big-O Notation
@@ -51,7 +51,7 @@
 - T(n) = O(f(n)) if and only if there exist positive constants c and n<sub>0</sub> such that 0 ≤ T(n) ≤ cf(n) for all n ≥ n<sub>0</sub>.
 - Örnek: T(n) = 5n<sup>2</sup> + 3n + 2, T(n) = O(n<sup>2</sup>)
 - Örnek: T(n) = 3n<sup>n</sup> + 2<sup>n</sup>, T(n) = O(n<sup>n</sup>)
-![alt text](Alg\Images\bigograph.png)
+![alt text](Images/bigograph.png)
 
 #### Big-Ω (Omega) Notation
 - Bir algoritmanın çalışma zamanının en iyi durumda ne kadar süreceğini belirlemek için kullanılır.
@@ -64,7 +64,7 @@
 - T(n) = Θ(f(n)) if and only if there exist positive constants c<sub>1</sub>, c<sub>2</sub> and n<sub>0</sub> such that 0 ≤ c<sub>1</sub>f(n) ≤ T(n) ≤ c<sub>2</sub>f(n) for all n ≥ n<sub>0</sub>.
 - Örnek: T(n) = 5n<sup>2</sup> + 3n + 2, T(n) = Θ(n<sup>2</sup>)
 - Örnek: T(n) = 3n<sup>n</sup> + 2<sup>n</sup>, T(n) = Θ(n<sup>n</sup>)
-![alt text](Alg\Images\bigthetagraph.png)
+![alt text](Images/bigthetagraph.png)
 
 ### Selection Sort
 - Selection sort, bir diziyi sıralamak için kullanılan bir algoritmadır.
@@ -72,7 +72,7 @@
 - En kötü durumda O(n<sup>2</sup>) zaman karmaşıklığına sahiptir.
 - En iyi durumda O(n<sup>2</sup>) zaman karmaşıklığına sahiptir.
 - Ortalama durumda O(n<sup>2</sup>) zaman karmaşıklığına sahiptir.
-![alt text](Alg\Images\selectionsort.gif)
+![alt text](Images/selectionsort.gif)
 
 ### Bubble Sort
 - Bubble sort, bir diziyi sıralamak için kullanılan bir algoritmadır.
@@ -80,7 +80,7 @@
 - En kötü durumda O(n<sup>2</sup>) zaman karmaşıklığına sahiptir.
 - En iyi durumda O(n) zaman karmaşıklığına sahiptir.
 - Ortalama durumda O(n<sup>2</sup>) zaman karmaşıklığına sahiptir.
-![alt text](Alg\Images\bubblesort.gif)
+![alt text](Images/bubblesort.gif)
 
 ### Insertion Sort
 - Insertion sort, bir diziyi sıralamak için kullanılan bir algoritmadır.
@@ -88,7 +88,7 @@
 - En kötü durumda O(n<sup>2</sup>) zaman karmaşıklığına sahiptir.
 - En iyi durumda O(n) zaman karmaşıklığına sahiptir.
 - Ortalama durumda O(n<sup>2</sup>) zaman karmaşıklığına sahiptir.
-![alt text](Alg\Images\insertionsort.gif)
+![alt text](Images/insertionsort.gif)
 
 ### Merge Sort
 - Merge sort, bir diziyi sıralamak için kullanılan bir algoritmadır.
@@ -96,7 +96,7 @@
 - En kötü durumda O(nlogn) zaman karmaşıklığına sahiptir.
 - En iyi durumda O(nlogn) zaman karmaşıklığına sahiptir.
 - Ortalama durumda O(nlogn) zaman karmaşıklığına sahiptir.
-![alt text](Alg\Images\mergesort.gif)
+![alt text](Images/mergesort.gif)
 
 ### Quick Sort
 - Quick sort, bir diziyi sıralamak için kullanılan bir algoritmadır.
@@ -104,7 +104,7 @@
 - En kötü durumda O(n<sup>2</sup>) zaman karmaşıklığına sahiptir.
 - En iyi durumda O(nlogn) zaman karmaşıklığına sahiptir.
 - Ortalama durumda O(nlogn) zaman karmaşıklığına sahiptir.
-![alt text](Alg\Images\quicksort.gif)
+![alt text](Images/quicksort.gif)
 
 ### Sequential Search
 - Sequential search, bir dizide bir elemanın olup olmadığını kontrol etmek için kullanılan bir algoritmadır.
@@ -112,7 +112,7 @@
 - En kötü durumda O(n) zaman karmaşıklığına sahiptir.
 - En iyi durumda O(1) zaman karmaşıklığına sahiptir.
 - Ortalama durumda O(n) zaman karmaşıklığına sahiptir.
-![alt text](Alg\Images\sequentialsearch.gif)
+![alt text](Images/sequentialsearch.gif)
 
 ### Binary Search
 - Binary search, bir dizide bir elemanın olup olmadığını kontrol etmek için kullanılan bir algoritmadır.
@@ -121,7 +121,7 @@
 - En kötü durumda O(log<sub>2</sub>n) zaman karmaşıklığına sahiptir.
 - En iyi durumda O(1) zaman karmaşıklığına sahiptir.
 - Ortalama durumda O(log<sub>2</sub>n) zaman karmaşıklığına sahiptir.
-![alt text](Alg\Images\binarysearch.gif)
+![alt text](Images/binarysearch.gif)
 
 ### Traveling Salesman Problem
 - Traveling salesman problem, bir satıcı için en kısa yolu bulmak için kullanılan bir algoritmadır.
@@ -129,7 +129,7 @@
 - En kötü durumda O(n!) zaman karmaşıklığına sahiptir.
 - En iyi durumda O(n<sup>2</sup>2<sup>n</sup>) zaman karmaşıklığına sahiptir.
 - Ortalama durumda O(n<sup>2>2<sup>n</sup>) zaman karmaşıklığına sahiptir.
-![alt text](Alg\Images\travelingsalesman.png)
+![alt text](Images/travelingsalesman.png)
 
 ### Knapsack Problem
 - Knapsack problem, bir çantanın kapasitesi dahilinde en değerli eşyaları seçmek için kullanılan bir algoritmadır.
@@ -147,39 +147,39 @@
 - En kötü durumda O(n!) zaman karmaşıklığına sahiptir.
 - En iyi durumda O(n<sup>3</sup>) zaman karmaşıklığına sahiptir.
 - Ortalama durumda O(n<sup>3</sup>) zaman karmaşıklığına sahiptir.
-![alt text](Alg\Images\assignmentproblem.png)
+![alt text](Images/assignmentproblem.png)
 
 ### Graphs
 - Graph, düğümler ve kenarlardan oluşan bir veri yapısıdır.
 - Düğümler (vertex) ve kenarlar (edge) ile tanımlanır.
 - Düğümler arasındaki ilişkileri gösterir.
-![alt text](Alg\Images\graphs.png)
+![alt text](Images/graphs.png)
 - Yönlü graf: Kenarlar bir yönden diğerine doğru gider.
-![alt text](Alg\Images\directionalgraphs.png)
+![alt text](Images/directionalgraphs.png)
 
 #### Graph Representation
 - Adjacency matrix: Düğümler arasındaki ilişkileri matris olarak gösterir.
-![alt text](Alg\Images\adjacencymatrix.png)
+![alt text](Images/adjacencymatrix.png)
 - Adjacency list: Düğümler arasındaki ilişkileri liste olarak gösterir.
-![alt text](Alg\Images\adjacencylist.png)
+![alt text](Images/adjacencylist.png)
 
 #### Topological Sort
 - Topological sort, ön şartları olan işleri sıralamak için kullanılan bir algoritmadır.
-![alt text](Alg\Images\topologicalsort.png)
+![alt text](Images/topologicalsort.png)
 
 #### Depth First Search
 - Depth first searc
 - Önceliği derinliğe verir.
 - Önce en uzun yola gider.
-![alt text](Alg\Images\depthfirstsearchtree.gif)
-![alt text](Alg\Images\depthfirstsearchgraph.gif)
+![alt text](Images/depthfirstsearchtree.gif)
+![alt text](Images/depthfirstsearchgraph.gif)
 
 #### Breadth First Search
 - Breadth first search, bir düğümü ziyaret edip diğer düğümleri ziyaret etmek için kullanılan bir algoritmadır.
 - Önceliği genişliğe verir.
 - Önce en kısa yola gider.
-![alt text](Alg\Images\breadthfirstsearchtree.gif)
-![alt text](Alg\Images\breadthfirstsearchgraph.gif)
+![alt text](Images/breadthfirstsearchtree.gif)
+![alt text](Images/breadthfirstsearchgraph.gif)
 
 ### Master Theorem
 - Master theorem, bir algoritmanın çalışma zamanını belirlemek için kullanılan bir tekniktir.
@@ -200,14 +200,14 @@
 - Binary tree, her düğümün en fazla iki çocuğu olan bir ağaç yapısıdır.
 - Düğümler, sol ve sağ olmak üzere iki çocuğa sahiptir.
 - Düğümler, kök, yaprak ve iç düğüm olmak üzere üç türe ayrılır.
-![alt text](Alg\Images\binarytree.png)
+![alt text](Images/binarytree.png)
 
 #### AVL Tree
 - AVL tree, bir binary tree yapısıdır.
 - Her düğümün yüksekliği en fazla 1 fark olacak şekilde dengelenir.
 - Düğümler, sağ ve sol olmak üzere iki çocuğa sahiptir.
 - Düğümler, kök, yaprak ve iç düğüm olmak üzere üç türe ayrılır.
-![alt text](Alg\Images\avltree.png)
+![alt text](Images/avltree.png)
 - Balance factor: Düğümün sağ ve sol alt ağaç yüksekliği farkı.
 
 #### 2-3 Tree
@@ -217,8 +217,8 @@
 - Düğüm 2 çocuğa sahipse 2-node, 3 çocuğa sahipse 3-node olarak adlandırılır.
 - 2-node: 1 anahtar, 2 çocuk, sol alt ağaçtaki anahtarlar küçük, sağ alt ağaçtaki anahtarlar büyük
 - 3-node: 2 anahtar, 3 çocuk, sol alt ağaçtaki anahtarlar küçük, ortadaki anahtarlar orta, sağ alt ağaçtaki anahtarlar büyük
-![alt text](Alg\Images\2-3trees.png)
-![alt text](Alg\Images\2-3treesExample.png)
+![alt text](Images/2-3trees.png)
+![alt text](Images/2-3treesExample.png)
 
 #### Heap
 - Heap, bir binary tree yapısıdır.
@@ -228,7 +228,7 @@
 - Dengeli bir binary tree yapısıdır.
 - Min heap: Her düğüm kendisinden küçük olan çocuklara sahiptir.
 - Max heap: Her düğüm kendisinden büyük olan çocuklara sahiptir.
-![alt text](Alg\Images\heap.png)
+![alt text](Images/heap.png)
 
 #### Heap Sort
 - Heap sort, bir diziyi sıralamak için kullanılan bir algoritmadır.
@@ -237,7 +237,7 @@
 #### Sorting by Counting
 - Sorting by counting, bir diziyi sıralamak için kullanılan bir algoritmadır.
 - Dizideki elemanları sayar ve sıralar.
-![alt text](Alg\Images\sortingbycounting.png)
+![alt text](Images/sortingbycounting.png)
 
 ### Horspool's Algorithm
 - Horspool's algorithm, bir string içinde bir pattern aramak için kullanılan bir algoritmadır.
@@ -248,7 +248,7 @@
 - Letter Value = (Pattern Length - 1) - Index
 - Every other character = Pattern Length
 - Last character = Pattern Length if not already set
-![alt text](Alg\Images\horspools.png)
+![alt text](Images/horspools.png)
 
 ### Boyer-Moore Algorithm
 - Boyer-Moore algorithm, bir string içinde bir pattern aramak için kullanılan bir algoritmadır.
@@ -329,7 +329,7 @@
 - B-trees, bir binary tree yapısıdır.
 - Her düğümün en fazla m çocuğu vardır.
 - Düğümler, kök, yaprak ve iç düğüm olmak üzere üç türe ayrılır.
-![alt text](Alg\Images\btree.gif)
+![alt text](Images/btree.gif)
 
 ### Coin-Row Problem
 - Coin-row problem, bir dizi parayı seçmek için kullanılan bir algoritmadır.
@@ -339,49 +339,49 @@
 > F(n) = max(c<sub>n</sub> + F(n-2), F(n-1))\
 > F(0) = 0, F(1) = c<sub>1</sub>
 
-![alt text](Alg\Images\coinrow.png)
+![alt text](Images/coinrow.png)
 
 ### KnapSack Problem
 - KnapSack problem, bir çantanın kapasitesi dahilinde en değerli eşyaları seçmek için kullanılan bir algoritmadır.
 - n eşyaları olan bir dizi.
 - Her eşyanın ağırlığı ve değeri vardır.
 - Çantanın kapasitesi dahilinde en değerli eşyaları seçer.
-![alt text](Alg\Images\knapsack.png)
+![alt text](Images/knapsack.png)
 
 ### Floyd-Warshall Algorithm
 - Floyd-Warshall algorithm, bir graf içindeki en kısa yolu bulmak için kullanılan bir algoritmadır.
 - Her düğüm arasındaki en kısa yolu bulur.
 - Düğümler arasındaki ağırlıkları hesaplar.
 - Düğümler arasındaki en kısa yolu bulur.
-![alt text](Alg\Images\floydwarshall.png)
+![alt text](Images/floydwarshall.png)
 
 ### Spanning Tree
 - Spanning tree, bir graf içindeki en kısa yolu bulmak için kullanılan bir algoritmadır.
 - Bir graf içindeki tüm düğümleri ve kenarları içerir.
 - Düğümler arasındaki en kısa yolu bulur.
 - Döngüleri yok eder.
-![alt text](Alg\Images\spanningtree.png)
+![alt text](Images/spanningtree.png)
 
 ### Prim's Algorithm
 - Prim's algorithm, bir graf içindeki en kısa yolu bulmak için kullanılan bir algoritmadır.
 - Bir düğümden başlayarak en kısa yolu bulur.
 - Düğümler arasındaki ağırlıkları hesaplar.
 - Düğümler arasındaki en kısa yolu bulur.
-![alt text](Alg\Images\prims.png)
+![alt text](Images/prims.png)
 
 ### Kruskal's Algorithm
 - Kruskal's algorithm, bir graf içindeki en kısa yolu bulmak için kullanılan bir algoritmadır.
 - Düşük ağırlıklı kenarları birleştirir.
 - Düğümler arasındaki ağırlıkları hesaplar.
 - Düğümler arasındaki en kısa yolu bulur.
-![alt text](Alg\Images\kruskals.png)
+![alt text](Images/kruskals.png)
 
 ### Dijkstra's Algorithm
 - Dijkstra's algorithm, bir graf içindeki en kısa yolu bulmak için kullanılan bir algoritmadır.
 - Bir düğümden başlayarak en kısa yolu bulur.
 - Düğümler arasındaki ağırlıkları hesaplar.
 - Düğümler arasındaki en kısa yolu bulur.
-![alt text](Alg\Images\dijkstras.png)
+![alt text](Images/dijkstras.png)
 
 ### Huffman Coding
 - Huffman coding, bir string içindeki karakterleri kodlamak için kullanılan bir algoritmadır.
@@ -390,18 +390,18 @@
 - En az kullanılan karakterlere en uzun kodları verir.
 - Küçükten büyüğe sıralanır. Ağaç yapısı oluşturulur.
 - Sol çocuk 0, sağ çocuk 1 olarak kodlanır.
-![alt text](Alg\Images\huffmancoding.gif)
+![alt text](Images/huffmancoding.gif)
 
 ### Bellman-Ford Algorithm
 - Bellman-Ford algorithm, bir graf içindeki en kısa yolu bulmak için kullanılan bir algoritmadır.
 - Bir düğümden başlayarak en kısa yolu bulur.
 - Düğümler arasındaki ağırlıkları hesaplar.
 - Düğümler arasındaki en kısa yolu bulur.
-![alt text](Alg\Images\bellmanford.png)
+![alt text](Images/bellmanford.png)
 
 ### Ford-Fulkerson Algorithm
 - Ford-Fulkerson algorithm, bir graf içindeki en kısa yolu bulmak için kullanılan bir algoritmadır.
 - Bir düğümden başlayarak en kısa yolu bulur.
 - Düğümler arasındaki ağırlıkları hesaplar.
 - Düğümler arasındaki en kısa yolu bulur.
-![alt text](Alg\Images\fordfulkerson.png)
+![alt text](Images/fordfulkerson.png)
