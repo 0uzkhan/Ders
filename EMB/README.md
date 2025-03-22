@@ -89,199 +89,199 @@
 ## Data Transfer Instructions
 - MOV
     > Moves data from one location to another
-    > Example: `MOV AX, BX`
+    > Example: `MOV AX, BX`\
     > ![MOV](Images/MOV.png)
 
 ## Arithmetic Instructions
 - ADD
     > Adds two operands
-    > Example: `ADD AX, BX`
+    > Example: `ADD AX, BX`\
     > ![ADD](Images/ADD.png)
 - INC
     > Increments an operand by 1
-    > Example: `INC AX`
+    > Example: `INC AX`\
     > ![INC](Images/INC.png)
 - ADC
     > Adds two operands with carry
-    > Example: `ADC AX, BX`
+    > Example: `ADC AX, BX`\
     > ![ADC](Images/ADC.png)
 - SUB
     > Subtracts two operands
-    > Example: `SUB AX, BX`
+    > Example: `SUB AX, BX`\
     > ![SUB](Images/SUB.png)
 - DEC
     > Decrements an operand by 1
-    > Example: `DEC AX`
+    > Example: `DEC AX`\
     > ![DEC](Images/DEC.png)
 - SBB
     > Subtracts two operands with borrow
-    > Example: `SBB AX, BX`
+    > Example: `SBB AX, BX`\
     > ![SBB](Images/SBB.png)
 - CMP
     > Compares two operands
-    > Example: `CMP AX, BX`
+    > Example: `CMP AX, BX`\
     > ![CMP](Images/CMP.png)
 - MUL
     > Multiplies two operands
-    > Example: `MUL BX`
+    > Example: `MUL BX`\
     > ![MUL](Images/MUL.png)
 - IMUL
     > Multiplies two signed operands
-    > Example: `IMUL BX`
+    > Example: `IMUL BX`\
     > ![IMUL](Images/IMUL.png)
 - DIV
     > Divides two operands
-    > Example: `DIV BX`
+    > Example: `DIV BX`\
     > ![DIV](Images/DIV.png)
 - IDIV
     > Divides two signed operands
-    > Example: `IDIV BX`
+    > Example: `IDIV BX`\
     > ![IDIV](Images/IDIV.png)
 
 ## Logical Instructions
 - AND
     > Performs a bitwise AND operation
-    > Example: `AND AX, BX`
+    > Example: `AND AX, BX`\
     > ![AND](Images/AND.png)
 - OR
     > Performs a bitwise OR operation
-    > Example: `OR AX, BX`
+    > Example: `OR AX, BX`\
     > ![OR](Images/OR.png)
 - XOR
     > Performs a bitwise XOR operation
-    > Example: `XOR AX, BX`
+    > Example: `XOR AX, BX`\
     > ![XOR](Images/XOR.png)
 - NOT
     > Performs a bitwise NOT operation
-    > Example: `NOT AX`
+    > Example: `NOT AX`\
     > ![NOT](Images/NOT.png)
 - TEST
     > Performs a bitwise AND operation without storing the result
-    > Example: `TEST AX, BX`
+    > Example: `TEST AX, BX`\
     > ![TEST](Images/TEST.png)
 - NEG
     > Negates an operand
-    > Example: `NEG AX`
+    > Example: `NEG AX`\
     > ![NEG](Images/NEG.png)
 
 ## Shift and Rotate Instructions
 - SHL (SAL)
     > Shifts the bits of an operand to the left
-    > Example: `SHL AX, 1`
+    > Example: `SHL AX, 1`\
     > ![SHL](Images/SHL.png)
 - SHR
     > Shifts the bits of an operand to the right
-    > Example: `SHR AX, 1`
+    > Example: `SHR AX, 1`\
     > ![SHR](Images/SHR.png)
 - ROL
     > Rotates the bits of an operand to the left
-    > Example: `ROL AX, 1`
+    > Example: `ROL AX, 1`\
     > ![ROL](Images/ROL.png)
 - ROR
     > Rotates the bits of an operand to the right
-    > Example: `ROR AX, 1`
+    > Example: `ROR AX, 1`\
     > ![ROR](Images/ROR.png)
 - SAL
     > Shifts the bits of an operand to the left
-    > Example: `SAL AX, 1`
+    > Example: `SAL AX, 1`\
     > ![SAL](Images/SAL.png)
 - SAR
     > Shifts the bits of an operand to the right
-    > Example: `SAR AX, 1`
+    > Example: `SAR AX, 1`\
     > ![SAR](Images/SAR.png)
 - RCL
     > Rotates the bits of an operand to the left through the carry flag
-    > Example: `RCL AX, 1`
+    > Example: `RCL AX, 1`\
     > ![RCL](Images/RCL.png)
 - RCR
     > Rotates the bits of an operand to the right through the carry flag
-    > Example: `RCR AX, 1`
+    > Example: `RCR AX, 1`\
     > ![RCR](Images/RCR.png)
 
 ## String Instructions
 - LEA
     > Loads the effective address of a memory location into a register
-    > Example: `LEA AX, [1000]`
+    > Example: `LEA AX, [1000]`\
     > ![LEA](Images/LEA.png)
 - MOVSB
-    > Moves a byte from the source to the destination
+    > Moves a byte from the source to the destination\
     > ![MOVSB](Images/MOVSB.png)
 - MOVSW
-    > Moves a word from the source to the destination
+    > Moves a word from the source to the destination\
     > ![MOVSW](Images/MOVSW.png)
 - CMPSB
-    > Compares a byte from the source with a byte from the destination
+    > Compares a byte from the source with a byte from the destination\
     > ![CMPSB](Images/CMPSB.png)
 - CMPSW
-    > Compares a word from the source with a word from the destination
+    > Compares a word from the source with a word from the destination\
     > ![CMPSW](Images/CMPSW.png)
 - SCASB
-    > Compares a byte from the destination with the accumulator
+    > Compares a byte from the destination with the accumulator\
     > ![SCASB](Images/SCASB.png)
 - SCASW
-    > Compares a word from the destination with the accumulator
+    > Compares a word from the destination with the accumulator\
     > ![SCASW](Images/SCASW.png)
 - LODSB
-    > Loads a byte from the source into the accumulator
+    > Loads a byte from the source into the accumulator\
     > ![LODSB](Images/LODSB.png)
 - LODSW
-    > Loads a word from the source into the accumulator
+    > Loads a word from the source into the accumulator\
     > ![LODSW](Images/LODSW.png)
 - STOSB
-    > Stores a byte from the accumulator into the destination
+    > Stores a byte from the accumulator into the destination\
     > ![STOSB](Images/STOSB.png)
 - STOSW
-    > Stores a word from the accumulator into the destination
+    > Stores a word from the accumulator into the destination\
     > ![STOSW](Images/STOSW.png)
 
 ## Control Transfer Instructions
 - JMP
     > Jumps to a specified address
-    > Example: `JMP 1000`
+    > Example: `JMP 1000`\
     > ![JMP](Images/JMP.png)
 - JA
     > Jumps if above (CF=0 and ZF=0)
-    > Example: `JA 1000`
+    > Example: `JA 1000`\
     > ![JA](Images/JA.png)
 - JBE
     > Jumps if below or equal (CF=1 or ZF=1)
-    > Example: `JBE 1000`
+    > Example: `JBE 1000`\
     > ![JBE](Images/JBE.png)
 - JL
     > Jumps if less (SF!=OF)
-    > Example: `JL 1000`
+    > Example: `JL 1000`\
     > ![JL](Images/JL.png)
 - JGE
     > Jumps if greater or equal (SF=OF)
-    > Example: `JGE 1000`
+    > Example: `JGE 1000`\
     > ![JGE](Images/JGE.png)
 - JNE
     > Jumps if not equal (ZF=0)
-    > Example: `JNE 1000`
+    > Example: `JNE 1000`\
     > ![JNE](Images/JNE.png)
 - JE
     > Jumps if equal (ZF=1)
-    > Example: `JE 1000`
+    > Example: `JE 1000`\
     > ![JE](Images/JE.png)
 - JC
     > Jumps if carry (CF=1)
-    > Example: `JC 1000`
+    > Example: `JC 1000`\
     > ![JC](Images/JC.png)
 - JCXZ
     > Jumps if CX is zero
-    > Example: `JCXZ 1000`
+    > Example: `JCXZ 1000`\
     > ![JCXZ](Images/JCXZ.png)
 
 ## Iteration Instructions
 - LOOP
     > Decrements CX and jumps if CX is not zero
-    > Example: `LOOP 1000`
+    > Example: `LOOP 1000`\
     > ![LOOP](Images/LOOP.png)
 - LOOPE
     > Decrements CX and jumps if CX is not zero and ZF is zero
-    > Example: `LOOPE 1000`
+    > Example: `LOOPE 1000`\
     > ![LOOPE](Images/LOOPE.png)
 - LOOPNE
     > Decrements CX and jumps if CX is not zero and ZF is one
-    > Example: `LOOPNE 1000`
+    > Example: `LOOPNE 1000`\
     > ![LOOPNE](Images/LOOPNE.png)
