@@ -19,7 +19,7 @@
 (https://acikerisim.bakircay.edu.tr/items/16335948-f504-44d9-8c1f-eb4adca18055)\
 (https://www.researchgate.net/publication/367254946_Akilli_Universite_Gelistirmede_On_Hazirlik_Calismalari_ve_Degerlendirme_Izmir_Bakircay_Universitesi_Ornegi)
 
-## Slayt 9, 
+## Slayt 9, 10
 
 > Çetintaş, F. Optimization of thermal insulation material and thickness for building energy efficiency in Mediterranean climates based on life cycle perspective. A/Z : ITU Journal of Faculty of Architecture.
 
