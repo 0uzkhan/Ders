@@ -1,7 +1,39 @@
 # Digital Image Processing Course Notes
 ## Table of Contents
-
-# 1. [Giris](#Giris)
+- [Digital Image Processing Course Notes](#digital-image-processing-course-notes)
+  - [Table of Contents](#table-of-contents)
+  - [Giriş](#giriş)
+  - [Ikili Görüntüler (Binary Images)](#ikili-görüntüler-binary-images)
+  - [Gri Seviye Görüntüler (Gray Level Images)](#gri-seviye-görüntüler-gray-level-images)
+  - [Renkli Görüntüler (Color Images)](#renkli-görüntüler-color-images)
+  - [OpenCV](#opencv)
+  - [Matplotlib](#matplotlib)
+  - [Ortalama Filtre](#ortalama-filtre)
+  - [Blur Filtreleri](#blur-filtreleri)
+    - [Gaussian Blur](#gaussian-blur)
+    - [Ortalama Süzgeci](#ortalama-süzgeci)
+    - [Medyan Süzgeci](#medyan-süzgeci)
+    - [Box Süzgeci](#box-süzgeci)
+  - [Gamma Filtre](#gamma-filtre)
+  - [Birleştirme](#birleştirme)
+  - [Add, AddWeighted, Subtract](#add-addweighted-subtract)
+  - [Thresholding](#thresholding)
+  - [Erosion, Dilation, Opening, Closing](#erosion-dilation-opening-closing)
+  - [Edge Detection](#edge-detection)
+  - [Bağlantı Bileşenleri](#bağlantı-bileşenleri)
+  - [Contour](#contour)
+  - [Renk Değiştirme](#renk-değiştirme)
+  - [Görüntü Parçalama ve Birleştirme](#görüntü-parçalama-ve-birleştirme)
+  - [Trackbar](#trackbar)
+  - [Video](#video)
+  - [Webcam Video](#webcam-video)
+  - [Video Arkaplan Çıkarma](#video-arkaplan-çıkarma)
+  - [Şablo Eşleştirme](#şablo-eşleştirme)
+  - [Perspektif Dönüşüm](#perspektif-dönüşüm)
+  - [Nesne Takibi](#nesne-takibi)
+    - [Mean Shift](#mean-shift)
+    - [Camshift](#camshift)
+## Giriş
 ![Pixels](Images/1.png)
 ![Pixels](Images/2.png)
 
@@ -875,6 +907,11 @@ cv2.imshow("Result", newImage)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
+- Renkli resmi parçalara ayırma ve birleştirme.
+- Resmin parçalarını ayırma.
+- Parçaları yeni bir resimde birleştirme.
+- Resmin parçalarını yeni bir resimde farklı yerlere yerleştirme.\
+![OpenCV Split Merge](Images/44.png)
 
 ## Trackbar
 ```python
@@ -914,5 +951,240 @@ cv2.destroyAllWindows()
 - Trackbar oluşturma.
 - cv2.createTrackbar fonksiyonu ile trackbar oluşturulur.
 - cv2.getTrackbarPos fonksiyonu ile trackbar değeri alınır.\
-![OpenCV Trackbar](Images/44.png)
+![OpenCV Trackbar](Images/45.png)
 
+## Video
+```python
+import cv2
+
+cap = cv2.VideoCapture("Examples/video.mp4")
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+    cv2.imshow("Video", frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
+```
+- Video dosyasını okuma.
+- cv2.VideoCapture fonksiyonu ile video dosyası açılır.
+- cap.read() ile video dosyasından kare alınır.
+- cv2.imshow ile video gösterilir.
+- cv2.waitKey(1) ile 1 ms beklenir.
+- ord('q') ile 'q' tuşuna basılınca döngüden çıkılır.
+- cap.release() ile video dosyası kapatılır.
+- cv2.destroyAllWindows() ile tüm pencereler kapatılır.\
+
+## Webcam Video
+```python
+import cv2
+
+cap = cv2.VideoCapture(0)
+while True:
+    ret, frame = cap.read()
+    cv2.imshow("Video", frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
+```
+
+- Webcam'den video alma.
+- cv2.VideoCapture(0) ile webcam açılır.
+- cap.read() ile video alınır.
+- cv2.imshow ile video gösterilir.
+- cv2.waitKey(1) ile 1 ms beklenir.
+- ord('q') ile 'q' tuşuna basılınca döngüden çıkılır.
+- cap.release() ile webcam kapatılır.
+- cv2.destroyAllWindows() ile tüm pencereler kapatılır.\
+
+## Video Arkaplan Çıkarma
+```python
+import cv2
+
+cap = cv2.VideoCapture("Examples/video.mp4")
+
+bsMOG2 = cv2.createBackgroundSubtractorMOG2()
+bsKNN = cv2.createBackgroundSubtractorKNN()
+bsGMG = cv2.bgsegm.createBackgroundSubtractorGMG()
+bsMOG = cv2.bgsegm.createBackgroundSubtractorMOG()
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    fgMask = bs.apply(frame)
+
+    cv2.imshow("Frame", frame)
+    cv2.imshow("Foreground Mask", fgMask)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
+```
+- Video arkaplan çıkarma.
+- cv2.createBackgroundSubtractorMOG2() ile MOG2 arkaplan çıkarıcı oluşturulur.
+- cv2.createBackgroundSubtractorKNN() ile KNN arkaplan çıkarıcı oluşturulur.
+- cv2.bgsegm.createBackgroundSubtractorGMG() ile GMG arkaplan çıkarıcı oluşturulur.
+- cv2.bgsegm.createBackgroundSubtractorMOG() ile MOG arkaplan çıkarıcı oluşturulur.
+- bs.apply(frame) ile arkaplan çıkarma işlemi yapılır.
+- cv2.imshow ile video ve arkaplan maskesi gösterilir.
+- cv2.waitKey(1) ile 1 ms beklenir.
+- ord('q') ile 'q' tuşuna basılınca döngüden çıkılır.
+- cap.release() ile video dosyası kapatılır.
+- cv2.destroyAllWindows() ile tüm pencereler kapatılır.\
+
+## Şablo Eşleştirme
+```python
+import cv2
+
+image = cv2.imread("Examples/Picture.png")
+template = cv2.imread("Examples/Template.png")
+result = cv2.matchTemplate(image, template, cv2.TM_CCOEFF_NORMED)
+min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+w, h, c = template.shape
+top_left = max_loc
+bottom_right = (top_left[0] + w, top_left[1] + h)
+cv2.rectangle(image, top_left, bottom_right, (0, 255, 0), 2)
+cv2.imshow("Result", image)
+cv2.imshow("Template", template)
+cv2.imshow("Image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+- Şablon eşleştirme.
+- cv2.matchTemplate fonksiyonu ile şablon eşleştirme yapılır.
+- cv2.minMaxLoc fonksiyonu ile en küçük ve en büyük değerler bulunur.
+- cv2.rectangle fonksiyonu ile eşleşen bölgeye dikdörtgen çizilir.
+- cv2.imshow ile sonuç gösterilir.
+- cv2.waitKey(0) ile tuşa basılana kadar beklenir.
+- cv2.destroyAllWindows() ile tüm pencereler kapatılır.\
+- ![OpenCV Template Matching](Images/46.png)
+
+## Perspektif Dönüşüm
+```python
+import cv2
+import numpy as np
+
+image = cv2.imread("Examples/lena.png")
+image = cv2.resize(image, (500, 500))
+pts1 = np.float32([[0, 0], [500, 0], [0, 500], [500, 500]])
+pts2 = np.float32([[0, 0], [500, 0], [100, 500], [400, 500]])
+matrix = cv2.getPerspectiveTransform(pts1, pts2)
+result = cv2.warpPerspective(image, matrix, (500, 500))
+cv2.imshow("Original", image)
+cv2.imshow("Result", result)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+- Perspektif dönüşüm.
+- cv2.getPerspectiveTransform fonksiyonu ile perspektif dönüşüm matrisi oluşturulur.
+- cv2.warpPerspective fonksiyonu ile perspektif dönüşüm yapılır.
+- cv2.imshow ile sonuç gösterilir.
+- cv2.waitKey(0) ile tuşa basılana kadar beklenir.
+- cv2.destroyAllWindows() ile tüm pencereler kapatılır.\
+![OpenCV Perspective](Images/47.png)
+
+## Nesne Takibi
+### Mean Shift
+```python
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+video = cv2.VideoCapture("Examples/video.mp4")
+ret, frame = video.read()
+
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+faceLocation = face_cascade.detectMultiScale(frame)
+x, y, w, h = faceLocation[0]
+roi = frame[y:y + h, x:x + w]
+roi_hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+roi_hist = cv2.calcHist([roi_hsv], [0], None, [180], [0, 180])
+cv2.normalize(roi_hist, roi_hist, 0, 255, cv2.NORM_MINMAX)
+term_criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1)
+
+while True:
+    ret, frame = video.read()
+    if not ret:
+        break
+
+    frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    back_proj = cv2.calcBackProject([frame_hsv], [0], roi_hist, [0, 180], 1)
+    _, track_window = cv2.meanShift(back_proj, (x, y, w, h), term_criteria)
+    x, y, w, h = track_window
+    cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+
+    cv2.imshow("Frame", frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+video.release()
+cv2.destroyAllWindows()
+```
+- Mean Shift ile nesne takibi.
+- cv2.VideoCapture ile video dosyası açılır.
+- cv2.CascadeClassifier ile yüz tespiti için Haar kaskad sınıflandırıcı yüklenir.
+- cv2.detectMultiScale ile yüz tespiti yapılır.
+- cv2.calcHist ile ROI'nin histogramı hesaplanır.
+- cv2.normalize ile histogram normalleştirilir.
+- cv2.meanShift ile nesne takibi yapılır.
+- cv2.rectangle ile takip edilen nesneye dikdörtgen çizilir.
+- cv2.imshow ile sonuç gösterilir.
+- cv2.waitKey(1) ile 1 ms beklenir.
+- ord('q') ile 'q' tuşuna basılınca döngüden çıkılır.
+- video.release() ile video dosyası kapatılır.
+- cv2.destroyAllWindows() ile tüm pencereler kapatılır.\
+
+### Camshift
+```python
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+video = cv2.VideoCapture("Examples/video.mp4")
+ret, frame = video.read()
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+faceLocation = face_cascade.detectMultiScale(frame)
+x, y, w, h = faceLocation[0]
+roi = frame[y:y + h, x:x + w]
+roi_hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+roi_hist = cv2.calcHist([roi_hsv], [0], None, [180], [0, 180])
+cv2.normalize(roi_hist, roi_hist, 0, 255, cv2.NORM_MINMAX)
+term_criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1)
+while True:
+    ret, frame = video.read()
+    if not ret:
+        break
+
+    frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    back_proj = cv2.calcBackProject([frame_hsv], [0], roi_hist, [0, 180], 1)
+    _, track_window = cv2.CamShift(back_proj, (x, y, w, h), term_criteria)
+    pts = cv2.boxPoints(track_window)
+    pts = np.int0(pts)
+    cv2.polylines(frame, [pts], True, (255, 0, 0), 2)
+
+    cv2.imshow("Frame", frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+video.release()
+cv2.destroyAllWindows()
+```
+- Camshift ile nesne takibi.
+- cv2.VideoCapture ile video dosyası açılır.
+- cv2.CascadeClassifier ile yüz tespiti için Haar kaskad sınıflandırıcı yüklenir.
+- cv2.detectMultiScale ile yüz tespiti yapılır.
+- cv2.calcHist ile ROI'nin histogramı hesaplanır.
+- cv2.normalize ile histogram normalleştirilir.
+- cv2.CamShift ile nesne takibi yapılır.
+- cv2.boxPoints ile takip edilen nesnenin köşe noktaları hesaplanır.
+- cv2.polylines ile takip edilen nesneye çokgen çizilir.
+- cv2.imshow ile sonuç gösterilir.
+- cv2.waitKey(1) ile 1 ms beklenir.
+- ord('q') ile 'q' tuşuna basılınca döngüden çıkılır.
+- video.release() ile video dosyası kapatılır.
+- cv2.destroyAllWindows() ile tüm pencereler kapatılır.\
+  
