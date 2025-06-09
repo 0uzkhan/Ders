@@ -1,6 +1,17 @@
 # Yazılım Proje Yönetimi Notları
 
 ## İçindekiler
+- [Hafta 1: Yazılım Proje Yönetimine Giriş](#hafta-1)
+- [Hafta 2: Step Wise Yaklaşımı ve Proje Planlama](#hafta-2)
+- [Hafta 3: İş Gerekçesi ve Proje Portföy Yönetimi](#hafta-3)
+- [Hafta 4: Proje Kapsamı ve İş Kırılım Yapısı (WBS)](#hafta-4)
+- [Hafta 5: Build or Buy? ve Süreç Modeli Seçimi](#hafta-5)
+- [Hafta 6: Risk Yönetimi](#hafta-6)
+- [Hafta 7: Yazılım Proje Tahminleri](#hafta-7)
+- [Hafta 8: Faaliyet Planlama ve Zaman Çizelgesi](#hafta-8)
+- [Hafta 9: Kaynak Zamanlaması ve Proje Süresinin Kısaltılması](#hafta-9)
+- [Hafta 10: Proje İzleme, Kontrol ve Kazanılmış Değer Analizi](#hafta-10)
+- [Hafta 11: Proje Kapanışı](#hafta-11)
 
 ## Hafta 1
 ### Yazılım Proje Yönetimi Niye Önemlidir?
