@@ -1188,39 +1188,39 @@ Burada B2:B7 aralığı, yıllara göre nakit akışlarını içerir.
 
 - IRR, yatırım kararlarında yaygın olarak kullanılan bir finansal analiz aracıdır.
 
-### Dealing with Uncertainty: Risk Evaluation
+### Belirsizlikle Başa Çıkmak: Risk Değerlendirmesi
 
-When comparing projects, it's important to consider not only the potential returns but also the associated risks. For example, Project A might seem to offer a better return than Project B, but it could also be significantly riskier.
+Projeleri karşılaştırırken, yalnızca potansiyel getirileri değil, aynı zamanda ilgili riskleri de dikkate almak önemlidir. Örneğin, Proje A'nın getirisi Proje B'den daha yüksek görünebilir; ancak çok daha riskli olabilir.
 
-#### Project Risk Matrix
+#### Proje Risk Matrisi
 
-A **project risk matrix** helps to systematically assess and compare the risks of different projects. This matrix typically evaluates risks based on their likelihood (probability) and impact (consequence).
+Bir **proje risk matrisi**, farklı projelerin risklerini sistematik olarak değerlendirmek ve karşılaştırmak için kullanılır. Bu matris genellikle riskleri olasılık (probability) ve etki (impact) açısından değerlendirir.
 
-| Risk Event                | Probability | Impact | Risk Score (P × I) | Mitigation Strategy           |
-|---------------------------|-------------|--------|--------------------|-------------------------------|
-| Key staff unavailable     | High        | High   | High               | Cross-training, backup staff  |
-| Requirements change       | Medium      | High   | Medium             | Change control process        |
-| Technology failure        | Low         | High   | Medium             | Technical reviews, prototyping|
-| Budget overrun            | Medium      | Medium | Medium             | Regular cost monitoring       |
-| Supplier delay            | Low         | Medium | Low                | Multiple suppliers            |
+| Risk Olayı                | Olasılık | Etki   | Risk Skoru (O × E) | Azaltma Stratejisi             |
+|---------------------------|----------|--------|--------------------|-------------------------------|
+| Anahtar personel yokluğu  | Yüksek   | Yüksek | Yüksek             | Yedek personel, çapraz eğitim |
+| Gereksinim değişikliği    | Orta     | Yüksek | Orta               | Değişiklik kontrol süreci     |
+| Teknoloji arızası         | Düşük    | Yüksek | Orta               | Teknik inceleme, prototipleme |
+| Bütçe aşımı               | Orta     | Orta   | Orta               | Düzenli maliyet izleme        |
+| Tedarikçi gecikmesi       | Düşük    | Orta   | Düşük              | Alternatif tedarikçiler       |
 
-- **Probability**: Likelihood of the risk occurring (Low/Medium/High)
-- **Impact**: Effect on the project if the risk occurs (Low/Medium/High)
-- **Risk Score**: Combined assessment (often numeric or qualitative)
-- **Mitigation Strategy**: Actions to reduce likelihood or impact
+- **Olasılık:** Riskin gerçekleşme ihtimali (Düşük/Orta/Yüksek)
+- **Etki:** Risk gerçekleşirse proje üzerindeki etkisi (Düşük/Orta/Yüksek)
+- **Risk Skoru:** Olasılık ve etkinin birleşik değerlendirmesi
+- **Azaltma Stratejisi:** Olasılığı veya etkiyi azaltacak önlemler
 
-#### Adjusting Discount Rates for Risk
+#### Risk İçin İskonto Oranının Ayarlanması
 
-For projects with higher risk, it is common to use a **higher discount rate** in financial evaluations (such as NPV calculations). This reflects the increased uncertainty and potential variability in outcomes.
-
----
-
-**Example:**  
-If Project A is riskier than Project B, you might use a 15% discount rate for A and a 10% rate for B when calculating NPV, making the comparison more realistic.
+Daha riskli projelerde, finansal değerlendirmelerde (ör. NPV hesaplaması) **daha yüksek bir iskonto oranı** kullanılır. Bu, artan belirsizliği ve sonuçlardaki olası değişkenliği yansıtır.
 
 ---
 
-By incorporating risk evaluation into project selection and financial analysis, organizations can make more informed decisions and better manage uncertainty.
+**Örnek:**  
+Proje A, Proje B'ye göre daha riskliyse, NPV hesaplamasında A için %15, B için %10 iskonto oranı kullanılabilir. Böylece karşılaştırma daha gerçekçi olur.
+
+---
+
+Risk değerlendirmesini proje seçimi ve finansal analizlere dahil ederek, organizasyonlar daha bilinçli kararlar alabilir ve belirsizliği daha iyi yönetebilir.
 
 ### Program Yönetimi (Programme Management)
 
