@@ -1820,7 +1820,7 @@ $$
 
 Doğrusal olmayan ayrımlar için veriyi açıkça daha yüksek boyuta taşımak yerine, çekirdek fonksiyonları ile iç çarpımlar \( \phi(\mathbf{x}_i)^{\top}\phi(\mathbf{x}_j) \) hesaplanır:
 
-- Doğrusal: \( K(\mathbf{x},\mathbf{x}') = \mathbf{x}^{\top}\mathbf{x}' \)
+- Doğrusal: $`\( K(\mathbf{x},\mathbf{x}') = \mathbf{x}^{\top}\mathbf{x}' \)`$
 - Polinom: \( K(\mathbf{x},\mathbf{x}') = (\gamma\,\mathbf{x}^{\top}\mathbf{x}' + r)^d \)
 - RBF/Gauss: \( K(\mathbf{x},\mathbf{x}') = \exp(-\gamma\,\lVert\mathbf{x}-\mathbf{x}'\rVert^2) \)
 - Sigmoid (tanh): \( K = \tanh(\gamma\,\mathbf{x}^{\top}\mathbf{x}' + r) \)
