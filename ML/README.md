@@ -443,7 +443,7 @@ Disiplinler (çok-disiplinli temel):
 >
 > Açıklama: Etiketsiz veri üzerinde k‑means (k=3) benzeri bir süreçle üç küme elde edilmesi. Küme merkezleri ve atamalar görselleştirilmiştir; k seçimi performansı ve yorumlanabilirliği etkiler.
 - Takviyeli (Reinforcement) Öğrenme:
-    - Ajan–çevre etkileşimi; durum s’te eylem a seçer, ödül r alır. Hedef, beklenen indirgenmiş toplam ödülü maksimize eden politika π’yi öğrenmektir: \( J(\pi) = \mathbb{E}\big[\sum_{t=0}^{\infty} \gamma^{t} r_t\big] \), \(0 \leq \gamma < 1\).
+    - Ajan–çevre etkileşimi; durum s’te eylem a seçer, ödül r alır. Hedef, beklenen indirgenmiş toplam ödülü maksimize eden politika π’yi öğrenmektir: $` J(\pi) = \mathbb{E}\big[\sum_{t=0}^{\infty} \gamma^{t} r_t\big] `$, $`0 \leq \gamma < 1`$.
     - Satranç/oyunlar: Hamle/oyun sonu ödülleriyle stratejiler gelişir; öğrenilen stratejiler farklı rakip ve pozisyonlara genellenir.
     - Doğru çıkış verilmez; bunun yerine eylemden sonra bir “kritik işaret” (ödül/ceza sinyali) gelir. Algoritma olumsuz işaret aldığında doğruyu bulana kadar farklı olasılıkları dener (keşif) ve zamanla toplam ödülü artıran politikayı öğrenir.
 - Hangi tür? Etiketli hedef varsa denetimli; yoksa ve yapı aranıyorsa denetimsiz; sıralı karar ve ödül varsa takviyeli öğrenme uygundur. Uygulamada hibrit yaklaşımlar da yaygındır.
@@ -1357,8 +1357,8 @@ Accuracy neden her zaman yeterli değil? — Dengesiz veri örneği
 - Örnek: 100 e‑postanın yalnız 1’i spam olsun (%1). Tüm e‑postalara “spam değil” diyen tembel bir modelin doğruluğu %99 görünür; fakat spam yakalama başarısı %0’dır. Bu nedenle dengesiz veri setlerinde daha zengin metriklere (Recall/Precision, ROC‑AUC, PR‑AUC) ihtiyaç vardır.
 
 ROC eksenleri ve tanımlar
-- True Positive Rate (TPR, Recall): \(\displaystyle \frac{TP}{TP+FN}\). “Pozitiflerin yüzde kaçını yakaladık?”
-- False Positive Rate (FPR): \(\displaystyle \frac{FP}{FP+TN}\). “Negatiflerin yüzde kaçına yanlışlıkla pozitif dedik?” Not: FPR = 1 − Özgüllük (Specificity), Özgüllük = \(\tfrac{TN}{TN+FP}\).
+- True Positive Rate (TPR, Recall): $`\displaystyle \frac{TP}{TP+FN}`$. “Pozitiflerin yüzde kaçını yakaladık?”
+- False Positive Rate (FPR): $`\displaystyle \frac{FP}{FP+TN}`$. “Negatiflerin yüzde kaçına yanlışlıkla pozitif dedik?” Not: FPR = 1 − Özgüllük (Specificity), Özgüllük = $`\tfrac{TN}{TN+FP}`$.
 
 ROC (Receiver Operating Characteristic) eğrisi nedir?
 - Tüm eşik (threshold) değerleri için model performansını gösterir: Y‑ekseni TPR, X‑ekseni FPR’dir.
@@ -1389,8 +1389,8 @@ ROC alanının yorumu (AUC)
 > ![ROC eğrisi — yorum ve AUC 136](Images/136.jpg)
 
 Pratik: Eşik seçimi (threshold tuning)
-- Youden’s J istatistiği: \( J = \max (\,TPR - FPR\,) \). ROC’ta diyagonale en uzak (dikey) noktayı bulur; dengeli bir seçimdir.
-- (0,1) noktasına en yakın: \( d = \min \sqrt{(1-TPR)^2 + (FPR)^2} \). Hem yüksek TPR hem düşük FPR isteyen uygulamalar için uygundur.
+- Youden’s J istatistiği: $` J = \max (\,TPR - FPR\,) `$. ROC’ta diyagonale en uzak (dikey) noktayı bulur; dengeli bir seçimdir.
+- (0,1) noktasına en yakın: $` d = \min \sqrt{(1-TPR)^2 + (FPR)^2} `$. Hem yüksek TPR hem düşük FPR isteyen uygulamalar için uygundur.
 
 Kısa Python örneği — en iyi eşiği seçmek:
 
@@ -1473,9 +1473,9 @@ Aşağıdaki tabloda üç gün için iki özellik (Sıcaklık, Nem Oranı) veril
 
 Uzaklık hesapları (p = 2):
 
-- \( d_{12} = \sqrt{(25-22)^2 + (80-50)^2} = \sqrt{9 + 900} = \sqrt{909} \approx 30.14 \)
-- \( d_{13} = \sqrt{(25-18)^2 + (80-80)^2} = \sqrt{49 + 0} = 7 \)
-- \( d_{23} = \sqrt{(22-18)^2 + (50-80)^2} = \sqrt{4 + 900} = \sqrt{904} \approx 30.06 \)
+- $` d_{12} = \sqrt{(25-22)^2 + (80-50)^2} = \sqrt{9 + 900} = \sqrt{909} \approx 30.14 `$
+- $` d_{13} = \sqrt{(25-18)^2 + (80-80)^2} = \sqrt{49 + 0} = 7 `$
+- $` d_{23} = \sqrt{(22-18)^2 + (50-80)^2} = \sqrt{4 + 900} = \sqrt{904} \approx 30.06 `$
 
 Gözlem: Gün 1 ile Gün 3 arasındaki uzaklık 7 ile en küçüktür; bu iki gün (bu iki özellik uzayında) birbirine daha benzerdir.
 
@@ -1488,7 +1488,7 @@ $$
 d_{ij}^{\text{KP}} = \sqrt{\sum_{k=1}^{p} \frac{\bigl(x_{ik} - x_{jk}\bigr)^{2}}{s_k^{2}} }
 $$
 
-    - Burada s_k^2, k’ıncı değişkenin varyans değeridir; pratikte bazen standart sapma (s_k) ile ölçeklenmiş farklar kullanılır: \(\Delta_k / s_k\).
+    - Burada s_k^2, k’ıncı değişkenin varyans değeridir; pratikte bazen standart sapma (s_k) ile ölçeklenmiş farklar kullanılır: $`\Delta_k / s_k`$.
     - Amaç: Her özelliğin ölçü birimi/ölçeği farklı olsa bile, katkısını karşılaştırılabilir hâle getirmek (ölçek duyarlılığını azaltmak).
     - Uyarı: s_k^2 ≈ 0 ise bölme hatasına yol açmamak için sabit/sıfıra yakın varyanslı özellikleri elemek veya küçük bir ε ile düzenlemek gerekir.
 
@@ -1516,11 +1516,11 @@ $$
 
 Hesaplar:
 
-- \( d_{12} = \sqrt{ \tfrac{(25-22)^2}{(8.22)^2} + \tfrac{(80-50)^2}{(200)^2} } = \sqrt{0.133 + 0.0225} \approx 0.39 \)
-- \( d_{13} = \sqrt{ \tfrac{(25-18)^2}{(8.22)^2} + \tfrac{(80-80)^2}{(200)^2} } = \sqrt{0.725 + 0} \approx 0.85 \)
-- \( d_{23} = \sqrt{ \tfrac{(22-18)^2}{(8.22)^2} + \tfrac{(50-80)^2}{(200)^2} } = \sqrt{0.237 + 0.0225} \approx 0.50 \)
+- $` d_{12} = \sqrt{ \tfrac{(25-22)^2}{(8.22)^2} + \tfrac{(80-50)^2}{(200)^2} } = \sqrt{0.133 + 0.0225} \approx 0.39 `$
+- $` d_{13} = \sqrt{ \tfrac{(25-18)^2}{(8.22)^2} + \tfrac{(80-80)^2}{(200)^2} } = \sqrt{0.725 + 0} \approx 0.85 `$
+- $` d_{23} = \sqrt{ \tfrac{(22-18)^2}{(8.22)^2} + \tfrac{(50-80)^2}{(200)^2} } = \sqrt{0.237 + 0.0225} \approx 0.50 `$
 
-Not — yaygın alternatif tanım: Birçok kaynakta standartlaştırılmış Öklid, \( d^2 = \sum_k \tfrac{(x_{ik} - x_{jk})^2}{\operatorname{Var}(x_k)} \) olarak verilir (paydada varyans, karekök dışarıda). Bu tanımda sayısal büyüklük farklı olur fakat karşılaştırmalı sıralama çoğu durumda değişmez.
+Not — yaygın alternatif tanım: Birçok kaynakta standartlaştırılmış Öklid, $` d^2 = \sum_k \tfrac{(x_{ik} - x_{jk})^2}{\operatorname{Var}(x_k)} `$ olarak verilir (paydada varyans, karekök dışarıda). Bu tanımda sayısal büyüklük farklı olur fakat karşılaştırmalı sıralama çoğu durumda değişmez.
 
 ### Manhattan (City-Block) Uzaklığı
 
@@ -1551,9 +1551,9 @@ Aynı tablo (Sıcaklık, Nem Oranı):
 
 Hesaplar (p = 2):
 
-- \( d_{12} = |25-22| + |80-50| = 3 + 30 = 33 \)
-- \( d_{13} = |25-18| + |80-80| = 7 + 0 = 7 \)
-- \( d_{23} = |22-18| + |50-80| = 4 + 30 = 34 \)
+- $` d_{12} = |25-22| + |80-50| = 3 + 30 = 33 `$
+- $` d_{13} = |25-18| + |80-80| = 7 + 0 = 7 `$
+- $` d_{23} = |22-18| + |50-80| = 4 + 30 = 34 `$
 
 Gözlem: Öklid örneğinde olduğu gibi, Gün 1 ve Gün 3 birbirine en yakındır (d = 7).
 
@@ -1569,7 +1569,7 @@ $$
     - Özel durumlar:
         - p = 1 → Manhattan (L1)
         - p = 2 → Öklid (L2)
-        - p → ∞ → Chebyshev: \( d_{ij}^{(\infty)} = \max_k |x_{ik} - x_{jk}| \)
+        - p → ∞ → Chebyshev: $` d_{ij}^{(\infty)} = \max_k |x_{ik} - x_{jk}| `$
 
 - Pratik ipuçları:
     - p arttıkça büyük farklar daha da baskın hâle gelir (outlier etkisi artar).
@@ -1594,16 +1594,16 @@ Mesafe ölçülerinde farklı ölçeklerdeki özellikler sonucu domine eder. Bu 
     - Standardize Öklid (Karl Pearson) bu problemi değişken varyansına göre ağırlıklandırarak azaltır.
 
 - Yöntemler:
-    - Standardizasyon (z-skor): \( z = \tfrac{x - \mu}{\sigma} \)
+    - Standardizasyon (z-skor): $` z = \tfrac{x - \mu}{\sigma} `$
         - Ortalama 0, standart sapma 1 olacak şekilde dönüştürür; birim etkisini kaldırır.
         - Outlier’lar varsa robuslaştırılmış seçenekler: Medyan ve IQR ile ölçekleme.
-    - Min–Max ölçekleme: \( x' = \tfrac{x - x_{\min}}{x_{\max} - x_{\min}} \in [0,1] \)
+    - Min–Max ölçekleme: $` x' = \tfrac{x - x_{\min}}{x_{\max} - x_{\min}} \in [0,1] `$
         - Sınırları sabitler; aykırı değerlere duyarlı olabilir.
-    - Vektör normlama (birim-norm): \( x' = \tfrac{x}{\lVert x \rVert_2} \) vb.
+    - Vektör normlama (birim-norm): $` x' = \tfrac{x}{\lVert x \rVert_2} `$ vb.
         - Özellikle kosinüs benzerliği/uzaklığı veya metin vektörlerinde faydalıdır.
 
 - Uygulama notları:
-    - Eğitim–doğrulama–test sızıntısını önlemek için ölçekleme parametrelerini (\(\mu,\sigma, x_{\min}, x_{\max}\)) yalnızca eğitim verisinden öğrenin ve diğer bölümlere uygulayın.
+    - Eğitim–doğrulama–test sızıntısını önlemek için ölçekleme parametrelerini ($`\mu,\sigma, x_{\min}, x_{\max}`$) yalnızca eğitim verisinden öğrenin ve diğer bölümlere uygulayın.
     - k-means/k-NN + Öklid kullanırken standardizasyon çoğunlukla varsayılan iyi başlangıçtır.
 
 
@@ -1617,17 +1617,17 @@ x_i' = \frac{x_i - \min(x)}{\max(x) - \min(x)} \in [0,1]
 $$
 
 - Terimler:
-    - \(x_i'\): Dönüştürülmüş değer
-    - \(x_i\): Gözlem değeri
-    - \(\max(x)\): Verideki en büyük x değeri
-    - \(\min(x)\): Verideki en küçük x değeri
+    - $`x_i'`$: Dönüştürülmüş değer
+    - $`x_i`$: Gözlem değeri
+    - $`\max(x)`$: Verideki en büyük x değeri
+    - $`\min(x)`$: Verideki en küçük x değeri
 
-Not: “Standartlaştırma” (z-skor) farklı bir dönüşümdür ve \( z = \tfrac{x - \mu}{\sigma} \) ile yapılır (yukarıdaki Yöntemler bölümüne bakınız).
+Not: “Standartlaştırma” (z-skor) farklı bir dönüşümdür ve $` z = \tfrac{x - \mu}{\sigma} `$ ile yapılır (yukarıdaki Yöntemler bölümüne bakınız).
 
 
 ##### Örnek: Min–Max Normalleştirme (min=2, max=90)
 
-Aşağıdaki X değerleri, min=2 ve max=90 kullanılarak \( x' = \tfrac{x - 2}{90 - 2} \) formülüyle [0,1] aralığına dönüştürülmüştür (sonuçlar 4 ondalığa yuvarlanmıştır):
+Aşağıdaki X değerleri, min=2 ve max=90 kullanılarak $` x' = \tfrac{x - 2}{90 - 2} `$ formülüyle [0,1] aralığına dönüştürülmüştür (sonuçlar 4 ondalığa yuvarlanmıştır):
 
 | X  | min(x) | max(x) | İşlem                 | Sonuç   |
 |----|--------|--------|-----------------------|---------|
@@ -1757,8 +1757,8 @@ e) Sonuç: EVET sayısı HAYIR sayısından fazla olduğundan (7,8,5) gözlemini
 Basit çoğunluk oylamasında her komşu aynı ağırlığa sahiptir. Ancak bazı durumlarda, daha yakın komşuların daha etkili olması istenir. Bu amaçla ağırlıklı oylama kullanılır.
 
 - Fikir: Komşu katkısı mesafe ile ters orantılıdır; daha yakın komşu daha büyük ağırlık alır.
-- Sık kullanılan ağırlıklar: \( w_j = \tfrac{1}{d(i,j)+\varepsilon} \) veya \( w_j = \tfrac{1}{d(i,j)^2+\varepsilon} \)
-- Sınıf skoru: \( S_c = \sum_{j \in \mathcal{N}_k,\; y_j=c} w_j \). Tahmin edilen sınıf: \( \arg\max_c S_c \).
+- Sık kullanılan ağırlıklar: $` w_j = \tfrac{1}{d(i,j)+\varepsilon} `$ veya $` w_j = \tfrac{1}{d(i,j)^2+\varepsilon} `$
+- Sınıf skoru: $` S_c = \sum_{j \in \mathcal{N}_k,\; y_j=c} w_j `$. Tahmin edilen sınıf: $` \arg\max_c S_c `$.
 
 > ![Ağırlıklı oylama formülü — görsel 70](Images/70.jpg)
 >
@@ -1793,7 +1793,7 @@ $$
 f(\mathbf{x}) = \mathbf{w}^{\top}\mathbf{x} + b = 0.
 $$
 
-- Sınır düzlemleri: \( \mathbf{w}^{\top}\mathbf{x} + b = +1 \) ve \( \mathbf{w}^{\top}\mathbf{x} + b = -1 \). Bu iki sınır arasındaki bant “marjin”dir ve genişliği \( 2/\lVert\mathbf{w}\rVert_2 \) olur. Marjini maksimize etmek genel ayırt ediciliği artırır.
+- Sınır düzlemleri: $` \mathbf{w}^{\top}\mathbf{x} + b = +1 `$ ve $` \mathbf{w}^{\top}\mathbf{x} + b = -1 `$. Bu iki sınır arasındaki bant “marjin”dir ve genişliği $` 2/\lVert\mathbf{w}\rVert_2 `$ olur. Marjini maksimize etmek genel ayırt ediciliği artırır.
 - Destek vektörleri, marjine en yakın (veya üzerinde) bulunan eğitim örnekleridir; çözüm yalnızca bu noktalara dayanır.
 
 > ![SVM — karar doğrusu ve marjin 138](Images/138.jpg)
@@ -1806,24 +1806,24 @@ $$
 \min_{\mathbf{w}, b} \ \tfrac{1}{2}\,\lVert\mathbf{w}\rVert^2 \quad \text{böyle ki}\quad y_i\big(\mathbf{w}^{\top}\mathbf{x}_i + b\big) \ge 1,\ \forall i.
 $$
 
-- Yumuşak kenar (ayrılamayan veri; esneme değişkenleri \(\xi_i\)):
+- Yumuşak kenar (ayrılamayan veri; esneme değişkenleri $`\xi_i`$):
 
 $$
 \min_{\mathbf{w}, b,\,\boldsymbol{\xi}} \ \tfrac{1}{2}\,\lVert\mathbf{w}\rVert^2 + C\sum_i \xi_i \quad \text{böyle ki}\quad y_i\big(\mathbf{w}^{\top}\mathbf{x}_i + b\big) \ge 1 - \xi_i,\ \xi_i \ge 0.
 $$
 
-- Eşdeğer kayıp perspektifi (hinge loss): \( L_{\text{hinge}}(y, f(x)) = \max\{0, 1 - y\,f(x)\} \); amaç, düzenlileştirme ile birlikte ortalama hinge kaybını minimize etmektir.
+- Eşdeğer kayıp perspektifi (hinge loss): $` L_{\text{hinge}}(y, f(x)) = \max\{0, 1 - y\,f(x)\} `$; amaç, düzenlileştirme ile birlikte ortalama hinge kaybını minimize etmektir.
 
 > ![SVM — destek vektörleri ve marjin 139](Images/139.jpg)
 
 ### Kernel Hilesi (Kernel Trick)
 
-Doğrusal olmayan ayrımlar için veriyi açıkça daha yüksek boyuta taşımak yerine, çekirdek fonksiyonları ile iç çarpımlar \( \phi(\mathbf{x}_i)^{\top}\phi(\mathbf{x}_j) \) hesaplanır:
+Doğrusal olmayan ayrımlar için veriyi açıkça daha yüksek boyuta taşımak yerine, çekirdek fonksiyonları ile iç çarpımlar $` \phi(\mathbf{x}_i)^{\top}\phi(\mathbf{x}_j) `$ hesaplanır:
 
-- Doğrusal: $`\( K(\mathbf{x},\mathbf{x}') = \mathbf{x}^{\top}\mathbf{x}' \)`$
-- Polinom: \( K(\mathbf{x},\mathbf{x}') = (\gamma\,\mathbf{x}^{\top}\mathbf{x}' + r)^d \)
-- RBF/Gauss: \( K(\mathbf{x},\mathbf{x}') = \exp(-\gamma\,\lVert\mathbf{x}-\mathbf{x}'\rVert^2) \)
-- Sigmoid (tanh): \( K = \tanh(\gamma\,\mathbf{x}^{\top}\mathbf{x}' + r) \)
+- Doğrusal: $`$` K(\mathbf{x},\mathbf{x}') = \mathbf{x}^{\top}\mathbf{x}' `$`$
+- Polinom: $` K(\mathbf{x},\mathbf{x}') = (\gamma\,\mathbf{x}^{\top}\mathbf{x}' + r)^d `$
+- RBF/Gauss: $` K(\mathbf{x},\mathbf{x}') = \exp(-\gamma\,\lVert\mathbf{x}-\mathbf{x}'\rVert^2) `$
+- Sigmoid (tanh): $` K = \tanh(\gamma\,\mathbf{x}^{\top}\mathbf{x}' + r) `$
 
 > ![SVM — çekirdek fonksiyonları 140](Images/140.jpg)
 
@@ -1973,9 +1973,9 @@ $$
 
 #### Örnek: Entropi Hesabı
 
-Veri kümesi: \( S = \{\text{evet},\,\text{evet},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır}\} \)
+Veri kümesi: $` S = \{\text{evet},\,\text{evet},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır}\} `$
 
-Olasılıklar: \( p(\text{evet}) = 2/8 = 0.25 \), \( p(\text{hayır}) = 6/8 = 0.75 \).
+Olasılıklar: $` p(\text{evet}) = 2/8 = 0.25 `$, $` p(\text{hayır}) = 6/8 = 0.75 `$.
 
 $$
 H(S) = -\bigl( 0.25\,\log_2 0.25 + 0.75\,\log_2 0.75 \bigr) \approx 0.81128.
@@ -1990,7 +1990,7 @@ $$
 
 Veri kümesi (8 gözlem): MODEL, CİNSİYET, YAŞ, MEMNUN.
 
-Sınıf olasılıkları: \( p(\text{HAYIR}) = 5/8 \), \( p(\text{EVET}) = 3/8 \).
+Sınıf olasılıkları: $` p(\text{HAYIR}) = 5/8 `$, $` p(\text{EVET}) = 3/8 `$.
 
 $$
 H(\text{MEMNUN}) = - \Bigl( \tfrac{5}{8}\,\log_2 \tfrac{5}{8} + \tfrac{3}{8}\,\log_2 \tfrac{3}{8} \Bigr) \approx 0{,}954.
@@ -2007,23 +2007,23 @@ $$
 \operatorname{Gain}(T, X) = H(T) - H(T\mid X), \quad H(T\mid X) = \sum_{x \in \mathcal{X}} p(x)\, H(T\mid X{=}x).
 $$
 
-    Notasyon notu: Bazı slayt/kitaplarda \( H(X,T) \) yazımı görülür; burada kastedilen şartlı entropinin beklenen değeridir (\( H(T\mid X) \)).
+    Notasyon notu: Bazı slayt/kitaplarda $` H(X,T) `$ yazımı görülür; burada kastedilen şartlı entropinin beklenen değeridir ($` H(T\mid X) `$).
 
 #### İşlem Adımları
 
-1) Sınıf niteliğinin entropisini hesapla: \( H(T) \)
+1) Sınıf niteliğinin entropisini hesapla: $` H(T) `$
 
 > ![Sınıf entropisi — görsel 79](Images/79.jpg)
 >
 > Açıklama: Görsel 79 — Sınıf (hedef) değişkeninin entropisinin hesaplanması.
 
-2) Her özellik için sınıfa bağımlı (şartlı) entropiyi hesapla: \( H(T\mid X) \)
+2) Her özellik için sınıfa bağımlı (şartlı) entropiyi hesapla: $` H(T\mid X) `$
 
 > ![Şartlı entropiler — görsel 80](Images/80.jpg)
 >
 > Açıklama: Görsel 80 — Özelliklere göre alt kümelerde entropi ve ağırlıklı ortalama.
 
-3) Kazançları bul ve en büyük kazanca sahip özelliği düğüm olarak seç: \( \operatorname{Gain}(T, X) = H(T) - H(T\mid X) \)
+3) Kazançları bul ve en büyük kazanca sahip özelliği düğüm olarak seç: $` \operatorname{Gain}(T, X) = H(T) - H(T\mid X) `$
 
 
 #### Örnek: Bilgi Kazancı Hesabı (BORÇ özelliği)
@@ -2051,8 +2051,8 @@ $$
 
 2) BORÇ’a göre şartlı entropiler ve ağırlıklar:
 
-- BORÇ=Yüksek: 3 örnek, sınıf dağılımı (3 Kötü, 0 İyi) ⇒ \( H(\text{RİSK}\mid \text{BORÇ}{=}\text{Yüksek}) = 0 \)
-- BORÇ=Düşük: 7 örnek, sınıf dağılımı (2 Kötü, 5 İyi) ⇒ \( H(\text{RİSK}\mid \text{BORÇ}{=}\text{Düşük}) \approx 0{,}863 \)
+- BORÇ=Yüksek: 3 örnek, sınıf dağılımı (3 Kötü, 0 İyi) ⇒ $` H(\text{RİSK}\mid \text{BORÇ}{=}\text{Yüksek}) = 0 `$
+- BORÇ=Düşük: 7 örnek, sınıf dağılımı (2 Kötü, 5 İyi) ⇒ $` H(\text{RİSK}\mid \text{BORÇ}{=}\text{Düşük}) \approx 0{,}863 `$
 
 Ağırlıklı şartlı entropi (slayttaki değerlerle):
 
@@ -2066,7 +2066,7 @@ $$
 \operatorname{Gain}(\text{RİSK}, \text{BORÇ}) = H(\text{RİSK}) - H(\text{RİSK}\mid \text{BORÇ}) \approx 1 - 0{,}64 = 0{,}36.
 $$
 
-Not: Benzer şekilde \( \operatorname{Gain}(\text{RİSK},\text{GELİR}) \) ve \( \operatorname{Gain}(\text{RİSK},\text{STATÜ}) \) hesaplanır; en büyük kazanca sahip nitelik kök düğüm seçilir.
+Not: Benzer şekilde $` \operatorname{Gain}(\text{RİSK},\text{GELİR}) `$ ve $` \operatorname{Gain}(\text{RİSK},\text{STATÜ}) `$ hesaplanır; en büyük kazanca sahip nitelik kök düğüm seçilir.
 
 
 #### Örnek: Bilgi Kazancı — MEMNUN Veri Kümesi
@@ -2093,30 +2093,30 @@ $$
 1) MODEL için kazanç:
 
 - Alt kümeler:
-    - MODEL = X5: (2 HAYIR, 0 EVET) ⇒ \( H = 0 \)
-    - MODEL = X3: (3 EVET, 3 HAYIR) ⇒ \( H = 1 \)
-- Ağırlıklı şartlı entropi: \( H(\text{MEMNUN}\mid \text{MODEL}) = \tfrac{2}{8}\cdot 0 + \tfrac{6}{8}\cdot 1 = 0{,}75 \)
-- Kazanç: \( 0{,}954 - 0{,}75 = 0{,}204 \)
+    - MODEL = X5: (2 HAYIR, 0 EVET) ⇒ $` H = 0 `$
+    - MODEL = X3: (3 EVET, 3 HAYIR) ⇒ $` H = 1 `$
+- Ağırlıklı şartlı entropi: $` H(\text{MEMNUN}\mid \text{MODEL}) = \tfrac{2}{8}\cdot 0 + \tfrac{6}{8}\cdot 1 = 0{,}75 `$
+- Kazanç: $` 0{,}954 - 0{,}75 = 0{,}204 `$
 
 2) CİNSİYET için kazanç:
 
 - Alt kümeler:
-    - ERKEK: (2 HAYIR, 3 EVET) ⇒ \( H \approx 0{,}971 \)
-    - KADIN: (2 HAYIR, 1 EVET) ⇒ \( H \approx 0{,}918 \)
-- Ağırlıklı şartlı entropi: \( H(\text{MEMNUN}\mid \text{CİNSİYET}) = \tfrac{5}{8}\cdot 0{,}971 + \tfrac{3}{8}\cdot 0{,}918 \approx 0{,}951 \)
-- Kazanç: \( 0{,}954 - 0{,}951 = 0{,}003 \)
+    - ERKEK: (2 HAYIR, 3 EVET) ⇒ $` H \approx 0{,}971 `$
+    - KADIN: (2 HAYIR, 1 EVET) ⇒ $` H \approx 0{,}918 `$
+- Ağırlıklı şartlı entropi: $` H(\text{MEMNUN}\mid \text{CİNSİYET}) = \tfrac{5}{8}\cdot 0{,}971 + \tfrac{3}{8}\cdot 0{,}918 \approx 0{,}951 `$
+- Kazanç: $` 0{,}954 - 0{,}951 = 0{,}003 `$
 
 3) YAŞ için kazanç (eşikler taranarak):
 
-- \( \le 19/ >19 \): \( H\_{\le 19} = 0,\ H\_{>19} \approx 0{,}863 \) ⇒ \( H = \tfrac{1}{8}\cdot 0 + \tfrac{7}{8}\cdot 0{,}863 = 0{,}754 \), Kazanç ≈ 0.200
-- \( \le 21/ >21 \): \( H\_{\le 21} \approx 0{,}918,\ H\_{>21} \approx 0{,}722 \) ⇒ \( H \approx 0{,}796 \), Kazanç ≈ 0.158
-- \( \le 22/ >22 \): \( H\_{\le 22} = 1,\ H\_{>22} \approx 0{,}811 \) ⇒ \( H \approx 0{,}905 \), Kazanç ≈ 0.049
-- \( \le 30/ >30 \): \( H\_{\le 30} \approx 0{,}971,\ H\_{>30} = 0 \) ⇒ \( H = \tfrac{5}{8}\cdot 0{,}971 + \tfrac{3}{8}\cdot 0 = 0{,}607 \), Kazanç ≈ 0.347
-- \( \le 45/ >45 \): \( H\_{\le 45} = 1,\ H\_{>45} = 0 \) ⇒ \( H = 0{,}75 \), Kazanç ≈ 0.204
-- \( \le 55/ >55 \): \( H\_{\le 55} \approx 0{,}985,\ H\_{>55} = 0 \) ⇒ \( H \approx 0{,}862 \), Kazanç ≈ 0.092
-- \( \le 60/ >60 \): \( H\_{\le 60} \approx 0{,}954 \) (tüm veri) ⇒ Kazanç = 0
+- $` \le 19/ >19 `$: $` H\_{\le 19} = 0,\ H\_{>19} \approx 0{,}863 `$ ⇒ $` H = \tfrac{1}{8}\cdot 0 + \tfrac{7}{8}\cdot 0{,}863 = 0{,}754 `$, Kazanç ≈ 0.200
+- $` \le 21/ >21 `$: $` H\_{\le 21} \approx 0{,}918,\ H\_{>21} \approx 0{,}722 `$ ⇒ $` H \approx 0{,}796 `$, Kazanç ≈ 0.158
+- $` \le 22/ >22 `$: $` H\_{\le 22} = 1,\ H\_{>22} \approx 0{,}811 `$ ⇒ $` H \approx 0{,}905 `$, Kazanç ≈ 0.049
+- $` \le 30/ >30 `$: $` H\_{\le 30} \approx 0{,}971,\ H\_{>30} = 0 `$ ⇒ $` H = \tfrac{5}{8}\cdot 0{,}971 + \tfrac{3}{8}\cdot 0 = 0{,}607 `$, Kazanç ≈ 0.347
+- $` \le 45/ >45 `$: $` H\_{\le 45} = 1,\ H\_{>45} = 0 `$ ⇒ $` H = 0{,}75 `$, Kazanç ≈ 0.204
+- $` \le 55/ >55 `$: $` H\_{\le 55} \approx 0{,}985,\ H\_{>55} = 0 `$ ⇒ $` H \approx 0{,}862 `$, Kazanç ≈ 0.092
+- $` \le 60/ >60 `$: $` H\_{\le 60} \approx 0{,}954 `$ (tüm veri) ⇒ Kazanç = 0
 
-Özet: En yüksek kazanç YAŞ ≤ 30 eşiği ile \( \approx 0{,}347 \).
+Özet: En yüksek kazanç YAŞ ≤ 30 eşiği ile $` \approx 0{,}347 `$.
 
 > ![Bilgi kazancı özeti — görsel 100](Images/100.jpg)
 >
@@ -2124,9 +2124,9 @@ $$
 
 Alt ağaç (YAŞ ≤ 30) için yeniden kazançlar:
 
-- Filtre: YAŞ ≤ 30 kayıtları tutulur (5 gözlem). \( H(\text{MEMNUN}) = - (\tfrac{2}{5}\log_2 \tfrac{2}{5} + \tfrac{3}{5}\log_2 \tfrac{3}{5}) \approx 0{,}971 \).
+- Filtre: YAŞ ≤ 30 kayıtları tutulur (5 gözlem). $` H(\text{MEMNUN}) = - (\tfrac{2}{5}\log_2 \tfrac{2}{5} + \tfrac{3}{5}\log_2 \tfrac{3}{5}) \approx 0{,}971 `$.
 - MODEL için: X5 alt kümesi (2 HAYIR) ⇒ H=0; X3 alt kümesi (3 EVET) ⇒ H=0 → Ağırlıklı H = 0, Kazanç = 0.971
-- CİNSİYET için: ERKEK (2 HAYIR, 2 EVET) ⇒ H = 1; KADIN (1 EVET) ⇒ H = 0 → Ağırlıklı H = \( \tfrac{4}{5}\cdot 1 + \tfrac{1}{5}\cdot 0 = 0{,}8 \), Kazanç = 0.171
+- CİNSİYET için: ERKEK (2 HAYIR, 2 EVET) ⇒ H = 1; KADIN (1 EVET) ⇒ H = 0 → Ağırlıklı H = $` \tfrac{4}{5}\cdot 1 + \tfrac{1}{5}\cdot 0 = 0{,}8 `$, Kazanç = 0.171
 
 > ![Alt ağaç kazanç özeti — görsel 101](Images/101.jpg)
 >
@@ -2204,7 +2204,7 @@ Birinci dallanma sonrası oluşan karar ağacı:
 
 - C4.5, Quinlan tarafından ID3’ün devamı olarak geliştirilmiştir; sayısal (nümerik) niteliklerle karar ağacı kurmayı destekler.
 - ID3’e göre temel farkları:
-    - Nümerik değerleri kategorik kararlara dönüştürmek için bir eşik (threshold) belirler ve \( x < t \) / \( x \ge t \) şeklinde dallandırır.
+    - Nümerik değerleri kategorik kararlara dönüştürmek için bir eşik (threshold) belirler ve $` x < t `$ / $` x \ge t `$ şeklinde dallandırır.
     - Bilinmeyen/eksik değerler için bir işleme yöntemi sunar (ör. olasılıksal dağıtım veya örnek ağırlıklarıyla paylaştırma).
     - (Not) Uygulamada budama (pruning) yaparak aşırı öğrenmeyi azaltır.
 - Eşik seçimi: Aday eşikler üzerinde bilgi kazancı değerlendirilir; en büyük bilgi kazancını veren eşik seçilerek dallanma yapılır.
@@ -2341,7 +2341,7 @@ $$
 = \frac{|T_{sol}|}{n}\,\operatorname{Gini}_{sol} + \frac{|T_{sağ}|}{n}\,\operatorname{Gini}_{sağ}.
 $$
 
-- Seçim: Her j niteliği için hesaplanan \(\operatorname{Gini}_j\) değerleri arasından en küçük olanı seçilir ve bölünme bu nitelik/eşik üzerinden yapılır. Sonra aynı işlem alt düğümlerde tekrarlanır.
+- Seçim: Her j niteliği için hesaplanan $`\operatorname{Gini}_j`$ değerleri arasından en küçük olanı seçilir ve bölünme bu nitelik/eşik üzerinden yapılır. Sonra aynı işlem alt düğümlerde tekrarlanır.
 
 ##### Örnek: Gini ile Karar Ağacı
 
@@ -2379,12 +2379,12 @@ MEMNUN veri kümesi (8 gözlem) örneği:
 
 Öznitelik bazında Gini (kategorikler):
 
-- MODEL: \( Gini_{X5} = 1 - (0/2)^2 - (2/2)^2 = 0 \), \( Gini_{X3} = 1 - (3/6)^2 - (3/6)^2 = 0.5 \)
-    - Ağırlıklı: \( Gini_{MODEL} = \tfrac{2\cdot 0 + 6\cdot 0.5}{8} = 0.375 \)
+- MODEL: $` Gini_{X5} = 1 - (0/2)^2 - (2/2)^2 = 0 `$, $` Gini_{X3} = 1 - (3/6)^2 - (3/6)^2 = 0.5 `$
+    - Ağırlıklı: $` Gini_{MODEL} = \tfrac{2\cdot 0 + 6\cdot 0.5}{8} = 0.375 `$
 - CİNSİYET:
-    - ERKEK: \( Gini = 1 - (2/5)^2 - (3/5)^2 = 0.48 \)
-    - KADIN: \( Gini = 1 - (1/3)^2 - (2/3)^2 \approx 0.45 \)
-    - Ağırlıklı: \( Gini_{C\İNS\İYET} = \tfrac{5\cdot 0.48 + 3\cdot 0.45}{8} \approx 0.469 \)
+    - ERKEK: $` Gini = 1 - (2/5)^2 - (3/5)^2 = 0.48 `$
+    - KADIN: $` Gini = 1 - (1/3)^2 - (2/3)^2 \approx 0.45 `$
+    - Ağırlıklı: $` Gini_{C\İNS\İYET} = \tfrac{5\cdot 0.48 + 3\cdot 0.45}{8} \approx 0.469 `$
 
 YAŞ için aday eşikler ve Gini değerleri:
 
@@ -2431,7 +2431,7 @@ R(t_{sol}) = \frac{1}{n(t_{sol})} \sum_{x_i\in t_{sol}} \bigl(y_i - \bar y_{t_{s
 R(t_{sağ}) = \frac{1}{n(t_{sağ})} \sum_{x_i\in t_{sağ}} \bigl(y_i - \bar y_{t_{sağ}}\bigr)^2.
 $$
 
-Seçim ölçütü: Bölme, \( R(t_{sol}) + R(t_{sağ}) \) toplamını minimize edecek şekilde seçilir (eşdeğer olarak MSE_s minimize edilir).
+Seçim ölçütü: Bölme, $` R(t_{sol}) + R(t_{sağ}) `$ toplamını minimize edecek şekilde seçilir (eşdeğer olarak MSE_s minimize edilir).
 
 ###### Örnek (küçük veri seti)
 
@@ -2448,10 +2448,10 @@ Veri (Y hedefi):
 Örnek bölme: X1 ≤ 12 (1. eleman referans alınarak)
 
 - t_{sol} = {44, 30, 45}, t_{sağ} = {35, 43}
-- \( \bar y_{t_{sol}} = (44+30+45)/3 = 39.67 \), \( \bar y_{t_{sağ}} = (35+43)/2 = 39 \)
-- \( R(t_{sol}) = \tfrac{(44-39.67)^2 + (30-39.67)^2 + (45-39.67)^2}{3} = 46.89 \)
-- \( R(t_{sağ}) = \tfrac{(35-39)^2 + (43-39)^2}{2} = 16 \)
-- Toplam: \( R(t_{sol}) + R(t_{sağ}) = 62.89 \)
+- $` \bar y_{t_{sol}} = (44+30+45)/3 = 39.67 `$, $` \bar y_{t_{sağ}} = (35+43)/2 = 39 `$
+- $` R(t_{sol}) = \tfrac{(44-39.67)^2 + (30-39.67)^2 + (45-39.67)^2}{3} = 46.89 `$
+- $` R(t_{sağ}) = \tfrac{(35-39)^2 + (43-39)^2}{2} = 16 `$
+- Toplam: $` R(t_{sol}) + R(t_{sağ}) = 62.89 `$
 
 Tüm olası eşiklerde benzer hesap yapılarak aşağıdaki tablo elde edilir:
 
@@ -2572,8 +2572,8 @@ Notlar:
 
 Eksik/kayıp değer içeren nitelikler için bilgi kazancı hesaplanırken aşağıdaki yaklaşım kullanılabilir:
 
-- Kayıplı örnekler hariç tutularak \( H(T) \) ve \( H(T\mid X) \) normal şekilde hesaplanır (sadece bilinen X değerleri ile).
-- Sonuç, kayıpsız örnek oranı \( F \) ile ölçeklenir:
+- Kayıplı örnekler hariç tutularak $` H(T) `$ ve $` H(T\mid X) `$ normal şekilde hesaplanır (sadece bilinen X değerleri ile).
+- Sonuç, kayıpsız örnek oranı $` F `$ ile ölçeklenir:
 
 $$
 F = \frac{\text{X değeri bilinen örnek sayısı}}{\text{toplam örnek sayısı}}, \quad \operatorname{Gain}_X = F\,\bigl( H(T) - H(T\mid X) \bigr).
@@ -2608,7 +2608,7 @@ Not: Hedef entropisi H(SINIF) tüm 14 kayıtla hesaplanır. Aşağıda koşullu 
 
 Koşullu entropi (yalnız NİTELİK1’i bilinen 13 kayıt):
 
-\( H(\text{SINIF}\mid \text{NİTELİK1}) \approx 0{,}747 \)
+$` H(\text{SINIF}\mid \text{NİTELİK1}) \approx 0{,}747 `$
 
 Ölçek faktörü ve ayarlanmış kazanç:
 
