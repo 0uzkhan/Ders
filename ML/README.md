@@ -1520,7 +1520,7 @@ Hesaplar:
 - $` d_{13} = \sqrt{ \tfrac{(25-18)^2}{(8.22)^2} + \tfrac{(80-80)^2}{(200)^2} } = \sqrt{0.725 + 0} \approx 0.85 `$
 - $` d_{23} = \sqrt{ \tfrac{(22-18)^2}{(8.22)^2} + \tfrac{(50-80)^2}{(200)^2} } = \sqrt{0.237 + 0.0225} \approx 0.50 `$
 
-Not — yaygın alternatif tanım: Birçok kaynakta standartlaştırılmış Öklid, $` d^2 = \sum_k \tfrac{(x_{ik} - x_{jk})^2}{\operatorname{Var}(x_k)} `$ olarak verilir (paydada varyans, karekök dışarıda). Bu tanımda sayısal büyüklük farklı olur fakat karşılaştırmalı sıralama çoğu durumda değişmez.
+Not — yaygın alternatif tanım: Birçok kaynakta standartlaştırılmış Öklid, $` d^2 = \sum_k \tfrac{(x_{ik} - x_{jk})^2}{\text{Var}(x_k)} `$ olarak verilir (paydada varyans, karekök dışarıda). Bu tanımda sayısal büyüklük farklı olur fakat karşılaştırmalı sıralama çoğu durumda değişmez.
 
 ### Manhattan (City-Block) Uzaklığı
 
@@ -2004,7 +2004,7 @@ $$
 - Tanım (ikili/çok sınıflı genel hâl):
 
 $$
-\operatorname{Gain}(T, X) = H(T) - H(T\mid X), \quad H(T\mid X) = \sum_{x \in \mathcal{X}} p(x)\, H(T\mid X{=}x).
+\text{Gain}(T, X) = H(T) - H(T\mid X), \quad H(T\mid X) = \sum_{x \in \mathcal{X}} p(x)\, H(T\mid X{=}x).
 $$
 
     Notasyon notu: Bazı slayt/kitaplarda $` H(X,T) `$ yazımı görülür; burada kastedilen şartlı entropinin beklenen değeridir ($` H(T\mid X) `$).
@@ -2023,7 +2023,7 @@ $$
 >
 > Açıklama: Görsel 80 — Özelliklere göre alt kümelerde entropi ve ağırlıklı ortalama.
 
-3) Kazançları bul ve en büyük kazanca sahip özelliği düğüm olarak seç: $` \operatorname{Gain}(T, X) = H(T) - H(T\mid X) `$
+3) Kazançları bul ve en büyük kazanca sahip özelliği düğüm olarak seç: $` \text{Gain}(T, X) = H(T) - H(T\mid X) `$
 
 
 #### Örnek: Bilgi Kazancı Hesabı (BORÇ özelliği)
@@ -2063,10 +2063,10 @@ $$
 3) Bilgi kazancı:
 
 $$
-\operatorname{Gain}(\text{RİSK}, \text{BORÇ}) = H(\text{RİSK}) - H(\text{RİSK}\mid \text{BORÇ}) \approx 1 - 0{,}64 = 0{,}36.
+\text{Gain}(\text{RİSK}, \text{BORÇ}) = H(\text{RİSK}) - H(\text{RİSK}\mid \text{BORÇ}) \approx 1 - 0{,}64 = 0{,}36.
 $$
 
-Not: Benzer şekilde $` \operatorname{Gain}(\text{RİSK},\text{GELİR}) `$ ve $` \operatorname{Gain}(\text{RİSK},\text{STATÜ}) `$ hesaplanır; en büyük kazanca sahip nitelik kök düğüm seçilir.
+Not: Benzer şekilde $` \text{Gain}(\text{RİSK},\text{GELİR}) `$ ve $` \text{Gain}(\text{RİSK},\text{STATÜ}) `$ hesaplanır; en büyük kazanca sahip nitelik kök düğüm seçilir.
 
 
 #### Örnek: Bilgi Kazancı — MEMNUN Veri Kümesi
@@ -2330,18 +2330,18 @@ Gini algoritmasında her aday bölünmede düğüm iki parçaya ayrılır ve sol
 - Sol ve sağ için Gini safsızlığı:
 
 $$
-\operatorname{Gini}_{sol} = 1 - \sum_{i=1}^{k} \left( \frac{L_i}{|T_{sol}|} \right)^2, \quad
-\operatorname{Gini}_{sağ} = 1 - \sum_{i=1}^{k} \left( \frac{R_i}{|T_{sağ}|} \right)^2.
+\text{Gini}_{sol} = 1 - \sum_{i=1}^{k} \left( \frac{L_i}{|T_{sol}|} \right)^2, \quad
+\text{Gini}_{sağ} = 1 - \sum_{i=1}^{k} \left( \frac{R_i}{|T_{sağ}|} \right)^2.
 $$
 
 - Aday bölmenin ağırlıklı Gini değeri (özellik j için): n eğitim kaydı varsa
 
 $$
-\operatorname{Gini}_j = \frac{1}{n}\Bigl( |T_{sol}|\,\operatorname{Gini}_{sol} + |T_{sağ}|\,\operatorname{Gini}_{sağ} \Bigr)
-= \frac{|T_{sol}|}{n}\,\operatorname{Gini}_{sol} + \frac{|T_{sağ}|}{n}\,\operatorname{Gini}_{sağ}.
+\text{Gini}_j = \frac{1}{n}\Bigl( |T_{sol}|\,\text{Gini}_{sol} + |T_{sağ}|\,\text{Gini}_{sağ} \Bigr)
+= \frac{|T_{sol}|}{n}\,\text{Gini}_{sol} + \frac{|T_{sağ}|}{n}\,\text{Gini}_{sağ}.
 $$
 
-- Seçim: Her j niteliği için hesaplanan $`\operatorname{Gini}_j`$ değerleri arasından en küçük olanı seçilir ve bölünme bu nitelik/eşik üzerinden yapılır. Sonra aynı işlem alt düğümlerde tekrarlanır.
+- Seçim: Her j niteliği için hesaplanan $`\text{Gini}_j`$ değerleri arasından en küçük olanı seçilir ve bölünme bu nitelik/eşik üzerinden yapılır. Sonra aynı işlem alt düğümlerde tekrarlanır.
 
 ##### Örnek: Gini ile Karar Ağacı
 
@@ -2489,7 +2489,7 @@ Regresyon modellerini değerlendirirken kullanılan başlıca metrikler MSE, RMS
 - Tanım:
 
 $$
-\operatorname{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat y_i)^2, \quad \operatorname{RMSE} = \sqrt{\operatorname{MSE}}.
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat y_i)^2, \quad \text{RMSE} = \sqrt{\text{MSE}}.
 $$
 
 - Yorum:
@@ -2517,7 +2517,7 @@ print({"mse": mse, "rmse": rmse})
 - Tanım (toplam sapma SS_tot ve artık sapma SS_res ile):
 
 $$
-R^2 = 1 - \frac{\sum_i (y_i - \hat y_i)^2}{\sum_i (y_i - \bar y)^2} = 1 - \frac{\operatorname{SS}_{res}}{\operatorname{SS}_{tot}}, \quad \bar y = \frac{1}{n}\sum_i y_i.
+R^2 = 1 - \frac{\sum_i (y_i - \hat y_i)^2}{\sum_i (y_i - \bar y)^2} = 1 - \frac{\text{SS}_{res}}{\text{SS}_{tot}}, \quad \bar y = \frac{1}{n}\sum_i y_i.
 $$
 
 - Yorum:
@@ -2576,7 +2576,7 @@ Eksik/kayıp değer içeren nitelikler için bilgi kazancı hesaplanırken aşa�
 - Sonuç, kayıpsız örnek oranı $` F `$ ile ölçeklenir:
 
 $$
-F = \frac{\text{X değeri bilinen örnek sayısı}}{\text{toplam örnek sayısı}}, \quad \operatorname{Gain}_X = F\,\bigl( H(T) - H(T\mid X) \bigr).
+F = \frac{\text{X değeri bilinen örnek sayısı}}{\text{toplam örnek sayısı}}, \quad \text{Gain}_X = F\,\bigl( H(T) - H(T\mid X) \bigr).
 $$
 
 Örnek veri kümesi (NİTELİK1’de bir eksik “?” değer var, toplam 14 kayıt):
@@ -2613,7 +2613,7 @@ $` H(\text{SINIF}\mid \text{NİTELİK1}) \approx 0{,}747 `$
 Ölçek faktörü ve ayarlanmış kazanç:
 
 $$
-F = \tfrac{13}{14}, \quad \operatorname{Gain}(\text{NİTELİK1},\text{SINIF}) = F\,\bigl(0{,}961 - 0{,}747\bigr) \approx 0{,}199.
+F = \tfrac{13}{14}, \quad \text{Gain}(\text{NİTELİK1},\text{SINIF}) = F\,\bigl(0{,}961 - 0{,}747\bigr) \approx 0{,}199.
 $$
 
 ### Ezber (Overfitting) ve Budama
