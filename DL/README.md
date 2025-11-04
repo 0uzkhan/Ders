@@ -13,6 +13,12 @@
 - [BIL365 - Derin Öğrenme](#bil365---derin-öğrenme)
 - [Ders Notları](#ders-notları)
   - [İçindekiler](#i̇çindekiler)
+  - [🧭 Sınav Konuları İndeksi](#-sınav-konuları-i̇ndeksi)
+    - [🧠 1. Temel Tanımlar (AI, ML, DL, YSA)](#-1-temel-tanımlar-ai-ml-dl-ysa)
+    - [⚖️ 2. Makine Öğrenmesi vs. Derin Öğrenme](#️-2-makine-öğrenmesi-vs-derin-öğrenme)
+    - [🧐 3. Aşırı Öğrenme (Overfitting)](#-3-aşırı-öğrenme-overfitting)
+    - [🖼️ 4. CNN ve Max Pooling Ne Yapar?](#️-4-cnn-ve-max-pooling-ne-yapar)
+    - [🧱 5. Katman Türleri ve Diğer Temel Tanımlar](#-5-katman-türleri-ve-diğer-temel-tanımlar)
   - [Giriş: Yapay Zeka, Makine Öğrenmesi, Derin Öğrenme](#giriş-yapay-zeka-makine-öğrenmesi-derin-öğrenme)
     - [Özet](#özet)
     - [Temel Kavramlar](#temel-kavramlar)
@@ -312,6 +318,65 @@
     - [Temsil ve Boyutlar](#temsil-ve-boyutlar)
     - [Notlar](#notlar-16)
     - [Hızlı Sorular](#hızlı-sorular-33)
+
+## 🧭 Sınav Konuları İndeksi
+
+### 🧠 1. Temel Tanımlar (AI, ML, DL, YSA)
+
+* [Giriş: Yapay Zeka, Makine Öğrenmesi, Derin Öğrenme](#giriş-yapay-zeka-makine-öğrenmesi-derin-öğrenme)
+* [Yapay Sinir Ağları: Tanım ve Bileşenler](#yapay-sinir-ağları-tanım-ve-bileşenler)
+* [Nöron Aktivasyonu ve Hesaplama](#nöron-aktivasyonu-ve-hesaplama)
+
+---
+
+### ⚖️ 2. Makine Öğrenmesi vs. Derin Öğrenme
+
+* [Makine Öğrenmesi vs Derin Öğrenme: Karşılaştırma](#makine-öğrenmesi-vs-derin-öğrenme-karşılaştırma)
+* [ML vs DL: Kavramlar](#ml-vs-dl-kavramlar)
+* [ML vs DL: Özellik Çıkarımı](#ml-vs-dl-özellik-çıkarımı)
+* [ML vs DL: Veri İhtiyacı](#ml-vs-dl-veri-i̇htiyacı)
+* [ML vs DL: Model Karmaşıklığı](#ml-vs-dl-model-karmaşıklığı)
+
+---
+
+### 🧐 3. Aşırı Öğrenme (Overfitting)
+
+* [Aşırı Öğrenme (Overfitting): Tanım ve Belirtiler](#aşırı-öğrenme-overfitting-tanım-ve-belirtiler)
+* [Aşırı Öğrenmenin Nedenleri](#aşırı-öğrenmenin-nedenleri)
+* [Önleme (Veri Odaklı): Veri Artırma](#aşırı-öğrenmeyi-önleme-veri-odaklı)
+* [Önleme (Model Odaklı): Kapasite Azaltma](#aşırı-öğrenmeyi-önleme-model-odaklı)
+* [Önleme (Düzenlileştirme): Dropout, L1/L2 (Weight Decay)](#düzenlileştirme-dropout-l1l2-weight-decay)
+* [Önleme: Erken Durdurma ve Batch Normalization](#erken-durdurma-ve-batch-normalization)
+
+---
+
+### 🖼️ 4. CNN ve Max Pooling Ne Yapar?
+
+* [Neden MLP Görüntüler İçin İdeal Değil?](#neden-mlp-görüntüler-i̇çin-i̇deal-değil)
+* [CNN: Evrişimli Katmanlar ve Ağırlık Paylaşımı](#cnn-evrişimli-katmanlar-ve-ağırlık-paylaşımı)
+* [Hiyerarşik Temsil Öğrenimi (CNN nasıl öğrenir)](#hiyerarşik-temsil-öğrenimi)
+* [CNN: Havuzlama (Pooling) (Max Pooling nedir?)](#cnn-havuzlama-pooling)
+
+---
+
+### 🧱 5. Katman Türleri ve Diğer Temel Tanımlar
+
+* **Aktivasyonlar:**
+    * [Aktivasyon Fonksiyonları: Lineer, Sigmoid, Tanh, ReLU](#aktivasyon-fonksiyonları-lineer-sigmoid-tanh-relu)
+    * [ReLU ve Seyrek Aktivite](#relu-ve-seyrek-aktivite)
+    * [Softmax Aktivasyonu ve Özellikleri](#softmax-aktivasyonu-ve-özellikleri)
+* **Diğer Katmanlar:**
+    * [CNN: Stride ve Padding](#cnn-stride-ve-padding)
+    * [CNN: Normalizasyon Katmanları (Batch Norm)](#cnn-normalizasyon-katmanları)
+    * [CNN: Flatten ve Dropout](#cnn-flatten-ve-dropout)
+* **Eğitim Süreci:**
+    * [Train/Validation/Test: Neden ve Nasıl?](#trainvalidationtest-neden-ve-nasıl)
+    * [Kayıp Fonksiyonları (MSE, Cross Entropy)](#kayıp-fonksiyonları-ve-toplam-kayıp)
+    * [Eğitim Süreci ve Optimizasyon (Epoch, Batch, Optimizer)](#eğitim-süreci-ve-optimizasyon)
+* **Diğer Mimari Kavramlar:**
+    * [Derin Ağlarda Gradyan Sorunları (Vanishing/Exploding)](#derin-ağlarda-gradyan-sorunları)
+    * [ResNet: Residual Bağlantılar](#resnet-residual-bağlantılar)
+    * [Transfer Öğrenme: Genel Bakış](#transfer-öğrenme-genel-bakış)
 
 <a id="giris-yz-ml-dl"></a>
 

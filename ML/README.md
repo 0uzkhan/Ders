@@ -15,6 +15,12 @@
 - [BIL365 - Makine Öğrenmesi](#bil365---makine-öğrenmesi)
 - [Ders Notları](#ders-notları)
   - [İçindekiler](#i̇çindekiler)
+  - [Sınavda Çıkabilecek Konular ve İpuçları](#sınavda-çıkabilecek-konular-ve-i̇puçları)
+    - [1. Karar Ağacı, ID3 Algoritması ve Kök Düğüm Seçimi](#1-karar-ağacı-id3-algoritması-ve-kök-düğüm-seçimi)
+    - [2. "3 Özellikli 1 Sınıf Tek Çıkış" Örneği](#2-3-özellikli-1-sınıf-tek-çıkış-örneği)
+    - [3. "Sayısal Değerlerin Hesaplanması" (Kavramsal)](#3-sayısal-değerlerin-hesaplanması-kavramsal)
+    - [4. "Gradyant Desken Nedir Ne İşe Yarar"](#4-gradyant-desken-nedir-ne-i̇şe-yarar)
+  - [Notlar](#notlar)
     - [Giriş ve Temel Kavramlar](#giriş-ve-temel-kavramlar)
       - [Dersin Amacı](#dersin-amacı)
       - [Öğrenme Çıktıları](#öğrenme-çıktıları)
@@ -106,6 +112,44 @@
     - [Ezber (Overfitting) ve Budama](#ezber-overfitting-ve-budama)
       - [Ağaç Budama](#ağaç-budama)
         - [Örnek: Hata toleransı ile budama](#örnek-hata-toleransı-ile-budama)
+
+
+## Sınavda Çıkabilecek Konular ve İpuçları
+
+### 1. Karar Ağacı, ID3 Algoritması ve Kök Düğüm Seçimi
+
+Bu konular birbiriyle doğrudan ilişkilidir ve notlarınızda detaylıca yer alıyor.
+
+* **Ana Konu:** [## Karar Ağaçları](#karar-ağaçları) başlığı altında genel bir giriş bulabilirsiniz.
+* **ID3 ve Kök Düğüm Seçimi:** ID3 algoritması, bir düğümde (özellikle kök düğümde) veriyi bölmek için **Bilgi Kazancı (Information Gain)** kriterini kullanır.
+    * Bu kazancı hesaplamak için önce **Entropi** öğrenilir. Bu konuyu [### Entropi](#entropi) başlığı altında bulabilirsiniz.
+    * Entropi kullanılarak Bilgi Kazancının nasıl hesaplandığı ve ID3/C4.5 algoritmalarında nasıl kullanıldığı [### Bilgi Kazancı (ID3 / C4.5)](#bilgi-kazancı-id3--c45) bölümünde açıklanmıştır.
+    * **"Hangisi kök düğüm"** sorusunun cevabı: Bilgi Kazancı en yüksek olan özellik kök düğüm olarak seçilir. Bu süreç, [#### İşlem Adımları](#i̇şlem-adımları) altında (Madde 3) "Kazançları bul ve en büyük kazanca sahip özelliği düğüm olarak seç" şeklinde özetlenmiştir.
+
+### 2. "3 Özellikli 1 Sınıf Tek Çıkış" Örneği
+
+Notlarınızda bu tanıma uyan mükemmel bir örnek bulunuyor:
+
+* **Bölüm:** [#### Örnek: Bilgi Kazancı — MEMNUN Veri Kümesi](#örnek-bilgi-kazancı--memnun-veri-kümesi)
+* **Açıklama:** Bu örnekte 3 özellik (MODEL, CİNSİYET, YAŞ) ve 1 sınıf/çıkış (MEMNUN) bulunmaktadır. Bu bölüm, tam olarak ID3/C4.5 kullanarak bu 3 özellikten hangisinin kök düğüm olacağını (ve sonraki dallanmaları) hesaplamaktadır.
+
+### 3. "Sayısal Değerlerin Hesaplanması" (Kavramsal)
+
+Sınavda hesaplama sormayacak olsa da, ID3'ün bir uzantısı olan C4.5'in sayısal değerleri nasıl ele aldığını bilmeniz gerekebilir.
+
+* **Bölüm:** [### C4.5 Algoritması](#c45-algoritması)
+* **Açıklama:** Bu bölümde, C4.5'in "Nümerik değerleri kategorik kararlara dönüştürmek için bir eşik (threshold) belirler" olduğu açıklanır.
+* **Örnek:** Yukarıda bahsedilen [MEMNUN Veri Kümesi](#örnek-bilgi-kazancı--memnun-veri-kümesi) örneğinde, `YAŞ` özelliği sayısaldır ve notlarınızda bu özellik için en iyi eşiğin (t = 30) nasıl bulunduğu gösterilmektedir.
+
+### 4. "Gradyant Desken Nedir Ne İşe Yarar"
+
+Bu konu, Karar Ağaçları'ndan ayrı olarak Lineer Regresyon başlığı altında yer almaktadır.
+
+* **Bölüm:** [## Dereceli azaltma metodu](#dereceli-azaltma-metodu)
+* **Nedir? (Tanımı):** "Dereceli azaltma (gradient descent) metodu, çok güçlü ve çok genel optimizasyon metodudur."
+* **Ne İşe Yarar? (Amacı):** Amacı, bir modelin **maliyet fonksiyonunun (`J(θ)`) minimumunu bulmaktır**. Notlarınızda "En iyi olay modeli, en iyi model parametreleri, en düşük maliyet değeri demektir." ve bu minimumu bulmak için "Devamlı olarak, J'nin değerlerini azaltmak için (θ0, θ1) uzayında küçük adımlar yapıyoruz." ifadeleri yer almaktadır. Kısacası, modelin en iyi parametrelerini (örneğin lineer regresyondaki θ değerlerini) bulmak için kullanılır.
+
+## Notlar
 
 ### Giriş ve Temel Kavramlar
 
