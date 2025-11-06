@@ -408,7 +408,11 @@
 
 - İlişki: DÖ ⊂ MÖ ⊂ YZ. Derin öğrenme, makine öğrenmesinin bir alt kümesidir; makine öğrenmesi de yapay zekanın alt kümesidir.
  - DÖ'nün gücü: Çok katmanlı mimarilerle (derinlik) temsil gücü artar; yeterli veri ve hesaplama kritik faktörlerdir.
-- Görseller (#1.jpg, #2.jpg) bu bölümde metinsel olarak özetlenmiştir.
+Görseller:
+
+![Görsel 1](Images/1.jpg)
+
+![Görsel 2](Images/2.jpg)
 
 ### Hızlı Sorular
 
@@ -605,13 +609,23 @@
 
 ### Notlar
 
-- Görseller (#3.jpg, #4.jpg, #5.jpg) erişilemediği için açıklamalar metne işlenmiştir.
+Görseller:
+
+![Görsel 3](Images/3.jpg)
+
+![Görsel 4](Images/4.jpg)
+
+![Görsel 5](Images/5.jpg)
 
 ### Hızlı Sorular
 
 1) LeNet'in iki ana bileşeni nedir (katman düzeyinde)?
 2) Paylaşımlı ağırlıklar neden önemlidir?
 3) 1998'de LeNet'in geniş ölçekli problemlerde sınırlı kalmasının iki nedeni?
+
+Görseller:
+
+![El Yazısı Tanıma](Images/12.jpg)
 
 <a id="imagenet-ilsvrc"></a>
 
@@ -626,10 +640,22 @@
 - ImageNet (2009): 22 binin üzerinde kategori ve milyonlarca etiketli görüntü; geniş ölçekli görsel tanıma araştırmaları için standart.
 - ILSVRC (2012): ImageNet tabanlı yıllık yarışma; sınıflandırma ve nesne tanıma görevleri için kıyaslama ortamı.
 
+Görseller:
+
+![ImageNet](Images/6.jpg)
+
+![ILSVRC 2012](Images/7.jpg)
+
+![ImageNet Challenge](Images/11.jpg)
+
 ### Hızlı Sorular
 
 1) Neden “büyük, etiketli veri” derin öğrenme için kritik?
 2) ILSVRC’nin araştırma topluluğuna sağladığı iki fayda nedir?
+
+Görseller:
+
+![ImageNet OCR/Handwriting](Images/12.jpg)
 
 <a id="alexnet-2012"></a>
 
@@ -643,6 +669,14 @@
 
 - Katmanlar: 7 gizli katman (bazı max pooling katmanları sayılmazsa).
 - Parametreler: ~60 milyon.
+
+Görseller:
+
+![AlexNet Başarısı](Images/8.jpg)
+
+![AlexNet Mimari](Images/9.jpg)
+
+![AlexNet 2012 Devrim](Images/91.jpg)
 - Ekip: Alex Krizhevsky, Ilya Sutskever, Geoffrey Hinton.
 
 ### Öne Çıkan Teknikler
@@ -740,6 +774,12 @@ Notlar:
 - Torchvision önceden eğitilmiş modeller ve performansları: https://docs.pytorch.org/vision/main/models.html
     - Dokümantasyonda, her model için giriş boyutu, normalize değerleri, top-1/top-5 doğruluk ve `weights` kullanımı bulunur.
 
+Görseller:
+
+![SOTA Genel 1](Images/89.jpg)
+
+![SOTA Genel 2](Images/90.jpg)
+
 ### Hızlı Sorular
 
 1) Neden “en iyi doğruluk” her zaman “en iyi üretim modeli” değildir?
@@ -757,6 +797,14 @@ Notlar:
 ### Neden İşe Yarar?
 
 - Alt katmanlar “genel” özellikleri (kenar, doku) öğrenir; üst katmanlar daha görev-özel temsiller taşır. Bu nedenle az veriyle de iyi performans sağlanabilir ve eğitim süresi kısalır.
+
+Görseller:
+
+![Transfer Öğrenme 1](Images/92.jpg)
+
+![Transfer Öğrenme 2](Images/93.jpg)
+
+![Transfer Öğrenme 3](Images/94.jpg)
 
 <a id="transfer-feature"></a>
 
@@ -915,6 +963,10 @@ print(f"Test Doğruluğu: {100.0*correct/total:.2f}%")
 - VGG (Visual Geometry Group), küçük 3×3 konvolüsyonları art arda kullanarak derinliğin performansa katkısını gösterdi. VGG-16/VGG-19 basit ve homojen bir mimariyle ResNet öncesi dönemin SOTA’sını belirledi.
 - VGG-16, günümüzde de transfer öğrenme için güçlü ve sezgisel bir özellik çıkarıcıdır (ancak parametre ve hesaplama maliyeti yüksektir; ≈138M parametre).
 
+Görseller:
+
+![VGG-16](Images/95.jpg)
+
 ### Hızlı Notlar
 
 - 3×3 filtreler + max-pooling blokları; sonunda büyük tam bağlı katmanlar (4096→4096→C).
@@ -983,6 +1035,12 @@ model.classifier = nn.Sequential(
 
 - 2015 (He ve ark.): Skip connection ile girdi, birkaç katman sonrası çıktıya toplanır (y = F(x) + x). Gradyan akışı kolaylaşır; çok daha derin ağlar (50/101/152) eğitilebilir.
 
+Görseller:
+
+![ResNet Blok 1](Images/96.jpg)
+
+![ResNet Blok 2](Images/97.jpg)
+
 ### Kod: ResNet-50 Transfer (CIFAR‑10)
 
 ```python
@@ -1004,6 +1062,10 @@ model.fc = nn.Linear(num_ftrs, 10)
 ### Özet
 
 - 1×1, 3×3, 5×5 konv ve pooling’i paralel uygular; çıktılarını birleştirir. Farklı ölçeklerde özellikleri aynı katmanda yakalar; hesaplamayı 1×1 “bottleneck” ile düşürür.
+
+Görseller:
+
+![Inception Modülü](Images/98.jpg)
 
 ### Kod: Inception v3 Transfer (CIFAR‑10)
 
@@ -1086,6 +1148,10 @@ model.classifier[1] = nn.Linear(num_ftrs, 10)
 - İyi durum: Eğitim ve doğrulama hatası birlikte düşer.
 - Overfitting: Eğitim hatası düşmeye devam ederken, doğrulama hatası artmaya başlar (ayrışma/boşluk büyür).
 
+Görseller:
+
+![Overfitting Eğrileri](Images/99.jpg)
+
 <a id="train-val-test"></a>
 
 ## Train/Validation/Test: Neden ve Nasıl?
@@ -1094,6 +1160,10 @@ model.classifier[1] = nn.Linear(num_ftrs, 10)
   1) Eğitim (%60–80): Öğrenme için kullanılır; ağırlıklar bu veriye göre güncellenir.
   2) Doğrulama (%10–20): Eğitim sırasında hiperparametre seçimi ve overfitting tespiti için kullanılır (öğrenme yoktur).
   3) Test (%10–20): Tüm ayarlardan sonra nihai, tarafsız değerlendirme için bir kez bakılır.
+
+  Görseller:
+
+  ![Validation Rolü](Images/100.jpg)
 
 <a id="validation-role"></a>
 
@@ -1191,6 +1261,10 @@ model_with_dropout = nn.Sequential(
 
 Not: CrossEntropyLoss kullanıyorsanız çıkışta Softmax uygulamayın; NLLLoss kullanıyorsanız LogSoftmax gerekir.
 
+Görseller:
+
+![Dropout Kod Görseli](Images/101.jpg)
+
 ### L2 (Weight Decay)
 
 ```python
@@ -1232,6 +1306,10 @@ for epoch in range(100):
 model.load_state_dict(best_state)
 ```
 
+Görseller:
+
+![Erken Durdurma Örneği](Images/102.jpg)
+
 ### Batch Normalization
 
 - Conv için `nn.BatchNorm2d(C)`, Linear için `nn.BatchNorm1d(D)`.
@@ -1244,6 +1322,12 @@ model.load_state_dict(best_state)
 Görev: Verilen çiçekler (veya yüz/yaş) veri setinde en az üç SOTA modelle transfer öğrenme yapıp karşılaştırın.
 
 Koşullar (özet):
+
+Görseller:
+
+![Çiçekler Veri Seti](Images/103.jpg)
+
+![Faces Age Detection Veri Seti](Images/104.jpg)
 
 1) Modeller: MobileNetV3, InceptionV3, EfficientNet‑B0.
 2) Eğitim/test fonksiyonlarını yeniden kullanılabilir yazın (model bağımsız).
@@ -1267,6 +1351,10 @@ Koşullar (özet):
 - Alt katmanlar: Kenarlar, dokular, basit renk/geometrik motifler.
 - Orta katmanlar: Basit şekiller ve birleşik desenler.
 - Üst katmanlar: Nesne parçaları ve yüksek düzey semantik özellikler (ör. yüz parçaları).
+
+Görseller:
+
+![Hiyerarşik Temsil](Images/10.jpg)
 
 ### Hızlı Sorular
 
@@ -1325,7 +1413,11 @@ Koşullar (özet):
 
 ### Notlar
 
-- Görseller (#13.jpg, #14.jpg) metne dönüştürülmüştür.
+Görseller:
+
+![Görsel 13](Images/13.jpg)
+
+![Görsel 14](Images/14.jpg)
 
 ### Hızlı Sorular
 
@@ -1346,6 +1438,12 @@ Koşullar (özet):
 - Aktivasyon: $y = h(a)$; $h(\cdot)$ genellikle doğrusal olmayan bir fonksiyondur.
 - Kesinlikle Artan Fonksiyon: $x_1 < x_2$ ise $g(x_1) < g(x_2)$ (kararı korur; türevi negatif değildir).
 
+Görseller:
+
+![Nöron Aktivasyonu](Images/15.jpg)
+
+![Nöron Çıktı Aktivasyonu](Images/16.jpg)
+
 ### Hızlı Sorular
 
 1) Neden doğrusal olmayan aktivasyonlara ihtiyaç duyarız?
@@ -1365,6 +1463,14 @@ Koşullar (özet):
 - Sigmoid: $\sigma(x) = \frac{1}{1 + e^{-x}}$. Aralık $(0,1)$; doygunluk bölgelerinde gradyan sönümlenir; sıfır merkezli değildir.
 - Tanh: $\tanh(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}}$. Aralık $(-1,1)$; sıfır merkezli; yine doygunluklarda gradyan zayıflar.
 - ReLU: $\mathrm{ReLU}(x) = \max(0,x)$. Hesaplama olarak ucuz; seyreklik üretir; üst sınır yok; “ölü ReLU” riski (gradyan 0’a kilitlenebilir).
+
+Görseller:
+
+![Lineer Aktivasyon](Images/17.jpg)
+
+![Sigmoid Aktivasyon](Images/18.jpg)
+
+![Tanh Aktivasyon](Images/19.jpg)
 
 ### İpuçları
 
@@ -1387,6 +1493,10 @@ Koşullar (özet):
 
 - Tanım: $f(x) = \max(0, x)$.
 - İleri Yayılım: $x < 0$ iken çıktı $0$; bir sonraki katmana bilgi taşınmaz.
+
+Görseller:
+
+![ReLU Aktivasyonu](Images/20.jpg)
 - Geri Yayılım: Pasif nöron gradyan almaz; etkili parametre sayısı azalır (düzenlileştirici etki).
 
 ### Neden Önemli?
@@ -1470,7 +1580,21 @@ $$\mathrm{softmax}(a)_i = \frac{\exp(a_i)}{\sum_{c=1}^{C} \exp(a_c)} \quad \text
 ### Notlar
 
 - Gizli aktivasyon $\phi$ olarak ReLU/tanh/sigmoid seçilebilir; pratikte çoğunlukla ReLU-türevleri kullanılır.
-- Görseller (#21–#27) metne dönüştürülerek özetlenmiştir.
+Görseller:
+
+![Görsel 21](Images/21.jpg)
+
+![Görsel 22](Images/22.jpg)
+
+![Görsel 23](Images/23.jpg)
+
+![Görsel 24](Images/24.jpg)
+
+![Görsel 25](Images/25.jpg)
+
+![Görsel 26](Images/26.jpg)
+
+![Görsel 27](Images/27.jpg)
 
 ### Hızlı Sorular
 
@@ -1496,6 +1620,16 @@ $$\mathrm{softmax}(a)_i = \frac{\exp(a_i)}{\sum_{c=1}^{C} \exp(a_c)} \quad \text
     - Sınıflandırma: $\hat{y} = \mathrm{softmax}\big(a^{(L+1)}\big)$ (çok sınıflı) veya $\hat{y}=\sigma\big(a^{(L+1)}\big)$ (ikili).
     - Regresyon: $\hat{y} = a^{(L+1)}$ (lineer çıktı).
 
+Görseller:
+
+![MLP Katman Ön-aktivasyonu](Images/28.jpg)
+
+![Gizli Katman Aktivasyonu](Images/29.jpg)
+
+![Çıkış Katmanı Aktivasyonu](Images/30.jpg)
+
+![MLP Şeması](Images/31.jpg)
+
 ### Toplam Parametre ve Hesaplama
 
 - Parametre Sayısı: $\sum_{k=1}^{L+1} (n_k n_{k-1} + n_k)$.
@@ -1518,6 +1652,10 @@ $$\mathrm{softmax}(a)_i = \frac{\exp(a_i)}{\sum_{c=1}^{C} \exp(a_c)} \quad \text
 
 - Derinlik ≥ 3 genellikle “derin” olarak adlandırılır; pratikte residual/skip bağlantıları daha derin ağların eğitimini kolaylaştırır.
 
+Görseller:
+
+![Derin Sinir Ağı](Images/32.jpg)
+
 ### Hızlı Sorular
 
 1) Derinleşirken hangi düzenlileştirme teknikleri faydalıdır? (ör. dropout, weight decay, batch norm)
@@ -1530,6 +1668,12 @@ $$\mathrm{softmax}(a)_i = \frac{\exp(a_i)}{\sum_{c=1}^{C} \exp(a_c)} \quad \text
 
 - Girdi özellikleri örneği: Sıcaklık (°F), Rüzgâr Hızı (mph), gün/saat, hava durumu vb.
 - Amaç: Gecikme var/yok (ikili sınıflandırma) veya gecikme süresi (regresyon) tahmini.
+
+Görseller:
+
+![Örnek Problem - Uçuş 1](Images/33.jpg)
+
+![Örnek Problem - Uçuş 2](Images/34.jpg)
 
 ### Basit MLP Kurulumu (İkili Sınıflandırma)
 
@@ -1568,6 +1712,18 @@ $$J(\theta) = \frac{1}{N} \sum_{i=1}^{N} \ell\big(\hat{y}^{(i)}, y^{(i)}\big) + 
 
 Burada $\Omega(\theta)$ genellikle $\tfrac{1}{2}\lVert \theta \rVert_2^2$ (L2) veya $\lVert \theta \rVert_1$ (L1) olarak seçilir.
 
+Görseller:
+
+![Kayıp Hesaplama](Images/35.jpg)
+
+![Toplam Hesaplama](Images/36.jpg)
+
+![Toplam Kayıp](Images/37.jpg)
+
+![Binary Cross Entropy](Images/38.jpg)
+
+![Mean Squared Error](Images/39.jpg)
+
 ### Notlar
 
 - Çok sınıflı sınıflandırmada softmax + çapraz entropi; ikili durumda sigmoid + ikili çapraz entropi tercih edilir. MSE çoğunlukla regresyon için uygundur.
@@ -1584,6 +1740,10 @@ Burada $\Omega(\theta)$ genellikle $\tfrac{1}{2}\lVert \theta \rVert_2^2$ (L2) v
 ### Özet
 
 - Eğitim, hatayı azaltacak şekilde ağın ağırlıklarının (parametrelerinin) güncellendiği yinelemeli bir süreçtir. Bir epoch, tüm eğitim verisinin modelden bir kez geçirilmesidir.
+
+Görseller:
+
+![Eğitim Süreci](Images/40.jpg)
 
 ### Adım Adım (Epoch içinde)
 
@@ -1620,6 +1780,10 @@ Burada $\Omega(\theta)$ genellikle $\tfrac{1}{2}\lVert \theta \rVert_2^2$ (L2) v
 - Basit MLP yapılandırmalarını etkileşimli olarak deneyin: https://playground.tensorflow.org/
 - Not: Özellik ölçekleme, aktivasyon ve karar sınırlarının nasıl değiştiğini gözlemleyin; aşırı öğrenmeyi görmek için veri gürültüsü ve model kapasitesiyle oynayın.
 
+Görseller:
+
+![Yapay Sinir Ağları - Playground](Images/41.jpg)
+
 <a id="iris-problem"></a>
 
 ## Iris: Problem Tanımı
@@ -1631,6 +1795,10 @@ Burada $\Omega(\theta)$ genellikle $\tfrac{1}{2}\lVert \theta \rVert_2^2$ (L2) v
 ### Notlar
 
 - Dengeli ve küçük bir veri setidir; hızlı prototipleme için uygundur.
+
+Görseller:
+
+![Iris Veri Seti](Images/42.jpg)
 
 <a id="iris-load-split"></a>
 
@@ -1838,6 +2006,12 @@ Burada $\Omega(\theta)$ genellikle $\tfrac{1}{2}\lVert \theta \rVert_2^2$ (L2) v
 - `DataLoader` ile `batch_size` seçilerek eğitime hazır hale getirilir.
 - Görselleştirme için ilk batch’ten bir örnek alıp `plt.imshow(tensor.squeeze(), cmap='gray')` ile gösterilebilir.
 
+Görseller:
+
+![MNIST Genel](Images/54.jpg)
+
+![MNIST Görselleştirme](Images/55.jpg)
+
 ### Not
 
 - DataLoader’da test için `test_set` kullanın; `test_loader = DataLoader(test_set, ...)` (bazı örneklerde yanlışlıkla `train_set` kullanabiliyor).
@@ -1866,6 +2040,10 @@ Burada $\Omega(\theta)$ genellikle $\tfrac{1}{2}\lVert \theta \rVert_2^2$ (L2) v
 ### Mimari
 
 - `Flatten → Linear(784,128) → ReLU → Linear(128,64) → ReLU → Linear(64,10)`; kayıp: `CrossEntropyLoss` (logits bekler; çıkışta softmax yok).
+
+Görseller:
+
+![Flatten Katmanı](Images/56.jpg)
 
 ### Not
 
@@ -1910,6 +2088,10 @@ Burada $\Omega(\theta)$ genellikle $\tfrac{1}{2}\lVert \theta \rVert_2^2$ (L2) v
 
 - Parametre patlaması: 200×200×3 giriş, 10 gizli nöronlu bir katman için ≈ 1.2M parametre. Yerel yapı ve uzaysal yakınlık bilgisi kaybolur.
 
+Görseller:
+
+![MLP Parametre Patlaması](Images/57.jpg)
+
 ### Not
 
 - Pikseller arası komşuluk bilgisi tam bağlı katmanlarda kullanılmaz; bu da veri/verim gereksinimini artırır.
@@ -1922,6 +2104,12 @@ Burada $\Omega(\theta)$ genellikle $\tfrac{1}{2}\lVert \theta \rVert_2^2$ (L2) v
 
 - İnsanlar nesneleri yerel ipuçlarından tanır; evrişim yaklaşımı da yerel bölgeler üzerinde çalışarak bu sezgiyi takip eder.
 
+Görseller:
+
+![Yerel Bölgeler 1](Images/58.jpg)
+
+![Yerel Bölgeler 2](Images/59.jpg)
+
 <a id="cnn-conv"></a>
 
 ## CNN: Evrişimli Katmanlar ve Ağırlık Paylaşımı
@@ -1933,6 +2121,44 @@ Burada $\Omega(\theta)$ genellikle $\tfrac{1}{2}\lVert \theta \rVert_2^2$ (L2) v
 ### Notlar
 
 - Öğrenilen filtreler kenar, köşe, doku gibi özellikleri yakalar; filtre sayısı arttıkça hesaplama maliyeti artar.
+
+Görseller:
+
+![CNN Genel](Images/60.jpg)
+
+![Konvolüsyon Örneği](Images/61.jpg)
+
+![Ağırlık Paylaşımı 1](Images/62.jpg)
+
+![Ağırlık Paylaşımı 2](Images/63.jpg)
+
+![Konvolüsyon Görselleştirme](Images/64.jpg)
+
+![Konvolüsyon Haritaları](Images/65.jpg)
+
+![Konvolüsyon Örnek 2](Images/66.jpg)
+
+![Konvolüsyon Örnek 3](Images/67.jpg)
+
+![Konvolüsyon Örnek 4](Images/68.jpg)
+
+![Konvolüsyon Örnek 5](Images/69.jpg)
+
+![Konvolüsyon Örnek 6](Images/70.jpg)
+
+![Konvolüsyon Örnek 7](Images/71.jpg)
+
+![Konvolüsyon Örnek 8](Images/72.jpg)
+
+![Konvolüsyon Örnek 9](Images/73.jpg)
+
+![Farklı Filtreler](Images/74.jpg)
+
+![Çoklu Filtreler](Images/75.jpg)
+
+![Konvolüsyon Örnek 10](Images/76.jpg)
+
+![Konvolüsyon Örnek 11](Images/77.jpg)
 
 <a id="cnn-stride-padding"></a>
 
@@ -1947,6 +2173,18 @@ Burada $\Omega(\theta)$ genellikle $\tfrac{1}{2}\lVert \theta \rVert_2^2$ (L2) v
 
 $$W' = \left\lceil \frac{W - F + 2P}{S} \right\rceil + 1,\quad H' = \left\lceil \frac{H - F + 2P}{S} \right\rceil + 1$$
 
+Görseller:
+
+![Stride Açıklama](Images/78.jpg)
+
+![Stride Örnek](Images/79.jpg)
+
+![Padding Kavramı](Images/80.jpg)
+
+![Padding Örnek](Images/81.jpg)
+
+![Çıkış Boyutu Formülü](Images/82.jpg)
+
 <a id="cnn-norm"></a>
 
 ## CNN: Normalizasyon Katmanları
@@ -1958,6 +2196,14 @@ $$W' = \left\lceil \frac{W - F + 2P}{S} \right\rceil + 1,\quad H' = \left\lceil 
 ### Formül (BatchNorm, kanal başına)
 
 $$\hat{x} = \frac{x - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}, \quad y = \gamma \, \hat{x} + \beta$$
+
+Görseller:
+
+![Normalizasyon 1](Images/83.jpg)
+
+![Normalizasyon 2](Images/84.jpg)
+
+![Normalizasyon 3](Images/85.jpg)
 
 <a id="cnn-pooling"></a>
 
@@ -1971,6 +2217,10 @@ $$\hat{x} = \frac{x - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}, \quad y = \gamma \, 
 
 - Komşu özellikler benzer olabileceği için bilgi kaybı sınırlıdır; aşırı havuzlama temsili zayıflatabilir.
 
+Görseller:
+
+![Pooling](Images/86.jpg)
+
 <a id="cnn-flat-dropout"></a>
 
 ## CNN: Flatten ve Dropout
@@ -1979,6 +2229,12 @@ $$\hat{x} = \frac{x - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}, \quad y = \gamma \, 
 
 - Flatten: Konvolüsyonel özellik haritalarını tam bağlı katmanlara bağlamak için tek boyutlu vektöre dönüştürür.
 - Dropout: Eğitim sırasında rastgele nöronları devre dışı bırakıp aşırı öğrenmeyi azaltır (ör. p=0.5).
+
+Görseller:
+
+![Flatten](Images/87.jpg)
+
+![Dropout](Images/88.jpg)
 
 <a id="cnn-simple-arch"></a>
 
@@ -2096,6 +2352,10 @@ $$\hat{x} = \frac{x - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}, \quad y = \gamma \, 
 - Gri Seviye: Tek kanal, tipik olarak 8-bit (0–255) parlaklık değeri.
 - Renkli (RGB): Üç kanal (R,G,B); her kanal bir gri seviye görüntüdür; birleşimi renkli görüntüyü verir.
 
+Görseller:
+
+![Dijital Görüntü Türleri](Images/43.jpg)
+
 ### Hızlı Sorular
 
 1) Hangi görüntü türü maskeleme için en uygundur ve neden?
@@ -2118,6 +2378,12 @@ $$\hat{x} = \frac{x - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}, \quad y = \gamma \, 
 
 - “İkilileştirme (binarization)” gri seviye veya renkli kanallardan eşikleme ile yapılır. Otsu vb. otomatik eşikleme yöntemleri de vardır.
 
+Görseller:
+
+![Binary Örnek 1](Images/44.jpg)
+
+![Binary Örnek 2](Images/45.jpg)
+
 ### Hızlı Sorular
 
 1) Global ve adaptif eşikleme arasındaki fark nedir?
@@ -2137,6 +2403,14 @@ $$\hat{x} = \frac{x - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}, \quad y = \gamma \, 
 ### Notlar
 
 - Görüntü boyutu (N×M), gri seviye aralığı G={0,...,255} (8-bit). Sayısallaştırma esnasında örnekleme (uzaysal çözünürlük) ve nicemleme (parlaklık çözünürlüğü) belirlenir.
+
+Görseller:
+
+![Gri Seviye 1](Images/46.jpg)
+
+![Gri Seviye 2](Images/47.jpg)
+
+![Gri Seviye 3](Images/48.jpg)
 
 ### Hızlı Sorular
 
@@ -2158,6 +2432,18 @@ $$\hat{x} = \frac{x - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}, \quad y = \gamma \, 
 ### Notlar
 
 - Farklı renk uzayları (HSV, Lab) belirli görevlerde avantaj sağlar (ör. parlaklık/renk bileşenlerini ayrıştırma). Derin öğrenmede ham RGB sık kullanılır; ön-işleme olarak normalizasyon yapılır.
+
+Görseller:
+
+![RGB Kanallar](Images/49.jpg)
+
+![RGB Değerleri](Images/50.jpg)
+
+![RGB Örnek 1](Images/51.jpg)
+
+![RGB Örnek 2](Images/52.jpg)
+
+![RGB Örnek 3](Images/53.jpg)
 
 ### Hızlı Sorular
 
