@@ -10,17 +10,39 @@
 
 # Ders Notları
 
+## Sınav Konuları
+
+Aşağıdaki maddeler, hocanın vize için özellikle vurguladığı konu tipleri ve çalışma önceliklerini kısa notlarla özetler. Her başlığın sonunda, notlarda ilgili konuya hızlı gitmen için link bıraktım.
+
+- **Hiyerarşik kümeleme (dendrogram) — önemli**
+    - **Kod beklenmiyor**; soru “tablodan dendrogram çizimi” şeklinde gelebilir.
+    - **Hesap makinesi gerekmiyor**; uzaklık/ölçü değerlerini hoca verecek.
+    - Mantık: en yakın kümeleri adım adım birleştir (agglomerative); bağlantı tanımı değiştikçe (single/complete) birleşme sırası değişebilir.
+    - İlgili notlar: [Hiyerarşik Kümeleme](#hiyerarşik-kümeleme), [Tek Bağlantı (Single Linkage / Nearest Neighbor)](#tek-bağlantı-single-linkage--nearest-neighbor), [Tam Bağlantı (Complete Linkage / Furthest Neighbor)](#tam-bağlantı-complete-linkage--furthest-neighbor)
+
+- **Model değerlendirme (test ağırlıklı gelebilir)**
+    - **Accuracy (genel başarı):** Dengesiz veri setlerinde tek başına yanıltıcı olabilir.
+    - **F1:** Precision–Recall dengesini topluca özetler; özellikle dengesiz sınıflarda daha anlamlıdır.
+    - **Confusion matrix:** Hangi hata tiplerinin (FP/FN) olduğunu hızlı görmeyi sağlar.
+    - **ROC / AUC:** Eşik değiştikçe TPR–FPR değişimini gösterir; soru gelebilir ama “aşırı detay” beklenmeyebilir.
+    - İlgili notlar: [Model Değerlendirme](#model-değerlendirme), [Sınıflandırma Başarı Metrikleri](#sınıflandırma-başarı-metrikleri), [Karmaşıklık Matrisi (Confusion Matrix)](#karmaşıklık-matrisi-confusion-matrix), [ROC Eğrisi ve AUC](#roc-eğrisi-ve-auc)
+
+- **Vize öncesi öncelik: genel ML temelleri**
+    - Lineer regresyon mantığı ve temel kavramlar (model, notasyon, hata/kayıp).
+    - Regresyonda temel hata ölçüsü olarak **MSE** (ve RMSE) yorumu.
+    - İlgili notlar: [Lineer Regresyon](#lineer-regresyon), [Ortalama Kare Hata (MSE) ve Kök Ortalama Kare Hata (RMSE)](#ortalama-kare-hata-mse-ve-kök-ortalama-kare-hata-rmse)
+
+- **Sınav biçimi notu**
+    - Sorular **konu karması** şeklinde gelebilir (farklı bölümlerden küçük parçalar).
+    - “Tablodan karar ağacı oluşturma (günler/güneşli vb.)” tarzı önceki soru tipinin **bu vize gelmeyeceği** söylenmiş.
+    - Referans (gelmeyecek denilen tipe örnek): [Uygulama: Hava Problemi (ID3 / C4.5)](#uygulama-hava-problemi-id3--c45)
+
 ## İçindekiler
 
 - [BIL365 - Makine Öğrenmesi](#bil365---makine-öğrenmesi)
 - [Ders Notları](#ders-notları)
   - [İçindekiler](#i̇çindekiler)
-  - [Sınavda Çıkabilecek Konular ve İpuçları](#sınavda-çıkabilecek-konular-ve-i̇puçları)
-    - [1. Karar Ağacı, ID3 Algoritması ve Kök Düğüm Seçimi](#1-karar-ağacı-id3-algoritması-ve-kök-düğüm-seçimi)
-    - [2. "3 Özellikli 1 Sınıf Tek Çıkış" Örneği](#2-3-özellikli-1-sınıf-tek-çıkış-örneği)
-    - [3. "Sayısal Değerlerin Hesaplanması" (Kavramsal)](#3-sayısal-değerlerin-hesaplanması-kavramsal)
-    - [4. "Gradyant Desken Nedir Ne İşe Yarar"](#4-gradyant-desken-nedir-ne-i̇şe-yarar)
-  - [Notlar](#notlar)
+    - [Sınav Konuları](#sınav-konuları)
     - [Giriş ve Temel Kavramlar](#giriş-ve-temel-kavramlar)
       - [Dersin Amacı](#dersin-amacı)
       - [Öğrenme Çıktıları](#öğrenme-çıktıları)
@@ -46,6 +68,17 @@
   - [Çok değişkenli (çok boyutlu) Lineer Regresyon](#çok-değişkenli-çok-boyutlu-lineer-regresyon)
     - [Maliyet fonksiyonu](#maliyet-fonksiyonu)
   - [Dereceli azaltma metodu](#dereceli-azaltma-metodu)
+  - [Denetimsiz Öğrenme](#denetimsiz-öğrenme)
+    - [Denetimsiz Öğrenme Çeşitleri](#denetimsiz-öğrenme-çeşitleri)
+            - [Kümeleme (Clustering)](#kümeleme-clustering)
+                - [K-Ortalamalar Yöntemi (K-Means)](#k-ortalamalar-yöntemi-k-means)
+                    - [Elbow Yöntemi](#elbow-yöntemi)
+                    - [Davies-Bouldin Geçerlilik İndeksi](#davies-bouldin-geçerlilik-i̇ndeksi)
+      - [Boyut Azaltma (Dimension Reduction)](#boyut-azaltma-dimension-reduction)
+      - [Otomatik Kodlayıcılar (Autoencoders)](#otomatik-kodlayıcılar-autoencoders)
+      - [Birliktelik Kuralları (Association Rules)](#birliktelik-kuralları-association-rules)
+      - [Anomali Tespiti (Anomaly Detection)](#anomali-tespiti-anomaly-detection)
+      - [Üretici Modeller (Generative Models)](#üretici-modeller-generative-models)
   - [Sınıflandırma (Classification) — Giriş](#sınıflandırma-classification--giriş)
   - [Sınıflandırma Başarı Metrikleri](#sınıflandırma-başarı-metrikleri)
     - [Karmaşıklık Matrisi (Confusion Matrix)](#karmaşıklık-matrisi-confusion-matrix)
@@ -63,6 +96,7 @@
     - [Özellik Ölçekleme (Feature Scaling) — Mesafe Tabanlı Yöntemler](#özellik-ölçekleme-feature-scaling--mesafe-tabanlı-yöntemler)
       - [Normalleştirme (Min–Max)](#normalleştirme-minmax)
         - [Örnek: Min–Max Normalleştirme (min=2, max=90)](#örnek-minmax-normalleştirme-min2-max90)
+    - [Özellik Seçimi](#özellik-seçimi)
   - [K-en Yakın Komşu (K-NN) Algoritması](#k-en-yakın-komşu-k-nn-algoritması)
     - [Adımlar](#adımlar)
     - [Pratik Notlar](#pratik-notlar)
@@ -86,6 +120,21 @@
       - [İşlem Adımları](#i̇şlem-adımları)
       - [Örnek: Bilgi Kazancı Hesabı (BORÇ özelliği)](#örnek-bilgi-kazancı-hesabı-borç-özelliği)
       - [Örnek: Bilgi Kazancı — MEMNUN Veri Kümesi](#örnek-bilgi-kazancı--memnun-veri-kümesi)
+    - [Topluluk Öğrenme Yöntemleri](#topluluk-öğrenme-yöntemleri)
+        - [Torbalama (Bagging)](#torbalama-bagging)
+        - [Random Forest](#random-forest)
+        - [Güçlendirme (Boosting)](#güçlendirme-boosting)
+        - [Yığınlama (Stacking)](#yığınlama-stacking)
+    - [Yapay Sinir Ağları](#yapay-sinir-ağları)
+        - [Derin Yapay Sinir Ağları](#derin-yapay-sinir-ağları)
+        - [YSA’ların Avantajları](#ysaların-avantajları)
+        - [YSA’ların Dezavantajları](#ysaların-dezavantajları)
+        - [Yapay Sinir Ağlarının Sınıflandırılması](#yapay-sinir-ağlarının-sınıflandırılması)
+        - [Yapay Sinir Ağlarının Yapısı](#yapay-sinir-ağlarının-yapısı)
+                - [Aktivasyon Fonksiyonları](#aktivasyon-fonksiyonları)
+                - [Eğitim (Öğrenme Süreci)](#eğitim-öğrenme-süreci)
+                - [Katsayıların Belirlenmesi](#katsayıların-belirlenmesi)
+                - [Keras ve TensorFlow](#keras-ve-tensorflow)
   - [Uygulama: Hava Problemi (ID3 / C4.5)](#uygulama-hava-problemi-id3--c45)
     - [Adım 1: Birinci Dallanma](#adım-1-birinci-dallanma)
     - [Adım 2: HAVA = “güneşli” dalı için dallanma](#adım-2-hava--güneşli-dalı-için-dallanma)
@@ -112,44 +161,6 @@
     - [Ezber (Overfitting) ve Budama](#ezber-overfitting-ve-budama)
       - [Ağaç Budama](#ağaç-budama)
         - [Örnek: Hata toleransı ile budama](#örnek-hata-toleransı-ile-budama)
-
-
-## Sınavda Çıkabilecek Konular ve İpuçları
-
-### 1. Karar Ağacı, ID3 Algoritması ve Kök Düğüm Seçimi
-
-Bu konular birbiriyle doğrudan ilişkilidir ve notlarınızda detaylıca yer alıyor.
-
-* **Ana Konu:** [## Karar Ağaçları](#karar-ağaçları) başlığı altında genel bir giriş bulabilirsiniz.
-* **ID3 ve Kök Düğüm Seçimi:** ID3 algoritması, bir düğümde (özellikle kök düğümde) veriyi bölmek için **Bilgi Kazancı (Information Gain)** kriterini kullanır.
-    * Bu kazancı hesaplamak için önce **Entropi** öğrenilir. Bu konuyu [### Entropi](#entropi) başlığı altında bulabilirsiniz.
-    * Entropi kullanılarak Bilgi Kazancının nasıl hesaplandığı ve ID3/C4.5 algoritmalarında nasıl kullanıldığı [### Bilgi Kazancı (ID3 / C4.5)](#bilgi-kazancı-id3--c45) bölümünde açıklanmıştır.
-    * **"Hangisi kök düğüm"** sorusunun cevabı: Bilgi Kazancı en yüksek olan özellik kök düğüm olarak seçilir. Bu süreç, [#### İşlem Adımları](#i̇şlem-adımları) altında (Madde 3) "Kazançları bul ve en büyük kazanca sahip özelliği düğüm olarak seç" şeklinde özetlenmiştir.
-
-### 2. "3 Özellikli 1 Sınıf Tek Çıkış" Örneği
-
-Notlarınızda bu tanıma uyan mükemmel bir örnek bulunuyor:
-
-* **Bölüm:** [#### Örnek: Bilgi Kazancı — MEMNUN Veri Kümesi](#örnek-bilgi-kazancı--memnun-veri-kümesi)
-* **Açıklama:** Bu örnekte 3 özellik (MODEL, CİNSİYET, YAŞ) ve 1 sınıf/çıkış (MEMNUN) bulunmaktadır. Bu bölüm, tam olarak ID3/C4.5 kullanarak bu 3 özellikten hangisinin kök düğüm olacağını (ve sonraki dallanmaları) hesaplamaktadır.
-
-### 3. "Sayısal Değerlerin Hesaplanması" (Kavramsal)
-
-Sınavda hesaplama sormayacak olsa da, ID3'ün bir uzantısı olan C4.5'in sayısal değerleri nasıl ele aldığını bilmeniz gerekebilir.
-
-* **Bölüm:** [### C4.5 Algoritması](#c45-algoritması)
-* **Açıklama:** Bu bölümde, C4.5'in "Nümerik değerleri kategorik kararlara dönüştürmek için bir eşik (threshold) belirler" olduğu açıklanır.
-* **Örnek:** Yukarıda bahsedilen [MEMNUN Veri Kümesi](#örnek-bilgi-kazancı--memnun-veri-kümesi) örneğinde, `YAŞ` özelliği sayısaldır ve notlarınızda bu özellik için en iyi eşiğin (t = 30) nasıl bulunduğu gösterilmektedir.
-
-### 4. "Gradyant Desken Nedir Ne İşe Yarar"
-
-Bu konu, Karar Ağaçları'ndan ayrı olarak Lineer Regresyon başlığı altında yer almaktadır.
-
-* **Bölüm:** [## Dereceli azaltma metodu](#dereceli-azaltma-metodu)
-* **Nedir? (Tanımı):** "Dereceli azaltma (gradient descent) metodu, çok güçlü ve çok genel optimizasyon metodudur."
-* **Ne İşe Yarar? (Amacı):** Amacı, bir modelin **maliyet fonksiyonunun (`J(θ)`) minimumunu bulmaktır**. Notlarınızda "En iyi olay modeli, en iyi model parametreleri, en düşük maliyet değeri demektir." ve bu minimumu bulmak için "Devamlı olarak, J'nin değerlerini azaltmak için (θ0, θ1) uzayında küçük adımlar yapıyoruz." ifadeleri yer almaktadır. Kısacası, modelin en iyi parametrelerini (örneğin lineer regresyondaki θ değerlerini) bulmak için kullanılır.
-
-## Notlar
 
 ### Giriş ve Temel Kavramlar
 
@@ -443,7 +454,7 @@ Disiplinler (çok-disiplinli temel):
 >
 > Açıklama: Etiketsiz veri üzerinde k‑means (k=3) benzeri bir süreçle üç küme elde edilmesi. Küme merkezleri ve atamalar görselleştirilmiştir; k seçimi performansı ve yorumlanabilirliği etkiler.
 - Takviyeli (Reinforcement) Öğrenme:
-    - Ajan–çevre etkileşimi; durum s’te eylem a seçer, ödül r alır. Hedef, beklenen indirgenmiş toplam ödülü maksimize eden politika π’yi öğrenmektir: $` J(\pi) = \mathbb{E}\big[\sum_{t=0}^{\infty} \gamma^{t} r_t\big] `$, $`0 \leq \gamma < 1`$.
+    - Ajan–çevre etkileşimi; durum s’te eylem a seçer, ödül r alır. Hedef, beklenen indirgenmiş toplam ödülü maksimize eden politika π’yi öğrenmektir: \( J(\pi) = \mathbb{E}\big[\sum_{t=0}^{\infty} \gamma^{t} r_t\big] \), \(0 \leq \gamma < 1\).
     - Satranç/oyunlar: Hamle/oyun sonu ödülleriyle stratejiler gelişir; öğrenilen stratejiler farklı rakip ve pozisyonlara genellenir.
     - Doğru çıkış verilmez; bunun yerine eylemden sonra bir “kritik işaret” (ödül/ceza sinyali) gelir. Algoritma olumsuz işaret aldığında doğruyu bulana kadar farklı olasılıkları dener (keşif) ve zamanla toplam ödülü artıran politikayı öğrenir.
 - Hangi tür? Etiketli hedef varsa denetimli; yoksa ve yapı aranıyorsa denetimsiz; sıralı karar ve ödül varsa takviyeli öğrenme uygundur. Uygulamada hibrit yaklaşımlar da yaygındır.
@@ -1246,6 +1257,318 @@ $$
 > Açıklama: Geçmiş reklam ve sonuç verileriyle denetimli öğrenme uygulanarak model elde edilir; bu model gelecekteki tahminler ve ters problemler için kullanılabilir.
 
 
+## Denetimsiz Öğrenme
+
+Denetimsiz öğrenme (unsupervised learning), etiketlenmemiş veri kümelerinden (yani verilerin herhangi bir sınıf/çıktı etiketi içermediği durumlarda) öğrenme yapılan makine öğrenmesi dalıdır. Temel amaç; verideki yapıları, kalıpları ve ilişkileri keşfetmek, benzer örnekleri gruplamak veya veriyi daha anlamlı/kompakt bir temsile dönüştürmektir.
+
+- Denetimli öğrenmeden farkı: Denetimsiz öğrenmede “doğru cevap” (etiket) bulunmadığından, algoritma rehberlik olmadan içgörüler/korelasyonlar bulmaya çalışır.
+- Çıktı türleri genelde: kümeler, düşük boyutlu temsiller, birliktelik kuralları, anomali skorları veya üretilmiş yeni örnekler.
+
+### Denetimsiz Öğrenme Çeşitleri
+
+#### Kümeleme (Clustering)
+
+Veri noktalarını benzer özelliklere sahip gruplara (kümelere) ayırma işlemidir.
+
+- Amaç: Kümeler arası benzerlik düşük, küme içi benzerlik yüksek olacak şekilde gruplama.
+- Örnek algoritmalar: K-Means, Hiyerarşik Kümeleme (Hierarchical Clustering).
+
+> ![Denetimsiz öğrenme — kümeleme](Images/145.jpg)
+
+Kümeleme yaklaşımları iki ana başlıkta düşünülebilir:
+
+- **Hiyerarşik Kümeleme (Hierarchical Clustering):** Kümeleri ya aşamalı olarak birleştirir (birleştirici/agglomerative) ya da aşamalı olarak böler (bölücü/divisive). Çoğu zaman dendrogram ile görselleştirilir.
+- **Hiyerarşik Olmayan Kümeleme (Non-hierarchical):** K sayısı gibi bir hedef belirlenir ve algoritma buna göre doğrudan bir kümeleme üretir (örn. K-Means).
+
+##### Hiyerarşik Kümeleme
+
+Hiyerarşik kümeleme; başlangıçta her gözlemi bir küme kabul edip, adım adım kümeleri birleştirerek (agglomerative) daha büyük kümeler elde etme veya tek bir ana kümeyi adım adım bölerek (divisive) alt kümeler elde etme esasına dayanır.
+
+###### Birleştirici (Agglomerative) Hiyerarşik Yöntemler
+
+Agileştirici yöntemlerde tipik akış:
+
+1) Başlangıç: Her gözlem tek başına bir kümedir.
+2) Gözlemler arası uzaklık matrisi hesaplanır (örn. Öklid).
+3) En yakın iki küme birleştirilir.
+4) Yeni kümeye göre küme-küme uzaklıkları yeniden tanımlanır ve güncellenir.
+5) İstenen küme sayısına gelene kadar veya tek küme kalana kadar devam edilir.
+
+Kritik nokta: **İki küme arasındaki uzaklığı** nasıl tanımladığınız (linkage) sonucun şeklini değiştirir.
+
+###### Tek Bağlantı (Single Linkage / Nearest Neighbor)
+
+İki küme arasındaki uzaklık, kümelerin içindeki en yakın iki nokta arasındaki uzaklık olarak alınır:
+
+$$
+d(A,B) = \min_{x\in A,\,y\in B} d(x,y)
+$$
+
+- Avantaj: Kümeler arası “köprü” noktalar üzerinden birleşme eğilimi vardır.
+- Dezavantaj (sezgi): “Zincirleme (chaining)” etkisiyle uzun/ince kümeler oluşabilir.
+
+###### Tam Bağlantı (Complete Linkage / Furthest Neighbor)
+
+İki küme arasındaki uzaklık, kümelerin içindeki en uzak iki nokta arasındaki uzaklık olarak alınır:
+
+$$
+d(A,B) = \max_{x\in A,\,y\in B} d(x,y)
+$$
+
+- Sezgi: Daha kompakt (içi daha sıkı) kümeleri teşvik eder.
+
+##### Örnek 2 — Tam Bağlantı (En Uzak Komşu) ile Hiyerarşik Kümeleme
+
+Tam bağlantı (furthest neighbor) yönteminde iki küme arası uzaklık, kümeler içindeki **en uzak** iki noktanın uzaklığı ile tanımlanır. Bu nedenle bir küme büyüdükçe, o kümeye olan uzaklık hesaplarında “en kötü durum” (maksimum) dikkate alınır.
+
+> ![Örnek 2 — veri tablosu](Images/168.jpg)
+
+**Adım 1:** İlk uzaklık matrisi oluşturulur.
+
+> ![Örnek 2 — başlangıç uzaklık matrisi](Images/169.jpg)
+
+En küçük değer 1.41’dir (iki aday: (2,3) veya (1,4)). Bu örnekte (1,4) seçilerek yeni küme oluşturulur: (1,4).
+
+**Adım 2:** (1,4) kümesinin diğer gözlemlere uzaklığı hesaplanır. Tam bağlantıda:
+
+$$
+d\big((1,4),j\big) = \max\{d(1,j),\ d(4,j)\}
+$$
+
+> ![Örnek 2 — (1,4) sonrası güncel tablo](Images/170.jpg)
+
+Bu tabloda en küçük uzaklık 1.41 ile (2,3) arasındadır; bu nedenle (2,3) kümesi oluşturulur.
+
+> ![Örnek 2 — (1,4) ve (2,3) kümeleri](Images/171.jpg)
+
+**Adım 3:** En küçük uzaklık 2.24 ile (1,4) ve 5 arasındadır; 5 gözlemi (1,4) kümesine dahil edilir ve (1,4,5) elde edilir.
+
+> ![Örnek 2 — (1,4,5) ve (2,3)](Images/172.jpg)
+
+**Adım 4:** Kalan iki küme birleştirilerek nihai küme elde edilir. Birleştirme uzaklıklarının özeti:
+
+> ![Örnek 2 — birleşme uzaklıkları özeti](Images/173.jpg)
+
+##### Hiyerarşik Olmayan Kümeleme
+
+###### K-Ortalamalar Yöntemi (K-Means)
+
+Bu yöntemde daha başlangıçta belli sayıdaki küme için toplam ortalama hatayı minimize etmek amaçlanır.
+
+N boyutlu uzayda N örnekli kümelerin verildiğini varsayalım. Bu uzay $\{C_1, C_2, \ldots, C_k\}$ biçiminde K kümeye ayrılsın. $\sum n_k = N$ (k=1,2,...,k) olmak üzere $C_k$ kümesinin ortalama vektörü $M_k$ aşağıdaki şekilde hesaplanır.
+
+> ![K-Means — ortalama vektör (merkez) tanımı](Images/174.jpg)
+
+Burada $X_k$ değeri $C_k$ kümesine ait olan i. örnektir. $C_k$ kümesi için kare-hata, her bir $C_k$ örneği ile onun merkezi (centroid) arasındaki Öklid uzaklıkları toplamıdır. Bu hataya **küme içi değişme** adı da verilir.
+
+Küme içi değişmeler şu şekilde hesaplanır:
+
+> ![K-Means — küme içi değişme (kare-hata)](Images/175.jpg)
+
+K kümesini içeren bütün kümeler uzayı için kare-hata, içindeki değişmelerin toplamıdır. O halde söz konusu kare-hata şu şekilde hesaplanır:
+
+> ![K-Means — toplam kare-hata](Images/176.jpg)
+
+Kare-hata kümeleme yönteminin amacı verilen K değeri için $E_k^2$ değerini minimize eden K kümelerini bulmaktır. Bu nedenle k-ortalamalar algoritmasında $E_k^2$ değerinin bir önceki iterasyona göre azalması beklenir.
+
+**K-Means Algoritmasının Adımları**
+
+K-Means algoritmasına başlamadan önce k küme sayısının belirlenmesi gerekir. Sonra aşağıdaki işlemler gerçekleştirilir:
+
+1. Her bir kümenin merkezi belirlenir. Bu merkezler $M_1, M_2, \ldots, M_k$ biçimindedir.
+2. $e_1, e_2, \ldots, e_k$ küme içi değişmeler hesaplanır. Bu değişmelerin toplamı olan $E_k^2$ değeri bulunur.
+3. $M_k$ merkez değerleri ile gözlem değerleri arasındaki uzaklıklar hesaplanır. Bir gözlem değeri hangi merkeze daha yakın ise o merkez ile ilgili küme içine dahil edilir.
+4. Yukarıdaki 2. ve 3. adımlar kümelerde değişiklik olmayıncaya kadar devam ettirilir.
+
+**K-Means Algoritmasının Özellikleri**
+
+- Gerçeklemesi kolay
+- Karmaşıklığı diğer kümeleme yöntemlerine göre az
+- K-Means algoritması bazı durumlarda iyi sonuç vermeyebilir:
+    - Veri grupları farklı boyutlarda ise
+    - Veri gruplarının yoğunlukları farklı ise
+    - Veri gruplarının şekli küresel değilse
+    - Veri içinde aykırılıklar varsa
+
+Pratik not: K-Means uzaklık tabanlıdır; **ölçekleme** (standardizasyon/min-max) çoğu zaman gerekir.
+
+**Örnek**
+
+> ![K-Means — örnek (başlangıç)](Images/177.jpg)
+
+Küme sayısını başlangıçta k=2 kabul edelim. Başlangıçta tesadüfi olarak aşağıdaki iki kümeyi belirliyoruz.
+
+- $C_1 = \{X_1, X_2, X_4\}$
+- $C_2 = \{X_3, X_5\}$
+
+> ![K-Means — örnek](Images/178.jpg)
+> ![K-Means — örnek](Images/179.jpg)
+
+**C) Uzaklık hesapları (Öklid):** $M_1$ ve $M_2$ merkezlerinden olan uzaklıkların minimum olması istendiğinden aşağıdaki hesaplamalar yapılır. Örneğin $(M_1, X_1)$ noktaları arasındaki uzaklık $M_1=\{6.67, 4.00\}$ ve $X_1=\{4, 2\}$ olduğuna göre şu şekilde hesaplanır.
+
+> ![K-Means — örnek uzaklık hesabı](Images/180.jpg)
+
+Bu işlemler sonucunda $d(M_1, X_1) < d(M_2, X_1)$ olduğu görülür. Bu durumda $M_1$ merkezinin $X_1$ gözlem değerine daha yakın olduğu anlaşılır. O halde $X_1 \in C_1$ olarak kabul edilir. Benzer biçimde tüm gözlem değerleri için tablo oluşturulur.
+
+> ![K-Means — örnek](Images/181.jpg)
+> ![K-Means — örnek](Images/182.jpg)
+> ![K-Means — örnek](Images/183.jpg)
+> ![K-Means — örnek](Images/184.jpg)
+> ![K-Means — örnek](Images/185.jpg)
+
+###### Elbow Yöntemi
+
+Elbow yöntemi, veri seti için en uygun küme sayısını bulmak için kullanılır.
+
+> ![Elbow yöntemi — genel fikir](Images/186.jpg)
+
+Her bir kümeleme ihtimali (farklı K değerleri) için toplam kare hata hesaplanarak görselleştirilir. Kırılımın (dirseğin) olduğu nokta “elbow” noktası olarak seçilir.
+
+> ![Elbow yöntemi — kare hata eğrisi](Images/187.jpg)
+
+###### Davies-Bouldin Geçerlilik İndeksi
+
+Davies-Bouldin İndeksi, bir kümeleme işleminin başarısını ölçmek için kullanılan bir metriktir. Temel mantığı şuna dayanır: iyi bir kümeleme işleminde, kümeler kendi içlerinde sıkı (compact), birbirlerinden ise mümkün olduğunca uzak (separated) olmalıdır. DBI, bu iki kriteri tek bir matematiksel formülde birleştirir.
+
+> ![Davies-Bouldin indeksi — tanım ve formül](Images/188.jpg)
+
+- $n$ => küme sayısı
+- $S_n$ => küme elemanlarının küme merkezine olan uzaklıklarının ortalaması
+- $S_n(Q_i,Q_j)$ => iki küme merkezi arasındaki uzaklık
+
+DB değeri ne kadar küçükse, küme kalitesi o kadar yüksektir.
+
+###### Davies–Bouldin Örnek
+
+Veri kümesi:
+
+| Kayıt | A  | B | C   |
+|------:|---:|--:|----:|
+| 1     | 27 | 3 |  94 |
+| 2     | 39 | 5 |  85 |
+| 3     | 23 | 6 | 100 |
+| 4     | 36 | 4 | 190 |
+| 5     | 39 | 6 | 182 |
+| 6     | 30 | 5 | 178 |
+
+Uzaklık matrisi (seçilmiş değerler):
+
+|        | Kayıt1 | Kayıt2 | Kayıt3 | Kayıt4 | Kayıt5 | Kayıt6 |
+|--------|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| Kayıt1 |   —   |  15.1 |   7.8 |  96.4 |  88.9 |  84.1 |
+| Kayıt2 | 15.1  |   —   |  22.0 | 105.0 |  97.0 |  93.4 |
+| Kayıt3 |  7.8  |  22.0 |   —   |  91.0 |  83.5 |  78.3 |
+| Kayıt4 | 96.4  | 105.0 |  91.0 |   —   |   8.8 |  13.5 |
+| Kayıt5 | 88.9  |  97.0 |  83.5 |   8.8 |   —   |   9.9 |
+| Kayıt6 | 84.1  |  93.4 |  78.3 |  13.5 |   9.9 |   —   |
+
+Kümeler:
+
+- A Kümesi = {1,2,3}
+- B Kümesi = {4,5,6}
+
+Küme elemanlarının küme merkezine olan uzaklıklarının ortalaması:
+
+- $S_n(A) = (3.30 + 12.30 + 9.76) / 3 = 8.45$
+- $S_n(B) = (6.81 + 4.33 + 7.31) / 3 = 6.15$
+
+İki küme merkezinin birbirine olan uzaklığı:
+
+> ![Davies–Bouldin örnek — küme merkezleri arası uzaklık](Images/189.jpg)
+
+Devam örneği (3 küme için özet değerler):
+
+- $S_n(A) = 7.56$
+- $S_n(B) = 45,47$
+- $S_n(C) = 4,94$
+
+Küme merkezleri:
+
+- $A_C = \{33, 4, 89.5\}$
+- $B_C = \{29.5, 5, 145\}$
+- $C_C = \{34.5, 5.5, 180\}$
+
+> ![Davies–Bouldin örnek — 3 küme için merkezler ve hesap](Images/190.jpg)
+
+##### Örnek 1 — Tek Bağlantı (En Yakın Komşu) ile Hiyerarşik Kümeleme
+
+Aşağıdaki örnekte beş gözlem, tek bağlantı (nearest neighbor) yaklaşımıyla adım adım birleştirilir.
+
+> ![Örnek 1 — veri tablosu](Images/157.jpg)
+
+**Adım 1:** Uzaklık tablosu oluşturulur (gözlemler arası Öklid uzaklıkları).
+
+> ![Örnek 1 — uzaklık tablosu](Images/158.jpg)
+
+> ![Örnek 1 — devam](Images/159.jpg)
+
+> ![Örnek 1 — devam](Images/160.jpg)
+
+**Adım 2:** Uzaklıklar tablosunda en küçük değer seçilir. Bu örnekte min değer 1.41 olup ilgili gözlemler 1 ve 3’tür; bu iki gözlem birleştirilerek (1,3) kümesi elde edilir. Sonra uzaklık matrisi güncellenir.
+
+> ![Örnek 1 — (1,3) birleştirme](Images/161.jpg)
+>
+> ![Örnek 1 — güncellenmiş tablo](Images/162.jpg)
+
+**Adım 3:** Yeni tabloda min uzaklık 2.24’tür ve bu değer 4 ve 5 gözlemleri arasındadır; (4,5) kümesi oluşturulur. Kalan kümeler: (1,3), 2, (4,5).
+
+> ![Örnek 1 — yeni uzaklık tablosu](Images/163.jpg)
+>
+> ![Örnek 1 — (4,5) birleştirme](Images/164.jpg)
+
+**Adım 4:** Sonraki tabloda min uzaklık 2.83’tür; 2 gözlemi ile (1,3) kümesi birleştirilerek (1,2,3) elde edilir. Tek bağlantıda iki küme arası uzaklık, kümeler içindeki **en yakın** iki elemanın uzaklığı olarak alındığından, (1,2,3) ile (4,5) arasındaki uzaklık tüm çiftler içinden minimum seçilerek belirlenir.
+
+> ![Örnek 1 — son uzaklık tablosu](Images/165.jpg)
+>
+> ![Örnek 1 — son adım](Images/166.jpg)
+>
+> ![Örnek 1 — sonuç](Images/167.jpg)
+
+#### Boyut Azaltma (Dimension Reduction)
+
+Veri setindeki özellik sayısını azaltmayı ve daha kompakt bir temsil elde etmeyi hedefler.
+
+- Neden kullanılır?
+    - Görselleştirme (özellikle 2B/3B), gürültü azaltma, modelleme maliyetini düşürme.
+    - Mesafe tabanlı yöntemlerde “boyutlanma laneti” etkisini hafifletme.
+- Örnek yöntemler: PCA (Principal Component Analysis), t-SNE (t-distributed Stochastic Neighbor Embedding).
+
+> ![Denetimsiz öğrenme — boyut azaltma](Images/146.jpg)
+
+#### Otomatik Kodlayıcılar (Autoencoders)
+
+Girdiyi düşük boyutlu bir temsil (encoding) içine sıkıştıran bir kodlayıcı (encoder) ve bu temsilden girdiyi yeniden üreten bir çözücü (decoder) içeren yapay sinir ağı mimarisidir.
+
+- Öğrenilen temsiller çoğu zaman boyut azaltma/özellik çıkarımı amacıyla kullanılır.
+- Not: “Etiket” olmadan, yeniden yapılandırma hatasını minimize ederek öğrenir.
+
+> ![Denetimsiz öğrenme — autoencoder](Images/147.jpg)
+
+#### Birliktelik Kuralları (Association Rules)
+
+Veri setindeki öğeler arasındaki ilişkileri keşfetmeyi amaçlar.
+
+- Tipik kullanım: Perakendede sepet analizi (hangi ürünler birlikte alınır?).
+- Çıktı örneği: “X alındığında Y de sıklıkla alınır” gibi kurallar.
+
+> ![Denetimsiz öğrenme — birliktelik kuralları](Images/148.jpg)
+
+#### Anomali Tespiti (Anomaly Detection)
+
+Normal veri örüntülerinden anlamlı sapmaları tespit etmeyi amaçlar.
+
+- Kullanım: Dolandırıcılık tespiti, sensör arıza analizi, ağ saldırısı tespiti.
+- Yaklaşım: Anomaliye bir “skor” verilir; eşiğe göre alarm üretilir.
+
+#### Üretici Modeller (Generative Models)
+
+Eğitim verisine benzer yeni örnekler üretebilen modellerdir.
+
+- Örnekler: GAN’ler (Generative Adversarial Networks), VAE’ler (Variational Autoencoders).
+
+> ![Denetimsiz öğrenme — üretici modeller](Images/149.jpg)
+
+
 ## Sınıflandırma (Classification) — Giriş
 
 - Tanım: Sınıflandırma, girdileri ayrık etiketlere (sınıflara) ayırma problemidir.
@@ -1357,8 +1680,8 @@ Accuracy neden her zaman yeterli değil? — Dengesiz veri örneği
 - Örnek: 100 e‑postanın yalnız 1’i spam olsun (%1). Tüm e‑postalara “spam değil” diyen tembel bir modelin doğruluğu %99 görünür; fakat spam yakalama başarısı %0’dır. Bu nedenle dengesiz veri setlerinde daha zengin metriklere (Recall/Precision, ROC‑AUC, PR‑AUC) ihtiyaç vardır.
 
 ROC eksenleri ve tanımlar
-- True Positive Rate (TPR, Recall): $`\displaystyle \frac{TP}{TP+FN}`$. “Pozitiflerin yüzde kaçını yakaladık?”
-- False Positive Rate (FPR): $`\displaystyle \frac{FP}{FP+TN}`$. “Negatiflerin yüzde kaçına yanlışlıkla pozitif dedik?” Not: FPR = 1 − Özgüllük (Specificity), Özgüllük = $`\tfrac{TN}{TN+FP}`$.
+- True Positive Rate (TPR, Recall): \(\displaystyle \frac{TP}{TP+FN}\). “Pozitiflerin yüzde kaçını yakaladık?”
+- False Positive Rate (FPR): \(\displaystyle \frac{FP}{FP+TN}\). “Negatiflerin yüzde kaçına yanlışlıkla pozitif dedik?” Not: FPR = 1 − Özgüllük (Specificity), Özgüllük = \(\tfrac{TN}{TN+FP}\).
 
 ROC (Receiver Operating Characteristic) eğrisi nedir?
 - Tüm eşik (threshold) değerleri için model performansını gösterir: Y‑ekseni TPR, X‑ekseni FPR’dir.
@@ -1389,8 +1712,8 @@ ROC alanının yorumu (AUC)
 > ![ROC eğrisi — yorum ve AUC 136](Images/136.jpg)
 
 Pratik: Eşik seçimi (threshold tuning)
-- Youden’s J istatistiği: $` J = \max (\,TPR - FPR\,) `$. ROC’ta diyagonale en uzak (dikey) noktayı bulur; dengeli bir seçimdir.
-- (0,1) noktasına en yakın: $` d = \min \sqrt{(1-TPR)^2 + (FPR)^2} `$. Hem yüksek TPR hem düşük FPR isteyen uygulamalar için uygundur.
+- Youden’s J istatistiği: \( J = \max (\,TPR - FPR\,) \). ROC’ta diyagonale en uzak (dikey) noktayı bulur; dengeli bir seçimdir.
+- (0,1) noktasına en yakın: \( d = \min \sqrt{(1-TPR)^2 + (FPR)^2} \). Hem yüksek TPR hem düşük FPR isteyen uygulamalar için uygundur.
 
 Kısa Python örneği — en iyi eşiği seçmek:
 
@@ -1461,6 +1784,8 @@ $$
 >
 > Açıklama: Görsel 56 — karesel Öklid uzaklığı formülü ve kullanım notları.
 
+> ![Öklid ve Karesel Öklid — sunum](Images/150.jpg)
+
 #### Örnek: Sıcaklık ve Nem Oranı ile Öklid Uzaklığı
 
 Aşağıdaki tabloda üç gün için iki özellik (Sıcaklık, Nem Oranı) verilmiştir. Bu noktalara göre Öklid uzaklıklarını hesaplayalım.
@@ -1471,11 +1796,15 @@ Aşağıdaki tabloda üç gün için iki özellik (Sıcaklık, Nem Oranı) veril
 | 2   | 22       | 50        |
 | 3   | 18       | 80        |
 
+> ![Öklid örneği — veri tablosu](Images/151.jpg)
+>
+> ![Öklid örneği — çözüm](Images/152.jpg)
+
 Uzaklık hesapları (p = 2):
 
-- $` d_{12} = \sqrt{(25-22)^2 + (80-50)^2} = \sqrt{9 + 900} = \sqrt{909} \approx 30.14 `$
-- $` d_{13} = \sqrt{(25-18)^2 + (80-80)^2} = \sqrt{49 + 0} = 7 `$
-- $` d_{23} = \sqrt{(22-18)^2 + (50-80)^2} = \sqrt{4 + 900} = \sqrt{904} \approx 30.06 `$
+- \( d_{12} = \sqrt{(25-22)^2 + (80-50)^2} = \sqrt{9 + 900} = \sqrt{909} \approx 30.14 \)
+- \( d_{13} = \sqrt{(25-18)^2 + (80-80)^2} = \sqrt{49 + 0} = 7 \)
+- \( d_{23} = \sqrt{(22-18)^2 + (50-80)^2} = \sqrt{4 + 900} = \sqrt{904} \approx 30.06 \)
 
 Gözlem: Gün 1 ile Gün 3 arasındaki uzaklık 7 ile en küçüktür; bu iki gün (bu iki özellik uzayında) birbirine daha benzerdir.
 
@@ -1488,13 +1817,15 @@ $$
 d_{ij}^{\text{KP}} = \sqrt{\sum_{k=1}^{p} \frac{\bigl(x_{ik} - x_{jk}\bigr)^{2}}{s_k^{2}} }
 $$
 
-    - Burada s_k^2, k’ıncı değişkenin varyans değeridir; pratikte bazen standart sapma (s_k) ile ölçeklenmiş farklar kullanılır: $`\Delta_k / s_k`$.
+    - Burada s_k^2, k’ıncı değişkenin varyans değeridir; pratikte bazen standart sapma (s_k) ile ölçeklenmiş farklar kullanılır: \(\Delta_k / s_k\).
     - Amaç: Her özelliğin ölçü birimi/ölçeği farklı olsa bile, katkısını karşılaştırılabilir hâle getirmek (ölçek duyarlılığını azaltmak).
     - Uyarı: s_k^2 ≈ 0 ise bölme hatasına yol açmamak için sabit/sıfıra yakın varyanslı özellikleri elemek veya küçük bir ε ile düzenlemek gerekir.
 
 > ![Karl Pearson uzaklığı — görsel 57](Images/57.jpg)
 >
 > Açıklama: Görsel 57 — standartlaştırılmış (varyansla ölçeklenen) Öklid uzaklığı notasyonu; farklı birim/ölçekli değişkenlerde tercih edilir.
+
+> ![Karl Pearson uzaklığı — sunum](Images/153.jpg)
 
 #### Örnek: Sıcaklık ve Nem Oranı ile Karl Pearson Uzaklığı
 
@@ -1506,21 +1837,25 @@ Veri tablosu (iki özellik: Sıcaklık, Nem Oranı):
 | 2   | 22       | 50        |
 | 3   | 18       | 80        |
 
-Verilen standart sapmalar (σ): Sıcaklık σ = 8.22, Nem Oranı σ = 200.
+> ![Karl Pearson örneği — sunum](Images/154.jpg)
+
+Verilen varyanslar: Sıcaklık Varyansı = 8.22, Nem Oranı Varyansı = 200.
 
 Bu derste kullanılan konvansiyona göre (sunum notasyonu):
 
 $$
-d_{ij}^{\text{KP}} = \sqrt{ \frac{(\Delta\text{Sıcaklık})^{2}}{(8.22)^{2}} + \frac{(\Delta\text{Nem})^{2}}{(200)^{2}} }
+d_{ij}^{\text{KP}} = \sqrt{ \frac{(\Delta\text{Sıcaklık})^{2}}{8.22} + \frac{(\Delta\text{Nem})^{2}}{200} }
 $$
 
 Hesaplar:
 
-- $` d_{12} = \sqrt{ \tfrac{(25-22)^2}{(8.22)^2} + \tfrac{(80-50)^2}{(200)^2} } = \sqrt{0.133 + 0.0225} \approx 0.39 `$
-- $` d_{13} = \sqrt{ \tfrac{(25-18)^2}{(8.22)^2} + \tfrac{(80-80)^2}{(200)^2} } = \sqrt{0.725 + 0} \approx 0.85 `$
-- $` d_{23} = \sqrt{ \tfrac{(22-18)^2}{(8.22)^2} + \tfrac{(50-80)^2}{(200)^2} } = \sqrt{0.237 + 0.0225} \approx 0.50 `$
+- \( d_{12} = \sqrt{ \tfrac{(25-22)^2}{8.22} + \tfrac{(80-50)^2}{200} } = \sqrt{1.095 + 4.5} \approx 2.37 \)
+- \( d_{13} = \sqrt{ \tfrac{(25-18)^2}{8.22} + \tfrac{(80-80)^2}{200} } = \sqrt{5.961 + 0} \approx 2.44 \)
+- \( d_{23} = \sqrt{ \tfrac{(22-18)^2}{8.22} + \tfrac{(50-80)^2}{200} } = \sqrt{1.946 + 4.5} \approx 2.54 \)
 
-Not — yaygın alternatif tanım: Birçok kaynakta standartlaştırılmış Öklid, $` d^2 = \sum_k \tfrac{(x_{ik} - x_{jk})^2}{\text{Var}(x_k)} `$ olarak verilir (paydada varyans, karekök dışarıda). Bu tanımda sayısal büyüklük farklı olur fakat karşılaştırmalı sıralama çoğu durumda değişmez.
+Gözlem: Bu ölçeklemede Gün 1 ile Gün 2 birbirine daha yakındır (d daha küçük).
+
+Not — yaygın alternatif tanım: Birçok kaynakta standartlaştırılmış Öklid, \( d^2 = \sum_k \tfrac{(x_{ik} - x_{jk})^2}{\operatorname{Var}(x_k)} \) olarak verilir (paydada varyans, karekök dışarıda). Bu tanımda sayısal büyüklük farklı olur fakat karşılaştırmalı sıralama çoğu durumda değişmez.
 
 ### Manhattan (City-Block) Uzaklığı
 
@@ -1539,6 +1874,8 @@ $$
 >
 > Açıklama: Görsel 58 — Manhattan (city-block) uzaklığının tanımı ve görsel sezgisi.
 
+> ![Manhattan uzaklığı — sunum](Images/155.jpg)
+
 #### Örnek: Sıcaklık ve Nem Oranı ile Manhattan Uzaklığı
 
 Aynı tablo (Sıcaklık, Nem Oranı):
@@ -1551,9 +1888,9 @@ Aynı tablo (Sıcaklık, Nem Oranı):
 
 Hesaplar (p = 2):
 
-- $` d_{12} = |25-22| + |80-50| = 3 + 30 = 33 `$
-- $` d_{13} = |25-18| + |80-80| = 7 + 0 = 7 `$
-- $` d_{23} = |22-18| + |50-80| = 4 + 30 = 34 `$
+- \( d_{12} = |25-22| + |80-50| = 3 + 30 = 33 \)
+- \( d_{13} = |25-18| + |80-80| = 7 + 0 = 7 \)
+- \( d_{23} = |22-18| + |50-80| = 4 + 30 = 34 \)
 
 Gözlem: Öklid örneğinde olduğu gibi, Gün 1 ve Gün 3 birbirine en yakındır (d = 7).
 
@@ -1565,11 +1902,13 @@ $$
 d_{ij}^{(p)} = \Biggl( \sum_{k=1}^{d} \bigl| x_{ik} - x_{jk} \bigr|^{\,p} \Biggr)^{\!1/p}
 $$
 
+> ![Minkowski uzaklığı — sunum](Images/156.jpg)
+
     - Burada d özellik (boyut) sayısı, p ise norm derecesidir.
     - Özel durumlar:
         - p = 1 → Manhattan (L1)
         - p = 2 → Öklid (L2)
-        - p → ∞ → Chebyshev: $` d_{ij}^{(\infty)} = \max_k |x_{ik} - x_{jk}| `$
+        - p → ∞ → Chebyshev: \( d_{ij}^{(\infty)} = \max_k |x_{ik} - x_{jk}| \)
 
 - Pratik ipuçları:
     - p arttıkça büyük farklar daha da baskın hâle gelir (outlier etkisi artar).
@@ -1594,16 +1933,16 @@ Mesafe ölçülerinde farklı ölçeklerdeki özellikler sonucu domine eder. Bu 
     - Standardize Öklid (Karl Pearson) bu problemi değişken varyansına göre ağırlıklandırarak azaltır.
 
 - Yöntemler:
-    - Standardizasyon (z-skor): $` z = \tfrac{x - \mu}{\sigma} `$
+    - Standardizasyon (z-skor): \( z = \tfrac{x - \mu}{\sigma} \)
         - Ortalama 0, standart sapma 1 olacak şekilde dönüştürür; birim etkisini kaldırır.
         - Outlier’lar varsa robuslaştırılmış seçenekler: Medyan ve IQR ile ölçekleme.
-    - Min–Max ölçekleme: $` x' = \tfrac{x - x_{\min}}{x_{\max} - x_{\min}} \in [0,1] `$
+    - Min–Max ölçekleme: \( x' = \tfrac{x - x_{\min}}{x_{\max} - x_{\min}} \in [0,1] \)
         - Sınırları sabitler; aykırı değerlere duyarlı olabilir.
-    - Vektör normlama (birim-norm): $` x' = \tfrac{x}{\lVert x \rVert_2} `$ vb.
+    - Vektör normlama (birim-norm): \( x' = \tfrac{x}{\lVert x \rVert_2} \) vb.
         - Özellikle kosinüs benzerliği/uzaklığı veya metin vektörlerinde faydalıdır.
 
 - Uygulama notları:
-    - Eğitim–doğrulama–test sızıntısını önlemek için ölçekleme parametrelerini ($`\mu,\sigma, x_{\min}, x_{\max}`$) yalnızca eğitim verisinden öğrenin ve diğer bölümlere uygulayın.
+    - Eğitim–doğrulama–test sızıntısını önlemek için ölçekleme parametrelerini (\(\mu,\sigma, x_{\min}, x_{\max}\)) yalnızca eğitim verisinden öğrenin ve diğer bölümlere uygulayın.
     - k-means/k-NN + Öklid kullanırken standardizasyon çoğunlukla varsayılan iyi başlangıçtır.
 
 
@@ -1617,17 +1956,17 @@ x_i' = \frac{x_i - \min(x)}{\max(x) - \min(x)} \in [0,1]
 $$
 
 - Terimler:
-    - $`x_i'`$: Dönüştürülmüş değer
-    - $`x_i`$: Gözlem değeri
-    - $`\max(x)`$: Verideki en büyük x değeri
-    - $`\min(x)`$: Verideki en küçük x değeri
+    - \(x_i'\): Dönüştürülmüş değer
+    - \(x_i\): Gözlem değeri
+    - \(\max(x)\): Verideki en büyük x değeri
+    - \(\min(x)\): Verideki en küçük x değeri
 
-Not: “Standartlaştırma” (z-skor) farklı bir dönüşümdür ve $` z = \tfrac{x - \mu}{\sigma} `$ ile yapılır (yukarıdaki Yöntemler bölümüne bakınız).
+Not: “Standartlaştırma” (z-skor) farklı bir dönüşümdür ve \( z = \tfrac{x - \mu}{\sigma} \) ile yapılır (yukarıdaki Yöntemler bölümüne bakınız).
 
 
 ##### Örnek: Min–Max Normalleştirme (min=2, max=90)
 
-Aşağıdaki X değerleri, min=2 ve max=90 kullanılarak $` x' = \tfrac{x - 2}{90 - 2} `$ formülüyle [0,1] aralığına dönüştürülmüştür (sonuçlar 4 ondalığa yuvarlanmıştır):
+Aşağıdaki X değerleri, min=2 ve max=90 kullanılarak \( x' = \tfrac{x - 2}{90 - 2} \) formülüyle [0,1] aralığına dönüştürülmüştür (sonuçlar 4 ondalığa yuvarlanmıştır):
 
 | X  | min(x) | max(x) | İşlem                 | Sonuç   |
 |----|--------|--------|-----------------------|---------|
@@ -1640,6 +1979,57 @@ Aşağıdaki X değerleri, min=2 ve max=90 kullanılarak $` x' = \tfrac{x - 2}{9
 | 2  | 2      | 90     | (2 − 2) / (90 − 2)   | 0.0000  |
 | 80 | 2      | 90     | (80 − 2) / (90 − 2)  | 0.8864  |
 | 20 | 2      | 90     | (20 − 2) / (90 − 2)  | 0.2045  |
+
+
+## Özellik Seçimi
+
+Makine öğrenmesinde özellik seçimi (feature selection), veri setindeki özelliklerin (features) sayısını azaltma veya daha anlamlı özellikleri belirleme sürecidir. Bu, modelin eğitimi ve performansını iyileştirmeyi amaçlar.
+
+Özellik seçimi aşağıdaki avantajları sağlayabilir:
+
+1. Hesaplama maliyeti azalır: Model eğitimi ve tahminleme süreçleri özellik sayısı arttıkça daha karmaşık hale gelir. Özellik seçimi, gereksiz özellikleri çıkartarak hesaplama maliyetini azaltabilir.
+2. Daha iyi genelleme: Gereksiz veya korele olmayan özelliklerin çıkarılması, modelin daha iyi genelleme yapmasına olanak tanır. Bu, modelin yeni, görülmemiş verilere daha iyi uyarlanmasına yardımcı olabilir.
+3. Daha iyi açıklanabilirlik: Daha az sayıda özellik, modelin davranışını daha açıklayıcı hale getirebilir. Bu durum, modelin nasıl kararlar verdiğini anlamayı kolaylaştırabilir.
+4. Önemli özellikleri vurgular: Modelin performansına önemli katkıda bulunan özellikleri belirleyerek, bu özelliklere odaklanmak ve anlamak daha kolay olabilir.
+
+Özellik seçimi yöntemleri genel olarak üç gruba ayrılır:
+
+### Filtre yöntemleri
+
+Bu yöntemler, özellikleri seçmek için istatistiksel ölçütler kullanır. Özelliklerin hedef değişkenle olan korelasyonuna veya karşılıklı bilgi (mutual information) değerine göre sıralanmasına dayanırlar. Filtre yöntemleri genellikle hesaplama açısından ucuzdur ve büyük veri kümeleri için kullanılabilir.
+
+- Ki-kare testi: Kategorik özellikler ile kategorik bir hedef değişken arasındaki ilişkiyi ölçer.
+- ANOVA (Varyans Analizi): Bir sürekli özellik ile kategorik bir hedef değişken arasındaki ortalamaların farkını karşılaştırır.
+- Korelasyon katsayısı: İki sürekli değişken arasındaki doğrusal ilişkiyi ölçer (genellikle Pearson korelasyon katsayısı).
+
+İlgili kaynak (scikit-learn): https://scikit-learn.org/1.5/modules/generated/sklearn.feature_selection.SelectKBest.html
+
+### Sarmalayıcı yöntemler
+
+Bu yöntemler, özellikleri seçmek için bir makine öğrenmesi modeli kullanır. Özellik alt kümelerini değerlendirmek ve en iyi performans gösteren alt kümeyi seçmek için bir arama algoritması kullanırlar. Sarmalayıcı yöntemleri, filtre yöntemlerinden daha pahalı olabilir, ancak genellikle daha doğru sonuçlar üretirler.
+
+İşlem adımları:
+
+- Tüm özelliklerle başlar.
+- Bir model eğitir ve özellikleri önemlerine göre sıralar.
+- En az önemli özelliği(leri) eler.
+- Kalan özelliklerle modeli yeniden eğitir.
+- İstenilen sayıda özellik kalana kadar bu işlemi tekrarlar.
+- En iyi performans gösteren özellik alt kümesini seçer.
+
+Ne zaman tercih edilir?
+
+- Özellikler arasında karmaşık etkileşimler olduğunda.
+- Model doğruluğunu optimize etmek önemli olduğunda.
+- Hesaplama maliyeti önemli bir kısıtlama olmadığında.
+
+### Gömülü yöntemler
+
+Bu yöntemler, özellik seçimi işlemini model eğitim sürecine entegre eder. Eğitilmiş bir makine öğrenmesi modelinin iç yapısını inceleyerek özellik önemini belirler.
+
+- Doğrusal Modeller (Linear Models): Standartlaştırılmış özelliklerin katsayılarının mutlak değeri, özelliğin öneminin bir göstergesi olarak kullanılabilir. Daha büyük katsayılar, o özelliğin hedef değişken üzerinde daha büyük bir etkisi olduğunu gösterir.
+    - Dikkat: Korelasyonlu özellikler varsa, katsayılar yanıltıcı olabilir.
+- Karar Ağaçları (Decision Trees): Bir özelliğin bir düğümü bölmek için kullanıldığında sağladığı bilgi kazancı (Information Gain) miktarı, o özelliğin önemine dair bir gösterge olabilir.
 
 
 ## K-en Yakın Komşu (K-NN) Algoritması
@@ -1757,8 +2147,8 @@ e) Sonuç: EVET sayısı HAYIR sayısından fazla olduğundan (7,8,5) gözlemini
 Basit çoğunluk oylamasında her komşu aynı ağırlığa sahiptir. Ancak bazı durumlarda, daha yakın komşuların daha etkili olması istenir. Bu amaçla ağırlıklı oylama kullanılır.
 
 - Fikir: Komşu katkısı mesafe ile ters orantılıdır; daha yakın komşu daha büyük ağırlık alır.
-- Sık kullanılan ağırlıklar: $` w_j = \tfrac{1}{d(i,j)+\varepsilon} `$ veya $` w_j = \tfrac{1}{d(i,j)^2+\varepsilon} `$
-- Sınıf skoru: $` S_c = \sum_{j \in \mathcal{N}_k,\; y_j=c} w_j `$. Tahmin edilen sınıf: $` \arg\max_c S_c `$.
+- Sık kullanılan ağırlıklar: \( w_j = \tfrac{1}{d(i,j)+\varepsilon} \) veya \( w_j = \tfrac{1}{d(i,j)^2+\varepsilon} \)
+- Sınıf skoru: \( S_c = \sum_{j \in \mathcal{N}_k,\; y_j=c} w_j \). Tahmin edilen sınıf: \( \arg\max_c S_c \).
 
 > ![Ağırlıklı oylama formülü — görsel 70](Images/70.jpg)
 >
@@ -1793,7 +2183,7 @@ $$
 f(\mathbf{x}) = \mathbf{w}^{\top}\mathbf{x} + b = 0.
 $$
 
-- Sınır düzlemleri: $` \mathbf{w}^{\top}\mathbf{x} + b = +1 `$ ve $` \mathbf{w}^{\top}\mathbf{x} + b = -1 `$. Bu iki sınır arasındaki bant “marjin”dir ve genişliği $` 2/\lVert\mathbf{w}\rVert_2 `$ olur. Marjini maksimize etmek genel ayırt ediciliği artırır.
+- Sınır düzlemleri: \( \mathbf{w}^{\top}\mathbf{x} + b = +1 \) ve \( \mathbf{w}^{\top}\mathbf{x} + b = -1 \). Bu iki sınır arasındaki bant “marjin”dir ve genişliği \( 2/\lVert\mathbf{w}\rVert_2 \) olur. Marjini maksimize etmek genel ayırt ediciliği artırır.
 - Destek vektörleri, marjine en yakın (veya üzerinde) bulunan eğitim örnekleridir; çözüm yalnızca bu noktalara dayanır.
 
 > ![SVM — karar doğrusu ve marjin 138](Images/138.jpg)
@@ -1806,24 +2196,24 @@ $$
 \min_{\mathbf{w}, b} \ \tfrac{1}{2}\,\lVert\mathbf{w}\rVert^2 \quad \text{böyle ki}\quad y_i\big(\mathbf{w}^{\top}\mathbf{x}_i + b\big) \ge 1,\ \forall i.
 $$
 
-- Yumuşak kenar (ayrılamayan veri; esneme değişkenleri $`\xi_i`$):
+- Yumuşak kenar (ayrılamayan veri; esneme değişkenleri \(\xi_i\)):
 
 $$
 \min_{\mathbf{w}, b,\,\boldsymbol{\xi}} \ \tfrac{1}{2}\,\lVert\mathbf{w}\rVert^2 + C\sum_i \xi_i \quad \text{böyle ki}\quad y_i\big(\mathbf{w}^{\top}\mathbf{x}_i + b\big) \ge 1 - \xi_i,\ \xi_i \ge 0.
 $$
 
-- Eşdeğer kayıp perspektifi (hinge loss): $` L_{\text{hinge}}(y, f(x)) = \max\{0, 1 - y\,f(x)\} `$; amaç, düzenlileştirme ile birlikte ortalama hinge kaybını minimize etmektir.
+- Eşdeğer kayıp perspektifi (hinge loss): \( L_{\text{hinge}}(y, f(x)) = \max\{0, 1 - y\,f(x)\} \); amaç, düzenlileştirme ile birlikte ortalama hinge kaybını minimize etmektir.
 
 > ![SVM — destek vektörleri ve marjin 139](Images/139.jpg)
 
 ### Kernel Hilesi (Kernel Trick)
 
-Doğrusal olmayan ayrımlar için veriyi açıkça daha yüksek boyuta taşımak yerine, çekirdek fonksiyonları ile iç çarpımlar $` \phi(\mathbf{x}_i)^{\top}\phi(\mathbf{x}_j) `$ hesaplanır:
+Doğrusal olmayan ayrımlar için veriyi açıkça daha yüksek boyuta taşımak yerine, çekirdek fonksiyonları ile iç çarpımlar \( \phi(\mathbf{x}_i)^{\top}\phi(\mathbf{x}_j) \) hesaplanır:
 
-- Doğrusal: $`$` K(\mathbf{x},\mathbf{x}') = \mathbf{x}^{\top}\mathbf{x}' `$`$
-- Polinom: $` K(\mathbf{x},\mathbf{x}') = (\gamma\,\mathbf{x}^{\top}\mathbf{x}' + r)^d `$
-- RBF/Gauss: $` K(\mathbf{x},\mathbf{x}') = \exp(-\gamma\,\lVert\mathbf{x}-\mathbf{x}'\rVert^2) `$
-- Sigmoid (tanh): $` K = \tanh(\gamma\,\mathbf{x}^{\top}\mathbf{x}' + r) `$
+- Doğrusal: \( K(\mathbf{x},\mathbf{x}') = \mathbf{x}^{\top}\mathbf{x}' \)
+- Polinom: \( K(\mathbf{x},\mathbf{x}') = (\gamma\,\mathbf{x}^{\top}\mathbf{x}' + r)^d \)
+- RBF/Gauss: \( K(\mathbf{x},\mathbf{x}') = \exp(-\gamma\,\lVert\mathbf{x}-\mathbf{x}'\rVert^2) \)
+- Sigmoid (tanh): \( K = \tanh(\gamma\,\mathbf{x}^{\top}\mathbf{x}' + r) \)
 
 > ![SVM — çekirdek fonksiyonları 140](Images/140.jpg)
 
@@ -1973,9 +2363,9 @@ $$
 
 #### Örnek: Entropi Hesabı
 
-Veri kümesi: $` S = \{\text{evet},\,\text{evet},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır}\} `$
+Veri kümesi: \( S = \{\text{evet},\,\text{evet},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır},\,\text{hayır}\} \)
 
-Olasılıklar: $` p(\text{evet}) = 2/8 = 0.25 `$, $` p(\text{hayır}) = 6/8 = 0.75 `$.
+Olasılıklar: \( p(\text{evet}) = 2/8 = 0.25 \), \( p(\text{hayır}) = 6/8 = 0.75 \).
 
 $$
 H(S) = -\bigl( 0.25\,\log_2 0.25 + 0.75\,\log_2 0.75 \bigr) \approx 0.81128.
@@ -1990,7 +2380,7 @@ $$
 
 Veri kümesi (8 gözlem): MODEL, CİNSİYET, YAŞ, MEMNUN.
 
-Sınıf olasılıkları: $` p(\text{HAYIR}) = 5/8 `$, $` p(\text{EVET}) = 3/8 `$.
+Sınıf olasılıkları: \( p(\text{HAYIR}) = 5/8 \), \( p(\text{EVET}) = 3/8 \).
 
 $$
 H(\text{MEMNUN}) = - \Bigl( \tfrac{5}{8}\,\log_2 \tfrac{5}{8} + \tfrac{3}{8}\,\log_2 \tfrac{3}{8} \Bigr) \approx 0{,}954.
@@ -2004,26 +2394,26 @@ $$
 - Tanım (ikili/çok sınıflı genel hâl):
 
 $$
-\text{Gain}(T, X) = H(T) - H(T\mid X), \quad H(T\mid X) = \sum_{x \in \mathcal{X}} p(x)\, H(T\mid X{=}x).
+\operatorname{Gain}(T, X) = H(T) - H(T\mid X), \quad H(T\mid X) = \sum_{x \in \mathcal{X}} p(x)\, H(T\mid X{=}x).
 $$
 
-    Notasyon notu: Bazı slayt/kitaplarda $` H(X,T) `$ yazımı görülür; burada kastedilen şartlı entropinin beklenen değeridir ($` H(T\mid X) `$).
+    Notasyon notu: Bazı slayt/kitaplarda \( H(X,T) \) yazımı görülür; burada kastedilen şartlı entropinin beklenen değeridir (\( H(T\mid X) \)).
 
 #### İşlem Adımları
 
-1) Sınıf niteliğinin entropisini hesapla: $` H(T) `$
+1) Sınıf niteliğinin entropisini hesapla: \( H(T) \)
 
 > ![Sınıf entropisi — görsel 79](Images/79.jpg)
 >
 > Açıklama: Görsel 79 — Sınıf (hedef) değişkeninin entropisinin hesaplanması.
 
-2) Her özellik için sınıfa bağımlı (şartlı) entropiyi hesapla: $` H(T\mid X) `$
+2) Her özellik için sınıfa bağımlı (şartlı) entropiyi hesapla: \( H(T\mid X) \)
 
 > ![Şartlı entropiler — görsel 80](Images/80.jpg)
 >
 > Açıklama: Görsel 80 — Özelliklere göre alt kümelerde entropi ve ağırlıklı ortalama.
 
-3) Kazançları bul ve en büyük kazanca sahip özelliği düğüm olarak seç: $` \text{Gain}(T, X) = H(T) - H(T\mid X) `$
+3) Kazançları bul ve en büyük kazanca sahip özelliği düğüm olarak seç: \( \operatorname{Gain}(T, X) = H(T) - H(T\mid X) \)
 
 
 #### Örnek: Bilgi Kazancı Hesabı (BORÇ özelliği)
@@ -2051,8 +2441,8 @@ $$
 
 2) BORÇ’a göre şartlı entropiler ve ağırlıklar:
 
-- BORÇ=Yüksek: 3 örnek, sınıf dağılımı (3 Kötü, 0 İyi) ⇒ $` H(\text{RİSK}\mid \text{BORÇ}{=}\text{Yüksek}) = 0 `$
-- BORÇ=Düşük: 7 örnek, sınıf dağılımı (2 Kötü, 5 İyi) ⇒ $` H(\text{RİSK}\mid \text{BORÇ}{=}\text{Düşük}) \approx 0{,}863 `$
+- BORÇ=Yüksek: 3 örnek, sınıf dağılımı (3 Kötü, 0 İyi) ⇒ \( H(\text{RİSK}\mid \text{BORÇ}{=}\text{Yüksek}) = 0 \)
+- BORÇ=Düşük: 7 örnek, sınıf dağılımı (2 Kötü, 5 İyi) ⇒ \( H(\text{RİSK}\mid \text{BORÇ}{=}\text{Düşük}) \approx 0{,}863 \)
 
 Ağırlıklı şartlı entropi (slayttaki değerlerle):
 
@@ -2063,10 +2453,10 @@ $$
 3) Bilgi kazancı:
 
 $$
-\text{Gain}(\text{RİSK}, \text{BORÇ}) = H(\text{RİSK}) - H(\text{RİSK}\mid \text{BORÇ}) \approx 1 - 0{,}64 = 0{,}36.
+\operatorname{Gain}(\text{RİSK}, \text{BORÇ}) = H(\text{RİSK}) - H(\text{RİSK}\mid \text{BORÇ}) \approx 1 - 0{,}64 = 0{,}36.
 $$
 
-Not: Benzer şekilde $` \text{Gain}(\text{RİSK},\text{GELİR}) `$ ve $` \text{Gain}(\text{RİSK},\text{STATÜ}) `$ hesaplanır; en büyük kazanca sahip nitelik kök düğüm seçilir.
+Not: Benzer şekilde \( \operatorname{Gain}(\text{RİSK},\text{GELİR}) \) ve \( \operatorname{Gain}(\text{RİSK},\text{STATÜ}) \) hesaplanır; en büyük kazanca sahip nitelik kök düğüm seçilir.
 
 
 #### Örnek: Bilgi Kazancı — MEMNUN Veri Kümesi
@@ -2093,30 +2483,30 @@ $$
 1) MODEL için kazanç:
 
 - Alt kümeler:
-    - MODEL = X5: (2 HAYIR, 0 EVET) ⇒ $` H = 0 `$
-    - MODEL = X3: (3 EVET, 3 HAYIR) ⇒ $` H = 1 `$
-- Ağırlıklı şartlı entropi: $` H(\text{MEMNUN}\mid \text{MODEL}) = \tfrac{2}{8}\cdot 0 + \tfrac{6}{8}\cdot 1 = 0{,}75 `$
-- Kazanç: $` 0{,}954 - 0{,}75 = 0{,}204 `$
+    - MODEL = X5: (2 HAYIR, 0 EVET) ⇒ \( H = 0 \)
+    - MODEL = X3: (3 EVET, 3 HAYIR) ⇒ \( H = 1 \)
+- Ağırlıklı şartlı entropi: \( H(\text{MEMNUN}\mid \text{MODEL}) = \tfrac{2}{8}\cdot 0 + \tfrac{6}{8}\cdot 1 = 0{,}75 \)
+- Kazanç: \( 0{,}954 - 0{,}75 = 0{,}204 \)
 
 2) CİNSİYET için kazanç:
 
 - Alt kümeler:
-    - ERKEK: (2 HAYIR, 3 EVET) ⇒ $` H \approx 0{,}971 `$
-    - KADIN: (2 HAYIR, 1 EVET) ⇒ $` H \approx 0{,}918 `$
-- Ağırlıklı şartlı entropi: $` H(\text{MEMNUN}\mid \text{CİNSİYET}) = \tfrac{5}{8}\cdot 0{,}971 + \tfrac{3}{8}\cdot 0{,}918 \approx 0{,}951 `$
-- Kazanç: $` 0{,}954 - 0{,}951 = 0{,}003 `$
+    - ERKEK: (2 HAYIR, 3 EVET) ⇒ \( H \approx 0{,}971 \)
+    - KADIN: (2 HAYIR, 1 EVET) ⇒ \( H \approx 0{,}918 \)
+- Ağırlıklı şartlı entropi: \( H(\text{MEMNUN}\mid \text{CİNSİYET}) = \tfrac{5}{8}\cdot 0{,}971 + \tfrac{3}{8}\cdot 0{,}918 \approx 0{,}951 \)
+- Kazanç: \( 0{,}954 - 0{,}951 = 0{,}003 \)
 
 3) YAŞ için kazanç (eşikler taranarak):
 
-- $` \le 19/ >19 `$: $` H\_{\le 19} = 0,\ H\_{>19} \approx 0{,}863 `$ ⇒ $` H = \tfrac{1}{8}\cdot 0 + \tfrac{7}{8}\cdot 0{,}863 = 0{,}754 `$, Kazanç ≈ 0.200
-- $` \le 21/ >21 `$: $` H\_{\le 21} \approx 0{,}918,\ H\_{>21} \approx 0{,}722 `$ ⇒ $` H \approx 0{,}796 `$, Kazanç ≈ 0.158
-- $` \le 22/ >22 `$: $` H\_{\le 22} = 1,\ H\_{>22} \approx 0{,}811 `$ ⇒ $` H \approx 0{,}905 `$, Kazanç ≈ 0.049
-- $` \le 30/ >30 `$: $` H\_{\le 30} \approx 0{,}971,\ H\_{>30} = 0 `$ ⇒ $` H = \tfrac{5}{8}\cdot 0{,}971 + \tfrac{3}{8}\cdot 0 = 0{,}607 `$, Kazanç ≈ 0.347
-- $` \le 45/ >45 `$: $` H\_{\le 45} = 1,\ H\_{>45} = 0 `$ ⇒ $` H = 0{,}75 `$, Kazanç ≈ 0.204
-- $` \le 55/ >55 `$: $` H\_{\le 55} \approx 0{,}985,\ H\_{>55} = 0 `$ ⇒ $` H \approx 0{,}862 `$, Kazanç ≈ 0.092
-- $` \le 60/ >60 `$: $` H\_{\le 60} \approx 0{,}954 `$ (tüm veri) ⇒ Kazanç = 0
+- \( \le 19/ >19 \): \( H\_{\le 19} = 0,\ H\_{>19} \approx 0{,}863 \) ⇒ \( H = \tfrac{1}{8}\cdot 0 + \tfrac{7}{8}\cdot 0{,}863 = 0{,}754 \), Kazanç ≈ 0.200
+- \( \le 21/ >21 \): \( H\_{\le 21} \approx 0{,}918,\ H\_{>21} \approx 0{,}722 \) ⇒ \( H \approx 0{,}796 \), Kazanç ≈ 0.158
+- \( \le 22/ >22 \): \( H\_{\le 22} = 1,\ H\_{>22} \approx 0{,}811 \) ⇒ \( H \approx 0{,}905 \), Kazanç ≈ 0.049
+- \( \le 30/ >30 \): \( H\_{\le 30} \approx 0{,}971,\ H\_{>30} = 0 \) ⇒ \( H = \tfrac{5}{8}\cdot 0{,}971 + \tfrac{3}{8}\cdot 0 = 0{,}607 \), Kazanç ≈ 0.347
+- \( \le 45/ >45 \): \( H\_{\le 45} = 1,\ H\_{>45} = 0 \) ⇒ \( H = 0{,}75 \), Kazanç ≈ 0.204
+- \( \le 55/ >55 \): \( H\_{\le 55} \approx 0{,}985,\ H\_{>55} = 0 \) ⇒ \( H \approx 0{,}862 \), Kazanç ≈ 0.092
+- \( \le 60/ >60 \): \( H\_{\le 60} \approx 0{,}954 \) (tüm veri) ⇒ Kazanç = 0
 
-Özet: En yüksek kazanç YAŞ ≤ 30 eşiği ile $` \approx 0{,}347 `$.
+Özet: En yüksek kazanç YAŞ ≤ 30 eşiği ile \( \approx 0{,}347 \).
 
 > ![Bilgi kazancı özeti — görsel 100](Images/100.jpg)
 >
@@ -2124,9 +2514,9 @@ $$
 
 Alt ağaç (YAŞ ≤ 30) için yeniden kazançlar:
 
-- Filtre: YAŞ ≤ 30 kayıtları tutulur (5 gözlem). $` H(\text{MEMNUN}) = - (\tfrac{2}{5}\log_2 \tfrac{2}{5} + \tfrac{3}{5}\log_2 \tfrac{3}{5}) \approx 0{,}971 `$.
+- Filtre: YAŞ ≤ 30 kayıtları tutulur (5 gözlem). \( H(\text{MEMNUN}) = - (\tfrac{2}{5}\log_2 \tfrac{2}{5} + \tfrac{3}{5}\log_2 \tfrac{3}{5}) \approx 0{,}971 \).
 - MODEL için: X5 alt kümesi (2 HAYIR) ⇒ H=0; X3 alt kümesi (3 EVET) ⇒ H=0 → Ağırlıklı H = 0, Kazanç = 0.971
-- CİNSİYET için: ERKEK (2 HAYIR, 2 EVET) ⇒ H = 1; KADIN (1 EVET) ⇒ H = 0 → Ağırlıklı H = $` \tfrac{4}{5}\cdot 1 + \tfrac{1}{5}\cdot 0 = 0{,}8 `$, Kazanç = 0.171
+- CİNSİYET için: ERKEK (2 HAYIR, 2 EVET) ⇒ H = 1; KADIN (1 EVET) ⇒ H = 0 → Ağırlıklı H = \( \tfrac{4}{5}\cdot 1 + \tfrac{1}{5}\cdot 0 = 0{,}8 \), Kazanç = 0.171
 
 > ![Alt ağaç kazanç özeti — görsel 101](Images/101.jpg)
 >
@@ -2137,6 +2527,626 @@ Kurallar (özet):
 - Eğer YAŞ ≤ 30 ve MODEL = X3 ise ⇒ MEMNUN = EVET
 - Eğer YAŞ ≤ 30 ve MODEL = X5 ise ⇒ MEMNUN = HAYIR
 - Eğer YAŞ > 30 ise ⇒ MEMNUN = HAYIR
+
+
+## Topluluk Öğrenme Yöntemleri
+
+Topluluk öğrenme yöntemleri (ensemble learning), etiketli eğitim verilerinden birden fazla temel sınıflandırıcı ile eğitilmiş modeller oluşturur. Daha sonra test verileri üzerinde bu modellerin tahminleri bir araya getirilerek (oylama/ortalama) nihai tahmin üretilir. Tek bir sınıflandırıcı ile oluşturulan modellere göre daha iyi performans elde edebilen bu yaklaşımlar, hem sınıflandırma hem de regresyon problemlerinde kullanılabilir.
+
+> ![Topluluk öğrenme — genel bakış](Images/191.jpg)
+
+Üç popüler topluluk öğrenme yöntemi şunlardır:
+
+- Torbalama (Bagging)
+- Güçlendirme (Boosting)
+- Yığınlama (Stacking)
+
+> ![Topluluk öğrenme — yöntemler](Images/192.jpg)
+
+### Torbalama (Bagging)
+
+Torbalama (Bagging), “bootstrap aggregating” ifadesinin kısaltmasıdır. Amaç; aynı veri kümesinden rastgele örneklemelerle (bootstrap) birden fazla alt veri kümesi üretmek ve her bir alt küme üzerinde ayrı modeller eğiterek tahminleri birleştirmektir.
+
+- Eğitim kümesinden rastgele örnek seçilerek oluşturulan alt veri kümelerinde bazı örnekler birden fazla kez bulunabilirken bazı örnekler hiç bulunmayabilir.
+- Regresyon problemlerinde: modellerin çıktılarının ortalaması/medyanı alınabilir.
+- Sınıflandırma problemlerinde: basit oylama ile birleştirme yapılır.
+- Torbalamada modellerin verdiği kararlar eşit derecede önemlidir; daha fazla model (oy) genellikle daha güvenilir sonuç verir.
+
+> ![Torbalama (Bagging) — süreç](Images/193.jpg)
+
+### Random Forest
+
+Torbalama yöntemi, karar ağaçları gibi değişkenliği yüksek modellerle çok iyi çalışır. Karar ağaçlarında uygulanan torbalama yaklaşımı **Random Forest** olarak adlandırılır.
+
+- Random Forest, birbirinden bağımsız olarak eğitilen çok sayıda karar ağacından oluşur.
+- Düğümler dallara ayrılırken her ağaçta tüm öznitelikleri kullanmak yerine, her düğümde rastgele seçilen öznitelik alt kümesi arasından en iyi bölme seçilir.
+    - Tüm öznitelikler her düğümde kullanılsaydı ağaçlar birbirine çok benzer olurdu; rastgele öznitelik seçimi bu benzerliği azaltmayı hedefler.
+- Sınıflandırmada: en çok oyu alan sınıf seçilir. Regresyonda: çıktıların ortalaması alınır.
+- Ek fayda: eğitim sırasında “önemli özniteliklerin” belirlenmesine yardımcı olabilir; bu da önemsiz görülen özniteliklerin elenmesine destek olur.
+
+> ![Random Forest — torbalama ve rastgele öznitelik seçimi](Images/194.jpg)
+
+### Güçlendirme (Boosting)
+
+Güçlendirme (Boosting) tekniği ilk olarak Schapire tarafından, sınıflandırma ve regresyon algoritmalarının tahmin doğruluğunu artırmak ve **güçlü bir model** oluşturmak amacıyla önerilmiştir.
+
+Güçlendirme yönteminde genel fikir şöyledir:
+
+- İlk model eğitilmeden önce etiketli eğitim kümesindeki her bir örneğe eşit ağırlık atanır.
+- İlk model eğitildikten sonra, modelin hatalı tahmin ettiği örneklerin ağırlığı artırılır; doğru tahmin ettiği örneklerin ağırlığı azaltılır.
+- İkinci (ve sonraki) model, ağırlıkları artan örneklerin seçilme olasılığının yükseldiği güncellenmiş bir eğitim kümesi üzerinde eğitilir.
+
+> ![Boosting — ağırlık güncelleme ve sıralı öğrenme](Images/195.jpg)
+
+Tüm modeller eğitildikten sonra nihai sonucu elde etmek için tahminler birleştirilir:
+
+- Regresyon problemlerinde: modellerin çıktılarının ortalama değeri alınabilir.
+- Sınıflandırma problemlerinde: modellerin çıktıları oylama yoluyla birleştirilebilir.
+
+Güçlendirmede her yeni model, daha önce inşa edilmiş modellerin performansından etkilenir ve özellikle zor/hatalı örneklere odaklanarak bir sonraki modelin bu örnekleri doğru tahmin etmesi amaçlanır.
+
+Önemli bir dezavantaj: Bu sıralı öğrenme tekniği **paralelleştirilemez**; çünkü her bir model yalnızca önceki model eğitildikten ve değerlendirildikten sonra eğitilebilir. Bu nedenle bagging kadar ölçeklenmeyebilir.
+
+> ![Boosting — bagging ile kıyas ve akış](Images/196.jpg)
+
+En sık kullanılan boosting modelleri:
+
+- AdaBoost (1995, Y. Freund)
+- Gradient Boosting (2001, Friedman)
+- XGBoost (2016)
+- LightGBM (2017)
+- CatBoost (2018)
+
+### Yığınlama (Stacking)
+
+Yığınlama (Stacking), “stacked generalization” ifadesinin kısaltmasıdır ve ilk olarak Wolpert tarafından 1992 yılında ortaya atılmıştır.
+
+Torbalama ve güçlendirmeden farklı olarak yığınlama, aynı tür modellerin (ör. sadece karar ağaçları) çıktılarını birleştirmek yerine, **farklı algoritmalar** tarafından oluşturulan modelleri birleştirmeyi hedefler.
+
+Yığınlamanın temel bileşeni, farklı modellerin tahminlerini birleştiren ve “genel öğrenici (meta-learner)” diye adlandırılabilecek ayrı bir modelin eğitilmesidir.
+
+Pratik akış (özet):
+
+- Etiketli eğitim veri kümesi iki kısma ayrılır.
+- Birinci kısım: Farklı temel modellerin eğitilmesinde kullanılır.
+- İkinci kısım: Bu temel modellerin ürettiği tahminler ile birleştirilerek meta-öğrenicinin eğitilmesinde kullanılır.
+
+Not: Temel modellerin eğitildiği veri kümesini meta-öğreniciyi eğitmekte doğrudan kullanmak ezberleme (overfitting) riskini artırabileceğinden, meta-öğrenici genellikle farklı/ayrılmış bir veri üzerinde eğitilmelidir.
+
+> ![Stacking — iki aşamalı eğitim ve meta-öğrenici](Images/197.jpg)
+
+
+## Yapay Sinir Ağları
+
+Yapay sinir ağları (YSA), insan beyninin öğrenme yoluyla yeni bilgiler türetebilme/oluşturabilme ve keşfedebilme yeteneklerinden ilhamla geliştirilen; örneklerden öğrenerek girdilere karşılık uygun çıktılar üretebilen algoritmalardır.
+
+> ![YSA — genel tanım](Images/198.jpg)
+
+Canlıların zeka ve öğrenme yetilerinin taklit edilmesi ve problem çözümlerinde bu taklitlerin kullanılması için geliştirilen bir yaklaşımdır; temelinde biyolojik sinir hücrelerinin bilgisayar ortamında modellenmesi vardır.
+
+> ![YSA — biyolojik ilham](Images/199.jpg)
+
+### Katmanlı Yapı
+
+Yapay sinir ağlarında birçok nöron katmanlar halinde bir arada bulunur.
+
+> ![YSA — katmanlar](Images/200.jpg)
+
+Basit bir yapay sinir ağı üç katmandan oluşur:
+
+- Giriş katmanı: Problem ile ilgili her özellik için bir nörondan oluşur.
+- Gizli katman: Nöron sayısı değişkendir.
+- Çıkış katmanı: Problem ile ilgili kaç farklı çıkış bekleniyor ise o kadar nörondan oluşur.
+
+Giriş ve çıkış katmanlarının yapısı probleme göre belirlenirken, gizli katmandaki nöron sayısını uygun şekilde ayarlamak çözülmesi gereken bir problemdir. Bu tür parametreler için en uygun değerin belirlenmesi süreci hiperparametre optimizasyonu olarak isimlendirilir.
+
+> ![YSA — giriş/gizli/çıkış katmanları](Images/201.jpg)
+
+### Derin Yapay Sinir Ağları
+
+Gizli katman sayısı 2’den fazla olan yapay sinir ağları **Derin Yapay Sinir Ağları** olarak isimlendirilir.
+
+> ![Derin YSA — çok katmanlı yapı](Images/202.jpg)
+
+### YSA’ların Avantajları
+
+1. YSA’lar birçok hücreden meydana gelir ve bu hücreler eş zamanlı çalışarak karmaşık işlevleri yerine getirir. Hücrelerden bir kısmı işlevini yitirse dahi sistem çalışmaya devam edebilir.
+2. Eğitim esnasında kullanılan nümerik bilgilerden problemin genel özelliklerini elde edebilir ve eğitimde görülmeyen girdiler için de anlamlı yanıtlar üretebilir.
+3. Dağılmış non-lineer alt birimler sayesinde non-lineer problemlerin çözümünü mümkün kılar.
+4. Makine öğrenmesi gerçekleştirebilir; olayları öğrenerek benzer olaylar karşısında mantıklı kararlar verebilir.
+5. Bilgi işleme yöntemleri geleneksel programlamadan farklıdır; geleneksel yaklaşımın bazı olumsuzlukları azaltılabilir.
+6. Bilgiler ağın tamamına yayılmış ağırlıklarda saklanır; bazı hücrelerin işlevini yitirmesi anlamlı bilginin kaybolmasına neden olmaz.
+7. Dağıtık belleğe sahiptirler; tek bir bağlantının kendi başına anlamı yoktur.
+8. Örnekleri kullanarak öğrenirler; başarısı seçilen örnekler ile doğru orantılıdır.
+9. Daha önce görülmemiş örnekler hakkında bilgi üretebilirler (genelleme).
+10. Algılamaya yönelik olaylarda kullanılabilirler; bu alanlarda başarıları kanıtlanmıştır.
+11. Örüntü (pattern) ilişkilendirme ve sınıflandırma yapabilirler.
+12. Örüntü tamamlama yapabilirler.
+13. Kendi kendine öğrenebilme ve organize etme yetenekleri vardır.
+14. Eksik bilgi ile çalışabilirler; performans kaybı eksik bilginin önemine bağlıdır.
+15. Hata toleransına sahiptirler.
+16. Dereceli bozulma (graceful degradation) gösterebilirler.
+
+### YSA’ların Dezavantajları
+
+1. Donanım bağımlıdır (paralel işlem yeteneği uygun donanımla ortaya çıkar).
+2. Uygun ağ yapısını belirlemek için genel/geçerli bir kural yoktur (deneyim/deneme-yanılma).
+3. Öğrenme katsayısı, hücre sayısı, katman sayısı gibi parametrelerin seçimi için standart bir kural yoktur.
+4. Problemin ağa gösterimi (nümerik temsile dönüştürme) performansı doğrudan etkiler.
+5. Eğitimin ne zaman bitirilmesi gerektiğine ilişkin kesin bir yöntem yoktur.
+6. Ağın davranışları açıklanamaz (yorumlanabilirlik zorluğu).
+
+### Geleneksel Algoritmalar ile YSA’ların Karşılaştırılması
+
+> ![Geleneksel algoritmalar ile YSA karşılaştırması](Images/203.jpg)
+
+### YSA’ların Kullanıldığı Alanlar
+
+Yapay sinir ağları başlıca sınıflandırma, modelleme ve tahmin uygulamalarında kullanılır. Özellikle:
+
+- Çok boyutlu
+- Gürültülü
+- Karmaşık
+- Kesin olmayan
+- Eksik/kusurlu
+- Hata olasılığı yüksek sensör verilerinin olduğu
+
+ve problemi çözmek için kapalı form bir matematiksel model/algoritmanın bulunmadığı; fakat örneklerin mevcut olduğu durumlarda yaygın olarak tercih edilir.
+
+### Yapay Sinir Ağlarının Sınıflandırılması
+
+Yapay sinir ağları; nöron dizilimlerine, ağırlıkların düzenlenmesi için yapılan hesaplamaların türüne ve zamanına göre çeşitli biçimlerde sınıflandırılabilir.
+
+#### Yapılarına Göre
+
+Yapay sinir ağları nöronların birbirine bağlanış şekline göre ileri ve geri beslemeli olarak ikiye ayrılır.
+
+- İleri beslemeli ağlar: Nöronlar girişten çıkışa doğru düzenli katmanlar şeklindedir; bir katmandan yalnızca sonraki katmana bağlantı vardır.
+
+> ![İleri beslemeli ağlar](Images/204.jpg)
+
+- Geri beslemeli ağlar: Bir hücrenin çıktısı yalnızca sonraki katmana değil; önceki katmana veya aynı katmandaki başka bir hücreye de girdi olarak bağlanabilir.
+
+> ![Geri beslemeli ağlar](Images/205.jpg)
+
+#### Öğrenme Algoritmalarına Göre
+
+- Danışmanlı öğrenme: Girdi değerleri ile birlikte istenen çıktı değerleri de verilir; beklenen çıktı ile ağ çıktısı arasındaki hataya göre ağırlıklar güncellenir.
+- Danışmansız öğrenme: Sadece örnek girdiler verilir; beklenen çıktı bilgisi yoktur. Ağ, benzer örnekleri kendi kurallarına göre gruplamaya çalışır.
+- Takviyeli öğrenme: Her iterasyon sonucunda elde edilen sonucun iyi/kötü olduğuna dair geri bildirim verilir; ağ buna göre kendini yeniden düzenler.
+
+#### Öğrenme Zamanına Göre
+
+- Statik öğrenme: Ağ kullanmadan önce eğitilir; kullanım sırasında ağırlıklar değişmez.
+- Dinamik öğrenme: Ağ çalıştığı süre boyunca da öğrenmeye devam edecek şekilde tasarlanır; sonraki kullanımlarda geri bildirime göre ağırlıklar değişebilir.
+
+### Yapay Sinir Ağlarının Yapısı
+
+> ![YSA yapısı — şema 1](Images/206.jpg)
+> ![YSA yapısı — şema 2](Images/207.jpg)
+
+Temel bileşenler (özet):
+
+- Girdiler (x): Nöronlara gelen verilerdir.
+- Ağırlıklar (w): Girdilerin çıktı üzerindeki etkisini ayarlayan katsayılardır; pozitif/negatif/sıfır olabilir.
+- Toplama (birleştirme) fonksiyonu: Ağırlıklarla çarpılmış girdileri toplayarak net girdiyi hesaplar.
+
+> ![YSA — net girdi hesabı](Images/208.jpg)
+
+### Aktivasyon Fonksiyonları
+
+Bir hücrenin çıkışı, başka bir hücrenin girişine aktarılmadan ve/veya çıktı olarak kullanılmadan önce aktivasyon fonksiyonundan geçirilir.
+
+Genellikle doğrusal olmayan fonksiyonlar seçilir; türevinin kolay hesaplanabilir olması pratikte önemlidir.
+
+> ![Aktivasyon fonksiyonu — örnekler](Images/209.jpg)
+> ![Aktivasyon fonksiyonu — örnekler](Images/210.jpg)
+
+Pratik kullanım notları:
+
+- ReLU fonksiyonu genellikle gizli katmanlarda tercih edilir.
+- Sigmoid fonksiyonu, çıktının $[0, 1]$ aralığında olması isteniyorsa çıkış katmanında tercih edilir (ikili/binary sınıflandırma).
+- Linear aktivasyon fonksiyonu, regresyon problemlerinde çıkış katmanında tercih edilir.
+
+> ![Aktivasyon fonksiyonları — özet](Images/211.jpg)
+
+#### Softmax Fonksiyonu
+
+Softmax, çoklu sınıflı sınıflandırma problemlerinde kullanılan bir aktivasyon fonksiyonudur. Bir dizi değeri $[0, 1]$ aralığına dönüştürür ve çıktıların toplamını 1 yapar. Böylece çıkışlar, sınıflar arasındaki olasılıkları temsil etmek için kullanılabilir.
+
+> ![Softmax fonksiyonu](Images/212.jpg)
+
+Hücrenin çıktısı: Aktivasyon fonksiyonundan çıkan değer, hücrenin çıktı değeridir. Bu değer ister YSA’nın çıktısı olarak dış dünyaya verilir, ister ağ içinde tekrar kullanılabilir. Her hücrenin birden fazla girdisi olmasına rağmen bir tek çıktısı vardır; bu çıktı istenilen sayıda hücreye bağlanabilir.
+
+### Eğitim (Öğrenme Süreci)
+
+Yapay sinir ağlarının öğrenme sürecinde dış ortamdan girişler alınır; aktivasyon fonksiyonlarından geçirilerek bir çıktı üretilir. Bu çıktı, tecrübeyle verilen/istenen çıktı ile karşılaştırılarak hata bulunur.
+
+Çeşitli öğrenme algoritmalarıyla hata azaltılarak gerçek çıkışa yaklaşılmaya çalışılır; bu süreçte güncellenen değerler ağın ağırlıklarıdır. Eğer YSA, verilen giriş-çıkış çiftleriyle amaca ulaşıyor/uygun yaklaşıyorsa ağırlık değerleri saklanır.
+
+Genelde örneklerin yaklaşık %70’i eğitim için, kalan %30’u test için ayrılarak ağın daha önce görmediği örnekler karşısındaki başarısı incelenir.
+
+> ![Eğitim — genel akış](Images/218.jpg)
+
+Eğitim adımları (özet):
+
+1. Örneklerin toplanması: Eğitim seti ve test seti oluşturulur.
+2. Ağın topolojik yapısının belirlenmesi: Girdi sayısı, ara katman sayısı, her ara katmandaki nöron sayısı ve çıktı sayısı belirlenir.
+3. Öğrenme parametrelerinin belirlenmesi: Öğrenme katsayısı, toplama/aktivasyon fonksiyonları, momentum katsayısı gibi parametreler belirlenir.
+4. Ağırlıkların başlangıç değerlerinin atanması: Genellikle rasgele değerler atanır.
+5. Öğrenme setinden örneklerin seçilmesi ve ağa gösterilmesi.
+6. İleri hesaplamaların yapılması: Verilen girdi için ağın çıktı değerleri hesaplanır.
+7. Gerçekleşen çıktının beklenen çıktı ile karşılaştırılması: Hata değerleri hesaplanır.
+8. Ağırlıkların değiştirilmesi: Geri hesaplama (backpropagation) vb. yöntemlerle hata azaltılacak şekilde ağırlıklar güncellenir.
+9. Öğrenmenin tamamlanması: Hata kabul edilir düzeye ininceye kadar süreç devam eder.
+
+Not: Ağın öğrenmesinin izlenmesinin en pratik yollarından biri hata grafiğidir. İterasyonlar boyunca hata düşer; belirli bir noktadan sonra hatanın daha fazla azalmaması öğrenmenin durduğunu ve daha iyi bir sonucun bulunamayabileceğini gösterebilir.
+
+### Katsayıların Belirlenmesi
+
+İleri beslemeli sinir ağında bağlantıların ağırlıklarının başlangıçta nasıl seçildiği ağın performansını etkiler. Genel olarak ağırlıklar belirli aralıklarda atanır:
+
+- Aralık çok büyük seçilirse ağ yerel çözümler arasında dolaşabilir.
+- Aralık çok küçük seçilirse öğrenme geç gerçekleşebilir.
+
+Deneyimler, bazı problemlerde başlangıç ağırlıklarının 0.1 ile 1.0 aralığında seçilmesinin başarılı sonuçlar üretebildiğini göstermiştir; ancak bu tamamen probleme bağlıdır.
+
+Başlangıç değerleri kadar öğrenme ve momentum katsayılarının belirlenmesi de önemlidir:
+
+- Öğrenme katsayısı ($\lambda$): Ağırlıkların değişim miktarını belirler. Büyük seçilirse osilasyon/kararsızlık görülebilir; küçük seçilirse öğrenme süresi artar.
+- Momentum katsayısı ($\alpha$): Bir önceki iterasyondaki değişimin belirli bir oranının yeni değişime eklenmesidir. Yerel minimumlara takılmayı azaltmaya yardımcı olabilir; ancak çok büyük değerler de çözüme ulaşmada sorunlara yol açabilir.
+
+İnteraktif denemeler için: https://playground.tensorflow.org/
+
+> ![TensorFlow Playground — örnek](Images/219.jpg)
+
+### Keras ve TensorFlow
+
+#### TensorFlow
+
+TensorFlow, Google tarafından geliştirilen; sınıflandırma, tespit vb. derin öğrenme modellerini oluşturmaya yönelik açık kaynaklı bir Python kütüphanesidir. Çeşitli görevlerde veri akışı (dataflow) programlamaya yönelik açık kaynaklı bir yazılım kitaplığıdır. Sinir ağları gibi makine öğrenimi uygulamaları için kullanılan sembolik bir matematik kütüphanesi olarak da düşünülebilir.
+
+#### Keras
+
+Keras, François Chollet tarafından geliştirilen ve başlangıçta Theano üzerine kurulan; daha sonra TensorFlow tarafından desteklenen yüksek seviyeli bir derin öğrenme API’sidir. Temel amacı, kullanıcıların kolayca derin öğrenme modelleri oluşturmasını, eğitmesini ve değerlendirmesini sağlamaktır.
+
+#### Keras (Avantajları)
+
+1. Modüler ve kolay kullanım: Katmanları ve modelleri modüler şekilde birleştirme olanağı sağlar; basitten karmaşığa geniş bir model yelpazesi kurulabilir.
+2. Yüksek seviyeli API: Birkaç satır kod ile model oluşturma/eğitme süreçlerini hızlı ve etkili hale getirir.
+3. Modüler backend desteği: Theano, TensorFlow ve Microsoft Cognitive Toolkit gibi farklı arka uçlar üzerinde çalışabilir; TensorFlow 2.x ile birlikte `tf.keras` altında entegre edilmiştir.
+4. Geniş topluluk desteği: Dokümantasyon, örnek projeler ve sorun çözümünde büyük ekosistem avantajı sağlar.
+5. Çeşitli katman ve aktivasyon fonksiyonları: `dense`, `convolutional`, `recurrent` vb. katmanlar ve aktivasyonlar ile farklı görevler için hızlı model geliştirmeyi kolaylaştırır.
+
+#### Sequential
+
+Sequential, modeli sıralı bir şekilde katmanları bir araya getirerek oluşturmamızı sağlayan basit ve kullanıcı dostu bir API’dir. Genellikle giriş katmanından başlayarak katmanları sırayla eklemek ve ardışık şekilde bağlamak için kullanılır.
+
+```python
+from tensorflow.keras.models import Sequential
+
+model = Sequential()
+```
+
+Keras; birçok farklı yapay sinir ağı katmanı için hazır tanımları `tensorflow.keras.layers` altında sunar. Sequential model tanımlamasında genellikle önce giriş katmanının boyutu belirlenir; ardından gizli katmanlar ve çıkış katmanı probleme uygun şekilde eklenir.
+
+> ![Keras ile Dense katmanları](Images/220.jpg)
+
+Örnek bir Dense (tam bağlı) ağ kurulumu:
+
+```python
+from tensorflow.keras.layers import Dense
+
+model.add(Dense(units=5, activation='relu', input_dim=3))
+model.add(Dense(units=5, activation='relu'))
+model.add(Dense(units=1, activation='linear'))
+```
+
+Katmanlar için aktivasyon fonksiyonu seçimi önemlidir:
+
+- Giriş ve gizli katmanlarda `relu` kullanımı yaygındır.
+- Çıkış katmanı aktivasyonu problem tipine göre seçilir:
+    - İkili sınıflandırma: `sigmoid`
+    - Çok sınıflı sınıflandırma: `softmax`
+    - Regresyon: `linear`
+
+#### Model Derleme (compile)
+
+Oluşturulan model `compile` metodu ile derlenmelidir. Derleme aşamasında kayıp fonksiyonu (loss), optimizer ve metrikler (metrics) belirlenir.
+
+```python
+model.compile(
+        loss='mean_squared_error',
+        optimizer='adam',
+        metrics=['mean_squared_error'],
+)
+```
+
+> ![Compile: loss/optimizer/metrics kavramları](Images/221.jpg)
+
+Kayıp fonksiyonları: https://keras.io/api/losses/
+
+- Regresyon problemleri: `mean_squared_error`
+- Sınıflandırma problemleri:
+    - İkili sınıflandırma: `binary_crossentropy`
+    - Çok sınıflı sınıflandırma: `categorical_crossentropy`
+
+Optimizer fonksiyonları: https://keras.io/api/optimizers/
+
+> ![Optimizer örnekleri](Images/222.jpg)
+
+Metric fonksiyonları: https://keras.io/api/metrics/
+
+> ![Metric örnekleri](Images/223.jpg)
+
+Varsayılanlar dışında optimizer parametreleri vermek için optimizer sınıfından bir örnek oluşturulabilir:
+
+```python
+from tensorflow.keras.optimizers import Adam
+
+opt = Adam(learning_rate=0.0002)
+model.compile(loss='mean_squared_error', optimizer=opt, metrics=['mean_squared_error'])
+```
+
+Modelin yapısını görmek için `model.summary()` kullanılabilir:
+
+> ![model.summary() çıktısı](Images/224.jpg)
+
+#### Örnek Akış (Toplu Kod)
+
+```python
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential
+
+model = Sequential()
+model.add(Dense(units=5, activation='relu', input_dim=3))
+model.add(Dense(units=5, activation='relu'))
+model.add(Dense(units=1, activation='linear'))
+model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mean_squared_error'])
+model.summary()
+```
+
+#### Örnek: Regresyon
+
+Veri hazırlama ve ölçekleme (girişlerin normalize edilmesi önemlidir):
+
+```python
+import pandas as pd
+
+# (Notebook ortamında) dosyayı indirip oku
+#!gdown --id 1JqTYmtsCuy6fZMIiQ7ZnK0VoIInSNuy-...
+EvFiyatlari = pd.read_csv("evfiyatlari.csv")
+
+X = EvFiyatlari[["MetreKare", "YatakOdasi", "Banyo"]]
+y = EvFiyatlari[["Fiyat"]]
+
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+```
+
+Eğitim/test bölme ve eğitim:
+
+```python
+from sklearn.model_selection import train_test_split
+
+x_train, x_test, y_train, y_test = train_test_split(
+        X_scaled, y, test_size=0.3, random_state=0
+)
+
+history = model.fit(x_train, y_train, epochs=10, batch_size=32)
+```
+
+Eğitim kaybını görselleştirme:
+
+```python
+import matplotlib.pyplot as plt
+
+plt.plot(history.history["loss"])
+plt.show()
+```
+
+Tahmin ve test metrikleri:
+
+```python
+y_hat = model.predict(x_test)
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+
+print("Mean Absolute Error:", mean_absolute_error(y_test, y_hat))
+print("Mean Squared Error:", mean_squared_error(y_test, y_hat))
+```
+
+#### Örnek: İkili Sınıflandırma
+
+```python
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.optimizers import Adam
+
+opt = Adam(learning_rate=0.001)
+
+model = Sequential()
+model.add(Dense(units=100, activation='relu', input_dim=30))
+model.add(Dense(units=50, activation='relu'))
+model.add(Dense(units=1, activation='sigmoid'))
+model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
+model.summary()
+```
+
+Model değerlendirme:
+
+```python
+loss, accuracy = model.evaluate(x_test, y_test)
+print(loss, accuracy)
+```
+
+Keras dışında sklearn metriklerini kullanmak için model çıktısı sınıf tahminlerine dönüştürülebilir (eşikleme):
+
+```python
+y_hat = model.predict(x_test)
+th = 0.5
+y_pred_classes = (y_hat > th).astype(int)
+
+from sklearn.metrics import confusion_matrix, accuracy_score
+
+print("Accuracy Score:", accuracy_score(y_test, y_pred_classes))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred_classes))
+```
+
+#### Örnek: Çok Sınıflı Sınıflandırma
+
+```python
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.optimizers import Adam
+
+opt = Adam(learning_rate=0.001)
+
+model = Sequential()
+model.add(Dense(units=100, activation='relu', input_dim=20))
+model.add(Dense(units=50, activation='relu'))
+model.add(Dense(units=4, activation='softmax'))
+model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+model.summary()
+```
+
+Softmax fonksiyonu, çoklu sınıflı sınıflandırma problemlerinde bir vektörü $[0, 1]$ aralığına dönüştürür ve toplamı 1 olacak şekilde normalize eder; böylece çıkışlar sınıflar için olasılık yorumuna uygundur.
+
+> ![Softmax fonksiyonu](Images/225.jpg)
+
+Çok sınıflı sınıflandırmada çıkış katmanı nöron sayısı, sınıf sayısı kadar olmalıdır. Çıkış değişkeni tek bir kategorik değerden oluşuyorsa one-hot encoding ile düzenlenebilir:
+
+```python
+print(df["FiyatAraligi"].unique())
+
+y = df["FiyatAraligi"]
+y = pd.get_dummies(y)
+classes = y.columns.values
+y = y.values
+```
+
+> ![One-hot encoding örneği](Images/226.jpg)
+
+Çok sınıflı problemde sınıf tahmini için `argmax` kullanılabilir:
+
+```python
+import numpy as np
+
+y_hat = model.predict(x_test)
+y_pred_classes = np.argmax(y_hat, axis=1)
+y_test_classes = np.argmax(y_test, axis=1)
+
+from sklearn.metrics import confusion_matrix, accuracy_score
+
+print("Accuracy Score:", accuracy_score(y_test_classes, y_pred_classes))
+print("Confusion Matrix:\n", confusion_matrix(y_test_classes, y_pred_classes))
+```
+
+#### Aşırı Öğrenme (Overfitting)
+
+Aşırı öğrenme, modelin eğitim verilerine çok iyi uyum sağlaması; ancak yeni ve görülmeyen verilerde düşük performans göstermesi durumudur.
+
+Aşırı öğrenme genellikle şu durumlarda ortaya çıkar:
+
+1. Model karmaşıklığı: Veri setine aşırı uyum sağlayan, genellemesi zayıf modeller.
+2. Az veri: Eğitim verisi az olduğunda genelleme yeteneği düşebilir.
+3. Aşırı uzun eğitim: Çok fazla epoch ile eğitim, ezberlemeyi artırabilir.
+4. Düzensiz veri / etiket hataları: Gürültü, modelin yanlış örüntüleri öğrenmesine neden olabilir.
+
+Aşırı öğrenmeyi önlemek için bazı stratejiler:
+
+1. Daha fazla/çeşitli veri
+2. Düzenleme (Regularization): L1/L2 gibi cezalandırmalar
+3. Dropout
+4. Erken durdurma (Early Stopping): Doğrulama verisi ile izleme
+
+#### L1 ve L2 Düzenlemesi (Regularization)
+
+L1 (Lasso) ağırlıkları sıfıra yaklaştırmaya; L2 (Ridge) ağırlıkları küçültmeye çalışır. Her katmanda kullanmak gerekmez; parametre sayısı yüksek katmanlarda kullanımı daha yaygındır.
+
+```python
+from tensorflow.keras import regularizers
+
+model.add(Dense(units=50, activation='relu', kernel_regularizer=regularizers.l1(0.01)))
+model.add(Dense(units=50, activation='relu', kernel_regularizer=regularizers.l2(0.01)))
+model.add(Dense(units=50, activation='relu', kernel_regularizer=regularizers.l1_l2(0.01, 0.01)))
+```
+
+#### Dropout
+
+Dropout, eğitim sırasında rastgele seçilen nöronların belirli bir yüzdesini devre dışı bırakarak modelin genelleme yeteneğini artırmayı amaçlar.
+
+```python
+from tensorflow.keras.layers import Dropout
+
+model.add(Dropout(0.3))
+```
+
+> ![Dropout](Images/227.jpg)
+
+#### Erken Durdurma (Early Stopping)
+
+Doğrulama (validation) verisi ile eğitim izlenebilir. Bunun için:
+
+1) `fit` içinde `validation_split` kullanılabilir:
+
+```python
+history = model.fit(x_train, y_train, epochs=200, batch_size=32, validation_split=0.1)
+```
+
+2) Eğitim verisi ayrıca doğrulama için bölünüp `validation_data` verilebilir:
+
+```python
+from sklearn.model_selection import train_test_split
+
+x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.1, random_state=0)
+history = model.fit(x_train, y_train, epochs=200, batch_size=32, validation_data=(x_val, y_val))
+```
+
+> ![Doğrulama metrikleri ile fit](Images/228.jpg)
+
+Doğrulama metrikleri `history` içine de yazılır; örneğin:
+
+```python
+import matplotlib.pyplot as plt
+
+plt.plot(history.history["accuracy"], label="Eğitim Başarısı")
+plt.plot(history.history["val_accuracy"], label="Doğrulama Başarısı")
+plt.legend()
+plt.show()
+```
+
+> ![Eğitim vs doğrulama grafiği](Images/229.jpg)
+
+Eğitimi uygun anda sonlandırmak için callback kullanılabilir:
+
+```python
+from tensorflow.keras.callbacks import EarlyStopping
+
+early_stopping = EarlyStopping(monitor='val_loss', patience=15, restore_best_weights=True)
+
+history = model.fit(
+        x_train,
+        y_train,
+        epochs=300,
+        batch_size=32,
+        validation_data=(x_val, y_val),
+        callbacks=[early_stopping],
+)
+```
+
+#### Model Kaydetme ve Yükleme
+
+Eğitimi tamamlanan model kaydedilebilir ve daha sonra tekrar yüklenerek kullanılabilir:
+
+```python
+model.save('modelim.h5')
+
+from tensorflow.keras.models import load_model
+loaded_model = load_model('modelim.h5')
+predictions = loaded_model.predict(x_test)
+```
 
 
 ## Uygulama: Hava Problemi (ID3 / C4.5)
@@ -2204,7 +3214,7 @@ Birinci dallanma sonrası oluşan karar ağacı:
 
 - C4.5, Quinlan tarafından ID3’ün devamı olarak geliştirilmiştir; sayısal (nümerik) niteliklerle karar ağacı kurmayı destekler.
 - ID3’e göre temel farkları:
-    - Nümerik değerleri kategorik kararlara dönüştürmek için bir eşik (threshold) belirler ve $` x < t `$ / $` x \ge t `$ şeklinde dallandırır.
+    - Nümerik değerleri kategorik kararlara dönüştürmek için bir eşik (threshold) belirler ve \( x < t \) / \( x \ge t \) şeklinde dallandırır.
     - Bilinmeyen/eksik değerler için bir işleme yöntemi sunar (ör. olasılıksal dağıtım veya örnek ağırlıklarıyla paylaştırma).
     - (Not) Uygulamada budama (pruning) yaparak aşırı öğrenmeyi azaltır.
 - Eşik seçimi: Aday eşikler üzerinde bilgi kazancı değerlendirilir; en büyük bilgi kazancını veren eşik seçilerek dallanma yapılır.
@@ -2294,8 +3304,8 @@ $$
 
 Adayların özeti:
 
-| BÖLÜNME | Psol | Psağ | P(Evet \| t_sol) | P(Evet \| t_sağ) | P(Hayır \| t_sağ) | P(Hayır \| t_sol) | Uygunluk Ölçüsü |
-|--------:|-----:|-----:|-----------------:|------------------:|------------------:|------------------:|----------------:|
+| BÖLÜNME | Psol | Psağ | P(Evet|tsol) | P(Evet|tsağ) | P(Hayır|tsağ) | P(Hayır|tsol) | Uygunluk Ölçüsü |
+|---------:|:----:|:----:|:------------:|:------------:|:-------------:|:-------------:|:----------------:|
 | 1 | 0.09 | 0.91 | 1.00 | 0.60 | 0.40 | 0.00 | 0.131 |
 | 2 | 0.45 | 0.55 | 0.60 | 0.67 | 0.33 | 0.40 | 0.069 |
 | 3 | 0.45 | 0.55 | 0.60 | 0.67 | 0.33 | 0.40 | 0.069 |
@@ -2330,18 +3340,18 @@ Gini algoritmasında her aday bölünmede düğüm iki parçaya ayrılır ve sol
 - Sol ve sağ için Gini safsızlığı:
 
 $$
-\text{Gini}_{sol} = 1 - \sum_{i=1}^{k} \left( \frac{L_i}{|T_{sol}|} \right)^2, \quad
-\text{Gini}_{sağ} = 1 - \sum_{i=1}^{k} \left( \frac{R_i}{|T_{sağ}|} \right)^2.
+\operatorname{Gini}_{sol} = 1 - \sum_{i=1}^{k} \left( \frac{L_i}{|T_{sol}|} \right)^2, \quad
+\operatorname{Gini}_{sağ} = 1 - \sum_{i=1}^{k} \left( \frac{R_i}{|T_{sağ}|} \right)^2.
 $$
 
 - Aday bölmenin ağırlıklı Gini değeri (özellik j için): n eğitim kaydı varsa
 
 $$
-\text{Gini}_j = \frac{1}{n}\Bigl( |T_{sol}|\,\text{Gini}_{sol} + |T_{sağ}|\,\text{Gini}_{sağ} \Bigr)
-= \frac{|T_{sol}|}{n}\,\text{Gini}_{sol} + \frac{|T_{sağ}|}{n}\,\text{Gini}_{sağ}.
+\operatorname{Gini}_j = \frac{1}{n}\Bigl( |T_{sol}|\,\operatorname{Gini}_{sol} + |T_{sağ}|\,\operatorname{Gini}_{sağ} \Bigr)
+= \frac{|T_{sol}|}{n}\,\operatorname{Gini}_{sol} + \frac{|T_{sağ}|}{n}\,\operatorname{Gini}_{sağ}.
 $$
 
-- Seçim: Her j niteliği için hesaplanan $`\text{Gini}_j`$ değerleri arasından en küçük olanı seçilir ve bölünme bu nitelik/eşik üzerinden yapılır. Sonra aynı işlem alt düğümlerde tekrarlanır.
+- Seçim: Her j niteliği için hesaplanan \(\operatorname{Gini}_j\) değerleri arasından en küçük olanı seçilir ve bölünme bu nitelik/eşik üzerinden yapılır. Sonra aynı işlem alt düğümlerde tekrarlanır.
 
 ##### Örnek: Gini ile Karar Ağacı
 
@@ -2379,12 +3389,12 @@ MEMNUN veri kümesi (8 gözlem) örneği:
 
 Öznitelik bazında Gini (kategorikler):
 
-- MODEL: $` Gini_{X5} = 1 - (0/2)^2 - (2/2)^2 = 0 `$, $` Gini_{X3} = 1 - (3/6)^2 - (3/6)^2 = 0.5 `$
-    - Ağırlıklı: $` Gini_{MODEL} = \tfrac{2\cdot 0 + 6\cdot 0.5}{8} = 0.375 `$
+- MODEL: \( Gini_{X5} = 1 - (0/2)^2 - (2/2)^2 = 0 \), \( Gini_{X3} = 1 - (3/6)^2 - (3/6)^2 = 0.5 \)
+    - Ağırlıklı: \( Gini_{MODEL} = \tfrac{2\cdot 0 + 6\cdot 0.5}{8} = 0.375 \)
 - CİNSİYET:
-    - ERKEK: $` Gini = 1 - (2/5)^2 - (3/5)^2 = 0.48 `$
-    - KADIN: $` Gini = 1 - (1/3)^2 - (2/3)^2 \approx 0.45 `$
-    - Ağırlıklı: $` Gini_{C\İNS\İYET} = \tfrac{5\cdot 0.48 + 3\cdot 0.45}{8} \approx 0.469 `$
+    - ERKEK: \( Gini = 1 - (2/5)^2 - (3/5)^2 = 0.48 \)
+    - KADIN: \( Gini = 1 - (1/3)^2 - (2/3)^2 \approx 0.45 \)
+    - Ağırlıklı: \( Gini_{C\İNS\İYET} = \tfrac{5\cdot 0.48 + 3\cdot 0.45}{8} \approx 0.469 \)
 
 YAŞ için aday eşikler ve Gini değerleri:
 
@@ -2431,7 +3441,7 @@ R(t_{sol}) = \frac{1}{n(t_{sol})} \sum_{x_i\in t_{sol}} \bigl(y_i - \bar y_{t_{s
 R(t_{sağ}) = \frac{1}{n(t_{sağ})} \sum_{x_i\in t_{sağ}} \bigl(y_i - \bar y_{t_{sağ}}\bigr)^2.
 $$
 
-Seçim ölçütü: Bölme, $` R(t_{sol}) + R(t_{sağ}) `$ toplamını minimize edecek şekilde seçilir (eşdeğer olarak MSE_s minimize edilir).
+Seçim ölçütü: Bölme, \( R(t_{sol}) + R(t_{sağ}) \) toplamını minimize edecek şekilde seçilir (eşdeğer olarak MSE_s minimize edilir).
 
 ###### Örnek (küçük veri seti)
 
@@ -2448,10 +3458,10 @@ Veri (Y hedefi):
 Örnek bölme: X1 ≤ 12 (1. eleman referans alınarak)
 
 - t_{sol} = {44, 30, 45}, t_{sağ} = {35, 43}
-- $` \bar y_{t_{sol}} = (44+30+45)/3 = 39.67 `$, $` \bar y_{t_{sağ}} = (35+43)/2 = 39 `$
-- $` R(t_{sol}) = \tfrac{(44-39.67)^2 + (30-39.67)^2 + (45-39.67)^2}{3} = 46.89 `$
-- $` R(t_{sağ}) = \tfrac{(35-39)^2 + (43-39)^2}{2} = 16 `$
-- Toplam: $` R(t_{sol}) + R(t_{sağ}) = 62.89 `$
+- \( \bar y_{t_{sol}} = (44+30+45)/3 = 39.67 \), \( \bar y_{t_{sağ}} = (35+43)/2 = 39 \)
+- \( R(t_{sol}) = \tfrac{(44-39.67)^2 + (30-39.67)^2 + (45-39.67)^2}{3} = 46.89 \)
+- \( R(t_{sağ}) = \tfrac{(35-39)^2 + (43-39)^2}{2} = 16 \)
+- Toplam: \( R(t_{sol}) + R(t_{sağ}) = 62.89 \)
 
 Tüm olası eşiklerde benzer hesap yapılarak aşağıdaki tablo elde edilir:
 
@@ -2489,7 +3499,7 @@ Regresyon modellerini değerlendirirken kullanılan başlıca metrikler MSE, RMS
 - Tanım:
 
 $$
-\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat y_i)^2, \quad \text{RMSE} = \sqrt{\text{MSE}}.
+\operatorname{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat y_i)^2, \quad \operatorname{RMSE} = \sqrt{\operatorname{MSE}}.
 $$
 
 - Yorum:
@@ -2517,7 +3527,7 @@ print({"mse": mse, "rmse": rmse})
 - Tanım (toplam sapma SS_tot ve artık sapma SS_res ile):
 
 $$
-R^2 = 1 - \frac{\sum_i (y_i - \hat y_i)^2}{\sum_i (y_i - \bar y)^2} = 1 - \frac{\text{SS}_{res}}{\text{SS}_{tot}}, \quad \bar y = \frac{1}{n}\sum_i y_i.
+R^2 = 1 - \frac{\sum_i (y_i - \hat y_i)^2}{\sum_i (y_i - \bar y)^2} = 1 - \frac{\operatorname{SS}_{res}}{\operatorname{SS}_{tot}}, \quad \bar y = \frac{1}{n}\sum_i y_i.
 $$
 
 - Yorum:
@@ -2572,11 +3582,11 @@ Notlar:
 
 Eksik/kayıp değer içeren nitelikler için bilgi kazancı hesaplanırken aşağıdaki yaklaşım kullanılabilir:
 
-- Kayıplı örnekler hariç tutularak $` H(T) `$ ve $` H(T\mid X) `$ normal şekilde hesaplanır (sadece bilinen X değerleri ile).
-- Sonuç, kayıpsız örnek oranı $` F `$ ile ölçeklenir:
+- Kayıplı örnekler hariç tutularak \( H(T) \) ve \( H(T\mid X) \) normal şekilde hesaplanır (sadece bilinen X değerleri ile).
+- Sonuç, kayıpsız örnek oranı \( F \) ile ölçeklenir:
 
 $$
-F = \frac{\text{X değeri bilinen örnek sayısı}}{\text{toplam örnek sayısı}}, \quad \text{Gain}_X = F\,\bigl( H(T) - H(T\mid X) \bigr).
+F = \frac{\text{X değeri bilinen örnek sayısı}}{\text{toplam örnek sayısı}}, \quad \operatorname{Gain}_X = F\,\bigl( H(T) - H(T\mid X) \bigr).
 $$
 
 Örnek veri kümesi (NİTELİK1’de bir eksik “?” değer var, toplam 14 kayıt):
@@ -2608,12 +3618,12 @@ Not: Hedef entropisi H(SINIF) tüm 14 kayıtla hesaplanır. Aşağıda koşullu 
 
 Koşullu entropi (yalnız NİTELİK1’i bilinen 13 kayıt):
 
-$` H(\text{SINIF}\mid \text{NİTELİK1}) \approx 0{,}747 `$
+\( H(\text{SINIF}\mid \text{NİTELİK1}) \approx 0{,}747 \)
 
 Ölçek faktörü ve ayarlanmış kazanç:
 
 $$
-F = \tfrac{13}{14}, \quad \text{Gain}(\text{NİTELİK1},\text{SINIF}) = F\,\bigl(0{,}961 - 0{,}747\bigr) \approx 0{,}199.
+F = \tfrac{13}{14}, \quad \operatorname{Gain}(\text{NİTELİK1},\text{SINIF}) = F\,\bigl(0{,}961 - 0{,}747\bigr) \approx 0{,}199.
 $$
 
 ### Ezber (Overfitting) ve Budama
