@@ -9,16 +9,51 @@
 
 # Ders Notları
 
+## Sınav Konuları
+
+- Derin öğrenmeden **test** olacak.
+- **Vize öncesi** konular sorulabilir; ancak ağırlık büyük ihtimalle **vize sonrası** konularda.
+- Hoca vize sonrası işlenen kavramlara (örn. **overfitting**) da değindiklerini söyledi.
+- Muhtemelen **test ağırlıklı**; belki **1 klasik** soru da gelebilir.
+
+### Vize sonrası (muhtemel ağırlık)
+
+- **Overfitting ve genelleme**: train–val farkı, bias/variance sezgisi, çözüm seti (düzenlileştirme + doğru split).
+  - Detay: [Aşırı Öğrenme (Overfitting)](#aşırı-öğrenme-overfitting-tanım-ve-belirtiler)
+  - Tamamlayıcı: [Train/Validation/Test](#trainvalidationtest-neden-ve-nasıl)
+- **Validation ve hiperparametre seçimi**: validation setin rolü, overfitting’i erken yakalama, ayar yapma mantığı.
+  - Detay: [Validation Seti: Rol ve Hiperparametre Ayarı](#validation-seti-rol-ve-hiperparametre-ayarı)
+- **Düzenlileştirme**: Dropout, L1/L2 (weight decay), early stopping, batch norm (ne işe yarar / ne zaman).
+  - Detay: [Düzenlileştirme](#düzenlileştirme-dropout-l1l2-weight-decay)
+  - Detay: [Erken Durdurma ve Batch Normalization](#erken-durdurma-ve-batch-normalization)
+- **Gradyan problemleri ve mimari çözümler**: vanishing/exploding gradient; residual bağlantıların neden önemli olduğu.
+  - Detay: [Derin Ağlarda Gradyan Sorunları](#derin-ağlarda-gradyan-sorunları)
+  - Detay: [ResNet](#resnet-residual-bağlantılar)
+- **Transfer öğrenme**: feature extraction vs fine-tuning; hangi durumda hangisi; dondurma/çözme mantığı.
+  - Detay: [Transfer Öğrenme](#transfer-öğrenme-genel-bakış)
+  - Detay: [Feature Extraction](#transfer-özellik-çıkarma-feature-extraction)
+  - Detay: [Fine-Tuning](#transfer-i̇nce-ayar-fine-tuning)
+- **Vize sonrası yeni başlıklar (işlendiyse)**: hangi problem türü ne çözer (generative/vision/sequence).
+  - Detay: [Autoencoders](#autoencoders) • [GAN](#gan) • [Object Detection](#object-detection) • [Semantic Segmentation](#semantic-segmentation)
+  - Detay: [RNN](#rnn) • [LSTM](#lstm) • [Transformer](#transformers)
+
+### Vize öncesi (genel başlıklar çıkabilir)
+
+- **ML vs DL farkları**: özellik çıkarımı, veri ihtiyacı, hesaplama/donanım, uçtan uca sistem mantığı.
+  - Detay: [ML vs DL Karşılaştırma](#makine-öğrenmesi-vs-derin-öğrenme-karşılaştırma)
+- **CNN tarihi ve temel sezgi**: LeNet/AlexNet, ImageNet etkisi, SOTA kavramı (neden önemli?).
+  - Detay: [LeNet ve CNN’ler](#derin-öğrenme-lenet-1998-ve-cnnler) • [AlexNet](#alexnet-2012-başarı-ve-yenilikler) • [SOTA Modeller](#state-of-the-art-sota-modeller)
+
+### Test + 1 klasik soru için ipucu
+
+- Kısa tanım + fark soruları: “X nedir?”, “X vs Y farkı?”, “hangi yöntem overfitting’i azaltır?”, “hangi metrik neyi ölçer?”
+- Klasik gelirse: genelde bir kavramı **örnekle açıklama** (örn. overfitting’i nasıl anlarsın ve nasıl düzeltirsin?).
+
 ## İçindekiler
 - [BIL365 - Derin Öğrenme](#bil365---derin-öğrenme)
 - [Ders Notları](#ders-notları)
+  - [Sınav Konuları](#sınav-konuları)
   - [İçindekiler](#i̇çindekiler)
-  - [🧭 Sınav Konuları İndeksi](#-sınav-konuları-i̇ndeksi)
-    - [🧠 1. Temel Tanımlar (AI, ML, DL, YSA)](#-1-temel-tanımlar-ai-ml-dl-ysa)
-    - [⚖️ 2. Makine Öğrenmesi vs. Derin Öğrenme](#️-2-makine-öğrenmesi-vs-derin-öğrenme)
-    - [🧐 3. Aşırı Öğrenme (Overfitting)](#-3-aşırı-öğrenme-overfitting)
-    - [🖼️ 4. CNN ve Max Pooling Ne Yapar?](#️-4-cnn-ve-max-pooling-ne-yapar)
-    - [🧱 5. Katman Türleri ve Diğer Temel Tanımlar](#-5-katman-türleri-ve-diğer-temel-tanımlar)
   - [Giriş: Yapay Zeka, Makine Öğrenmesi, Derin Öğrenme](#giriş-yapay-zeka-makine-öğrenmesi-derin-öğrenme)
     - [Özet](#özet)
     - [Temel Kavramlar](#temel-kavramlar)
@@ -279,7 +314,76 @@
   - [CNN: Basit Mimari Akışı (MNIST)](#cnn-basit-mimari-akışı-mnist)
     - [Akış](#akış)
     - [Notlar](#notlar-13)
-  - [Regresyon: Problem ve Dönüşüm](#regresyon-problem-ve-dönüşüm)
+  - [Otomatik Kodlayıcılar (Autoencoders)](#autoencoders)
+    - [Mimari: Encoder – Bottleneck – Decoder](#ae-architecture)
+    - [Kayıp: Reconstruction Error](#ae-loss)
+    - [Kullanım Alanları](#ae-uses)
+    - [Gürültü Azaltan AE (Denoising)](#denoising-ae)
+    - [Değişimsel Otomatik Kodlayıcı (VAE)](#vae)
+    - [Evrişimli Otomatik Kodlayıcılar](#conv-ae)
+  - [Üretken Çekişmeli Ağlar (GAN)](#gan)
+    - [Ayırt Edici vs Üretken Modeller](#disc-vs-gen)
+    - [Mimari: Generator ve Discriminator](#gan-arch)
+    - [Amaç Fonksiyonu (Minimax)](#gan-objective)
+    - [Eğitim Adımları](#gan-training)
+    - [GAN Eğitmek Neden Zor?](#gan-challenges)
+    - [Örnek GAN Aileleri](#gan-families)
+    - [Pix2Pix (cGAN)](#pix2pix)
+    - [CycleGAN](#cyclegan)
+    - [Uygulama Örnekleri](#gan-apps)
+  - [Nesne Tespiti (Object Detection)](#object-detection)
+    - [Problem Tanımı: Ne + Nerede](#od-problem)
+    - [Kayan Pencere (Sliding Window)](#od-sliding-window)
+    - [Bölge Önerileri (Region Proposals)](#od-region-proposals)
+    - [R-CNN Ailesi: R-CNN → Fast → Faster](#od-rcnn-family)
+    - [Kutuları Karşılaştırma: IoU](#od-iou)
+    - [Örtüşen Kutular: NMS](#od-nms)
+    - [Başarı Ölçümü: mAP (COCO)](#od-map)
+    - [Tek Aşamalı Dedektörler ve YOLO](#od-single-stage)
+  - [Semantic Segmentation](#semantic-segmentation)
+    - [Tanım ve Sezgi](#seg-definition)
+    - [Fully Convolutional Network (FCN)](#seg-fcn)
+    - [Downsampling → Upsampling Tasarımları](#seg-down-up)
+    - [Upsampling Yöntemleri](#seg-upsampling)
+    - [U-Net](#unet)
+    - [Kayıp Fonksiyonları](#seg-losses)
+    - [Değerlendirme Metrikleri](#seg-metrics)
+    - [Semantic vs Instance vs Panoptic](#seg-taxonomy)
+    - [Instance Segmentation ve Mask R-CNN](#instance-seg)
+    - [Panoptic Segmentation](#panoptic)
+    - [Keypoint / Pose Estimation](#keypoint)
+  - [Tekrarlayan Sinir Ağları (RNN)](#rnn)
+    - [Neden RNN? Sıralı Veriler](#rnn-why)
+    - [Döngüsel Yapı ve Hidden State](#rnn-hidden)
+    - [BPTT ve Vanishing Gradient](#rnn-bptt)
+    - [Zaman Serileri: Windowing (Pencereleme)](#rnn-windowing)
+    - [Sequence Length ve Prediction Horizon](#rnn-horizon)
+    - [Tensor Boyutları ve Data Leakage](#rnn-tensors)
+  - [LSTM (Long Short-Term Memory)](#lstm)
+    - [Motivasyon: Uzun Vadeli Bağımlılık](#lstm-why)
+    - [Cell State ve Kapılar](#lstm-gates)
+    - [Uygulamalar](#rnn-apps)
+  - [Metin Vektörleştirme ve Embedding](#text-vectorization)
+    - [Vocabulary ve One-Hot](#one-hot)
+    - [Word Embeddings](#word-embeddings)
+    - [PyTorch: nn.Embedding](#nn-embedding)
+  - [Transformer Mimarisi](#transformers)
+    - [Transformer’a Geçiş (Neden?)](#why-transformers)
+    - [Genel Mimari: Encoder–Decoder](#transformer-architecture)
+    - [Self-Attention: Query, Key, Value](#self-attention)
+    - [Scaled Dot-Product Attention](#scaled-dot-product-attention)
+    - [Multi-Head Attention](#multi-head-attention)
+    - [Add & Norm (Residual + LayerNorm)](#add-norm)
+    - [Feed Forward Network (FFN)](#ffn)
+    - [Decoder: Masked Self-Attention](#decoder-masked-attention)
+    - [Cross-Attention (Encoder–Decoder)](#cross-attention)
+    - [Kullanım Alanları](#transformer-apps)
+    - [BERT (Encoder-only)](#bert)
+    - [GPT (Decoder-only)](#gpt)
+    - [GPT vs BERT](#gpt-vs-bert)
+    - [Güncel Trendler](#transformer-trends)
+    - [NLP Platformları](#nlp-platforms)
+  - [Regresyon: Problem ve Dönüşüm](#regression-problem)
     - [Özet](#özet-41)
     - [Dönüşüm İlkeleri](#dönüşüm-i̇lkeleri-1)
     - [Hızlı Sorular](#hızlı-sorular-28)
@@ -318,65 +422,6 @@
     - [Temsil ve Boyutlar](#temsil-ve-boyutlar)
     - [Notlar](#notlar-16)
     - [Hızlı Sorular](#hızlı-sorular-33)
-
-## 🧭 Sınav Konuları İndeksi
-
-### 🧠 1. Temel Tanımlar (AI, ML, DL, YSA)
-
-* [Giriş: Yapay Zeka, Makine Öğrenmesi, Derin Öğrenme](#giriş-yapay-zeka-makine-öğrenmesi-derin-öğrenme)
-* [Yapay Sinir Ağları: Tanım ve Bileşenler](#yapay-sinir-ağları-tanım-ve-bileşenler)
-* [Nöron Aktivasyonu ve Hesaplama](#nöron-aktivasyonu-ve-hesaplama)
-
----
-
-### ⚖️ 2. Makine Öğrenmesi vs. Derin Öğrenme
-
-* [Makine Öğrenmesi vs Derin Öğrenme: Karşılaştırma](#makine-öğrenmesi-vs-derin-öğrenme-karşılaştırma)
-* [ML vs DL: Kavramlar](#ml-vs-dl-kavramlar)
-* [ML vs DL: Özellik Çıkarımı](#ml-vs-dl-özellik-çıkarımı)
-* [ML vs DL: Veri İhtiyacı](#ml-vs-dl-veri-i̇htiyacı)
-* [ML vs DL: Model Karmaşıklığı](#ml-vs-dl-model-karmaşıklığı)
-
----
-
-### 🧐 3. Aşırı Öğrenme (Overfitting)
-
-* [Aşırı Öğrenme (Overfitting): Tanım ve Belirtiler](#aşırı-öğrenme-overfitting-tanım-ve-belirtiler)
-* [Aşırı Öğrenmenin Nedenleri](#aşırı-öğrenmenin-nedenleri)
-* [Önleme (Veri Odaklı): Veri Artırma](#aşırı-öğrenmeyi-önleme-veri-odaklı)
-* [Önleme (Model Odaklı): Kapasite Azaltma](#aşırı-öğrenmeyi-önleme-model-odaklı)
-* [Önleme (Düzenlileştirme): Dropout, L1/L2 (Weight Decay)](#düzenlileştirme-dropout-l1l2-weight-decay)
-* [Önleme: Erken Durdurma ve Batch Normalization](#erken-durdurma-ve-batch-normalization)
-
----
-
-### 🖼️ 4. CNN ve Max Pooling Ne Yapar?
-
-* [Neden MLP Görüntüler İçin İdeal Değil?](#neden-mlp-görüntüler-i̇çin-i̇deal-değil)
-* [CNN: Evrişimli Katmanlar ve Ağırlık Paylaşımı](#cnn-evrişimli-katmanlar-ve-ağırlık-paylaşımı)
-* [Hiyerarşik Temsil Öğrenimi (CNN nasıl öğrenir)](#hiyerarşik-temsil-öğrenimi)
-* [CNN: Havuzlama (Pooling) (Max Pooling nedir?)](#cnn-havuzlama-pooling)
-
----
-
-### 🧱 5. Katman Türleri ve Diğer Temel Tanımlar
-
-* **Aktivasyonlar:**
-    * [Aktivasyon Fonksiyonları: Lineer, Sigmoid, Tanh, ReLU](#aktivasyon-fonksiyonları-lineer-sigmoid-tanh-relu)
-    * [ReLU ve Seyrek Aktivite](#relu-ve-seyrek-aktivite)
-    * [Softmax Aktivasyonu ve Özellikleri](#softmax-aktivasyonu-ve-özellikleri)
-* **Diğer Katmanlar:**
-    * [CNN: Stride ve Padding](#cnn-stride-ve-padding)
-    * [CNN: Normalizasyon Katmanları (Batch Norm)](#cnn-normalizasyon-katmanları)
-    * [CNN: Flatten ve Dropout](#cnn-flatten-ve-dropout)
-* **Eğitim Süreci:**
-    * [Train/Validation/Test: Neden ve Nasıl?](#trainvalidationtest-neden-ve-nasıl)
-    * [Kayıp Fonksiyonları (MSE, Cross Entropy)](#kayıp-fonksiyonları-ve-toplam-kayıp)
-    * [Eğitim Süreci ve Optimizasyon (Epoch, Batch, Optimizer)](#eğitim-süreci-ve-optimizasyon)
-* **Diğer Mimari Kavramlar:**
-    * [Derin Ağlarda Gradyan Sorunları (Vanishing/Exploding)](#derin-ağlarda-gradyan-sorunları)
-    * [ResNet: Residual Bağlantılar](#resnet-residual-bağlantılar)
-    * [Transfer Öğrenme: Genel Bakış](#transfer-öğrenme-genel-bakış)
 
 <a id="giris-yz-ml-dl"></a>
 
@@ -2249,6 +2294,1342 @@ Görseller:
 ### Notlar
 
 - Girdi şekli `[B,1,28,28]`; padding sayesinde bazı katmanlarda genişlik/yükseklik korunur. Çıkış katmanı logits döndürür; kayıp `CrossEntropyLoss`.
+
+<a id="autoencoders"></a>
+
+## Otomatik Kodlayıcılar (Autoencoders)
+
+### Özet
+
+- Otomatik Kodlayıcı (Autoencoder, AE), verinin sıkıştırılmış bir temsilini öğrenmek için kullanılan denetimsiz bir yapay sinir ağıdır.
+- Temel amaç, girdi $X$'i yeniden oluşturacak bir çıktı $X'$ üretmektir: $X \approx X'$.
+- “Darboğaz (bottleneck)” katmanı, modeli girdiyi ezberlemek yerine en önemli özellikleri sıkışık bir temsilde tutmaya zorlar.
+
+Görseller:
+
+![Otomatik Kodlayıcı (Genel)](Images/105.jpg)
+
+<a id="ae-architecture"></a>
+
+### Mimari: Encoder – Bottleneck – Decoder
+
+1) **Kodlayıcı (Encoder)**: $z = e(x)$
+  - Girdiyi alır ve daha düşük boyutlu gizli uzaya (latent space) sıkıştırır.
+2) **Darboğaz (Bottleneck)**: $z$
+  - Öğrenilen sıkıştırılmış temsildir; boyut indirgeme burada gerçekleşir.
+3) **Kod Çözücü (Decoder)**: $x' = d(z)$
+  - Sıkıştırılmış temsilden girdiyi yeniden yapılandırmaya çalışır.
+
+Hedef: **Girdi Katmanı ≈ Çıktı Katmanı**  \($X \approx X'$\)
+
+### Notlar
+
+- Darboğaz boyutu, girdiden daha küçük seçilir (örn. 1024 → 64). Bu kısıt, ağın “kopyala‑yapıştır” ezberine kaçmasını engelleyip temsil öğrenmeye zorlar.
+- AE, verideki gürültüyü atıp ana kalıpları (features) latent uzaya sığdırmayı öğrenebilir.
+
+<a id="ae-loss"></a>
+
+### Kayıp: Reconstruction Error
+
+- AE eğitimi, $X$ ile $X'$ arasındaki farkı en aza indirmeye dayanır. Bu fark **yeniden yapılandırma hatası**dır (reconstruction error).
+- Veri tipine göre tipik kayıplar:
+  - Reel değerli veriler (örn. piksel yoğunlukları): **MSE**
+  - İkili (binary) veriler (örn. siyah/beyaz pikseller): **Binary Cross‑Entropy (BCE)**
+
+Görseller:
+
+![Reconstruction Error ve Kayıp](Images/105.jpg)
+
+### Kodlayıcı’nın Gücü: Özellik Çıkarımı
+
+- Pratikte hedef yalnızca $X'$ üretmek değildir; asıl değerli parça eğitim sonunda elde edilen **Encoder**’dır.
+- Eğitim bittikten sonra **Decoder atılabilir**; Encoder, yüksek boyutlu girdiyi (örn. 784 piksel MNIST) düşük boyutlu ve anlamlı bir vektöre (örn. 32‑boyut) dönüştüren bir **feature extractor** olur.
+- Bu latent vektörler; SVM, RandomForest, basit MLP gibi denetimli modeller için ham piksellere göre daha iyi bir girdi temsili sağlayabilir.
+
+<a id="ae-uses"></a>
+
+### Kullanım Alanları
+
+1) **Boyut azaltma ve görselleştirme** (2D/3D latent uzaya indirip görselleştirme)
+2) **Özellik çıkarımı / ön‑eğitim** (denetimli modele daha iyi temsil sağlama)
+3) **Anomali tespiti** (normal veride düşük, anormal veride yüksek reconstruction error)
+4) **Görüntü iyileştirme / gürültü giderme** (Denoising AE)
+5) **Üretken modeller** (VAE ile yeni örnek üretimi)
+
+<a id="denoising-ae"></a>
+
+### Gürültü Azaltan AE (Denoising Autoencoder)
+
+Adımlar (özet):
+
+1) Temiz görüntüyü alın: $x$.
+2) Rastgele gürültü ekleyin: $x_{noisy}$.
+3) Modele $x_{noisy}$ verin.
+4) Decoder’dan temiz $x$’i yeniden yapılandırmasını isteyin.
+
+Kayıp fikri:
+
+$$L = L\big(x,\; d(e(x_{noisy}))\big)$$
+
+Sonuç: Model, gürültüyü “filtrelemeyi” öğrenir.
+
+Görseller:
+
+![Denoising Autoencoder](Images/106.png)
+
+<a id="vae"></a>
+
+### Değişimsel Otomatik Kodlayıcı (VAE)
+
+VAE, AE’ye benzer ancak **yeni veri üretebilen (generative)** olasılıksal bir mimaridir.
+
+- Standart AE (deterministik): $z = e(x)$ (latent uzayda tek bir noktaya haritalar). Latent uzay “boşluklu” olabilir.
+- VAE (stokastik): Encoder tek nokta yerine bir **dağılım** öğrenir ve iki vektör üretir:
+  - Ortalama: $\mu$
+  - Log‑varyans: $\log(\sigma^2)$
+
+**Reparameterization trick** ile örnekleme:
+
+$$z = \mu + \sigma \odot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)$$
+
+Bu, rastgeleliği modele katarken gradyanların akmasına izin verir.
+
+VAE kaybı (iki parça):
+
+1) **Reconstruction loss**: $L_{rec}(x, x')$ (MSE veya BCE)
+2) **KL divergence**: $D_{KL}\big(q(z\mid x)\;\|\;\mathcal{N}(0, I)\big)$
+
+KL terimi, latent uzayı düzenleyerek sürekli ve pürüzsüz hale getirir; böylece latent uzaydan rastgele $z$ seçip decoder’a vererek **yeni örnekler** üretebilirsiniz.
+
+Görseller:
+
+![VAE Şeması](Images/107.png)
+
+<a id="conv-ae"></a>
+
+### Evrişimli Otomatik Kodlayıcılar (Convolutional Autoencoders)
+
+Neden?
+
+- Görüntüyü düz vektöre çevirip (örn. 784) lineer katmanlara vermek, **piksel komşuluklarını** ve yerel desenleri kaybettirir.
+- Parametre sayısı hızla büyür.
+
+Çözüm: CNN tabanlı AE
+
+- Encoder: Uzaysal boyutu küçültürken kanal sayısını artırır (özellik çıkarımı).
+- Decoder: Özellik haritasını büyütüp görüntüyü geri oluşturur.
+
+Encoder (downsampling) yöntemleri:
+
+- **Pooling** (örn. 2×2 MaxPool): 32×32 → 16×16
+- **Strided convolution** (stride=2): Modern mimarilerde pooling yerine sık kullanılır.
+
+Takas (trade‑off): Uzaysal boyut azalırken (H,W ↓), kanal sayısı artar (C ↑).
+
+Görseller:
+
+![Uzaysal Boyut vs Derinlik](Images/108.jpg)
+
+Decoder (upsampling) yöntemleri:
+
+1) **Interpolasyon + Conv** (Upsample + Conv)
+  - Basit; bazen bulanık sonuçlar verebilir.
+  - Bilinear interpolation: en yakın 2 komşudan ağırlıklı hesap.
+  - Bicubic interpolation: en yakın 3 komşudan hesap.
+2) **Transposed Convolution** (learnable upsampling)
+  - “Deconvolution / Upconvolution / Fractionally‑strided conv” gibi isimlerle de anılır.
+  - Özellikle segmentation/decoder mimarilerinde yaygındır.
+
+Görseller:
+
+![Decoder Upsampling Mekanizmaları](Images/108.jpg)
+![Bilinear Interpolation](Images/109.jpg)
+![Bicubic Interpolation](Images/110.jpg)
+![Transposed Conv (stride=1, padding=1)](Images/111.jpg)
+![Transposed Conv (stride=1, padding=1) örnek](Images/112.jpg)
+![Transposed Conv (stride=2, padding=1)](Images/113.jpg)
+![Transposed Conv (stride=2, padding=1) örnek](Images/114.jpg)
+![Transposed Conv 3×3, stride=2](Images/115.jpg)
+![Transposed Conv 3×3, stride=2 örnek](Images/116.jpg)
+![Transposed Conv çakışma toplama](Images/117.jpg)
+![Transposed Conv kırpma örneği](Images/118.jpg)
+![Transposed Conv: 1D example](Images/119.jpg)
+![Transposed Conv isimlendirme](Images/120.jpg)
+
+### Hızlı Sorular
+
+1) AE’de “target” neden girdinin kendisidir?
+2) Darboğaz boyutunu çok büyük seçerseniz ne olur?
+3) BCE hangi tür yeniden yapılandırma görevlerinde MSE’ye göre daha uygundur?
+4) VAE’de KL divergence latent uzay üzerinde neyi “düzenler”?
+5) Transposed convolution ile upsampling yaparken “checkerboard artifacts” neden oluşabilir? (ipucu: stride ve kernel uyumu)
+
+<a id="gan"></a>
+
+## Üretken Çekişmeli Ağlar (Generative Adversarial Networks, GAN)
+
+### Özet
+
+- Autoencoder’lar çoğunlukla **girdiyi yeniden yapılandırmaya** odaklanırken (olanı taklit), GAN’lar **yeni örnekler üretmeye** odaklanır (yeni bir şey yaratma).
+- GAN, iki ağın rekabetiyle öğrenir:
+  - **Generator (G)**: sahte örnek üretir.
+  - **Discriminator (D)**: örneğin gerçek mi sahte mi olduğunu ayırt eder.
+
+Görseller:
+
+![GAN Genel Şema](Images/121.jpg)
+
+<a id="disc-vs-gen"></a>
+
+### Ayırt Edici vs Üretken Modeller
+
+- **Ayırt edici (discriminative) modeller**: $P(y\mid x)$ öğrenir. Amaç: sınıf sınırı çizmek.
+  - Örnek: “Bu resim kedi mi köpek mi?”
+- **Üretken (generative) modeller**: $P(x)$ veya $P(x\mid y)$ öğrenir. Amaç: veri dağılımından yeni örnek üretmek.
+  - Örnek: “Hiç var olmayan yeni bir kedi resmi üret.”
+
+<a id="gan-arch"></a>
+
+### Mimari: Generator ve Discriminator
+
+Kalpazan–Dedektif benzetmesi:
+
+- **Generator (Kalpazan)**: rastgele gürültü vektörü $z$ alır ve sahte örnek üretir: $x_{fake} = G(z)$.
+- **Discriminator (Dedektif)**: bir örnek alır (gerçek veya sahte) ve “gerçek olma olasılığı” üretir: $D(x) \in (0,1)$.
+
+Pratik akış:
+
+1) Gürültü (latent) vektörü: $z$ (örn. 100 boyutlu Gaussian noise)
+2) Generator: $G(z) \rightarrow x_{fake}$ (görüntü üretiminde sıklıkla upsampling / transposed convolution blokları)
+3) Gerçek veri: $x_{real}$ (eğitim setinden)
+4) Discriminator: $D(x) \rightarrow$ olasılık (1: gerçek, 0: sahte)
+
+Görseller:
+
+![GAN Mimari 1](Images/121.jpg)
+![GAN Mimari 2](Images/122.jpg)
+
+<a id="gan-objective"></a>
+
+### Amaç Fonksiyonu (Minimax)
+
+GAN eğitimi, iki oyunculu bir **sıfır toplamlı oyun** gibi düşünülebilir:
+
+$$\min_G\;\max_D\;V(D,G)=\mathbb{E}_{x\sim p_{data}}[\log D(x)] + \mathbb{E}_{z\sim p(z)}[\log(1 - D(G(z)))]$$
+
+Sezgi:
+
+- **D**, gerçek örneklerde $D(x)$'i 1’e; sahte örneklerde $D(G(z))$'yi 0’a yaklaştırmaya çalışır.
+- **G**, ürettiği örneklerin $D$ tarafından “gerçek” sanılmasını ister.
+
+Not:
+
+- Uygulamada generator için sık kullanılan alternatif hedef: $\max_G\;\mathbb{E}_{z}[\log D(G(z))]$ (daha güçlü gradyan verebilir).
+
+Görseller:
+
+![GAN Amaç Fonksiyonu](Images/123.jpg)
+
+<a id="gan-training"></a>
+
+### Eğitim Adımları
+
+Adım 1 — **Discriminator’ı eğit** (Generator sabit):
+
+- Gerçek resimler göster → hedef: 1
+- Sahte resimler göster → hedef: 0
+- Loss hesapla ve **yalnızca D ağırlıklarını** güncelle
+
+Adım 2 — **Generator’ı eğit** (Discriminator sabit):
+
+- Sahte resimler üret
+- Bu resimleri D’ye ver
+- Loss hesapla ve **yalnızca G ağırlıklarını** güncelle
+
+<a id="gan-challenges"></a>
+
+### GAN Eğitmek Neden Zor?
+
+1) **Mod çökmesi (mode collapse)**: Generator çeşitliliği kaybedip sürekli benzer örnekler üretir.
+2) **Yakınsamama (non‑convergence)**: Parametreler dengeye oturmak yerine salınım yapabilir.
+3) **Dengeli eğitim ihtiyacı**: Discriminator çok güçlenirse generator gradyanı zayıflayıp öğrenemez.
+
+<a id="gan-families"></a>
+
+### Örnek GAN Aileleri
+
+- GAN literatüründe (özellikle görüntü üretiminde) farklı mimari/öğrenme iyileştirmeleri olan birçok türev vardır.
+
+Görseller:
+
+![GAN Aileleri / Zaman Çizelgesi](Images/124.jpg)
+![GAN Örnek Sonuçlar](Images/125.jpg)
+
+Kaynaklar:
+
+- https://arxiv.org/pdf/1708.05509.pdf
+- https://github.com/simoninithomas/CatDCGAN
+- https://github.com/JadeBlue96/DCGAN-Dog-Generator
+
+Görseller:
+
+![DCGAN Örnek 1](Images/126.jpg)
+![DCGAN Örnek 2](Images/127.jpg)
+
+<a id="pix2pix"></a>
+
+### Pix2Pix (cGAN)
+
+Pix2Pix, **Görüntüden Görüntüye Çeviri (Image‑to‑Image Translation)** problemleri için tasarlanmış bir **Şartlı GAN (cGAN)** yaklaşımıdır.
+
+- Amaç: Giriş görüntüsünün içeriğini koruyup, hedef stile dönüştürmek.
+  - Örn: eskiz → renkli çanta, uydu → harita, gündüz → gece.
+- **Eşleşmiş (paired) veri** ister: (giriş, hedef) çiftleri birebir eşleşmiş olmalıdır.
+- Generator tarafında sık kullanılan fikir: **U‑Net + skip connection** (detay kaybını azaltır).
+- Discriminator tarafında sık kullanılan fikir: **PatchGAN**
+  - Tek bir gerçek/sahte skoru yerine, görüntüyü yamalara bölüp her yama için karar vererek yüksek frekans detaylarını (doku/keskinlik) korumaya yardım eder.
+
+Görseller:
+
+![Pix2Pix](Images/128.jpg)
+
+Kaynaklar:
+
+- https://arxiv.org/pdf/1611.07004v1.pdf
+- https://github.com/phillipi/pix2pix
+
+<a id="cyclegan"></a>
+
+### CycleGAN
+
+CycleGAN, Pix2Pix’in aksine **eşleşmiş veri (paired data) olmadan** görüntüden görüntüye çeviri yapmayı hedefler.
+
+- Eğitim setinde birebir eşleşen (aynı sahnenin gündüz/gece gibi) çiftlere ihtiyaç yoktur.
+- İki yönlü dönüşüm öğrenir:
+  - $G: A \rightarrow B$
+  - $F: B \rightarrow A$
+- Temel fikir: **Döngüsel tutarlılık (cycle consistency)**
+  - $A\rightarrow B\rightarrow A$ sonrası tekrar orijinale yakın olmalıdır.
+
+Cycle consistency kaybı fikri (L1 örneği):
+
+$$L_{cyc}=\mathbb{E}_{x\sim A}[\|F(G(x)) - x\|_1] + \mathbb{E}_{y\sim B}[\|G(F(y)) - y\|_1]$$
+
+Sistemde genelde **2 Generator** ve **2 Discriminator** bulunur (A kümesini ve B kümesini ayrı denetleyen).
+
+Görseller:
+
+![CycleGAN](Images/129.jpg)
+
+Kaynaklar:
+
+- https://arxiv.org/pdf/1703.10593.pdf
+- https://junyanz.github.io/CycleGAN/
+
+<a id="gan-apps"></a>
+
+### Uygulama Örnekleri
+
+Görseller:
+
+![Pix2Pix/CycleGAN Uygulama 1](Images/130.jpg)
+![Pix2Pix/CycleGAN Uygulama 2](Images/131.jpg)
+![Pix2Pix/CycleGAN Uygulama 3](Images/132.jpg)
+![Pix2Pix/CycleGAN Uygulama 4](Images/133.jpg)
+![Pix2Pix/CycleGAN Uygulama 5](Images/134.jpg)
+![Yağmur Temizleme](Images/135.jpg)
+![Fotoğraflardan Emoji](Images/136.jpg)
+
+Bağlantılar:
+
+- https://affinelayer.com/pixsrv/
+- https://arxiv.org/pdf/1701.05957.pdf
+- https://arxiv.org/pdf/1611.02200.pdf
+
+### Hızlı Sorular
+
+1) GAN’de generator ve discriminator hangi amaçlarla “çekişir”?
+2) Mode collapse nedir ve neden problem yaratır?
+3) Discriminator çok güçlenirse generator’ın öğrenmesi neden zorlaşır?
+4) Pix2Pix neden paired data ister?
+5) Cycle consistency fikri CycleGAN’de hangi sorunu çözer?
+
+<a id="object-detection"></a>
+
+## Nesne Tespiti (Object Detection)
+
+Görseller:
+
+![Derin Öğrenme Görevleri](Images/137.jpg)
+
+<a id="od-problem"></a>
+
+### Problem Tanımı: Ne + Nerede
+
+- Giriş: Tek bir RGB görüntüsü.
+- Çıktı: Görüntüdeki nesneler kümesi.
+- Her nesne için iki tip bilgi tahmin edilir:
+  1) **Ne?** Kategori etiketi (önceden tanımlı sınıflar)
+  2) **Nerede?** Sınırlayıcı kutu (bounding box): $(x, y, w, h)$
+
+Zorluklar:
+
+- **Değişken sayıda çıktı**: Her görüntüde farklı sayıda nesne olabilir.
+- **Çoklu çıktı türü**: Sınıflandırma + konum regresyonu birlikte gerekir.
+- **Çözünürlük**: Sınıflandırma çoğu zaman 224×224; tespit için genelde daha yüksek çözünürlük (örn. 800×600) gerekir.
+
+Görseller:
+
+![Nesne Tespiti](Images/138.jpg)
+![Nesne Tespitinin Zorlukları](Images/139.jpg)
+![Tespit Örneği](Images/140.jpg)
+![Çoklu Nesne Çıkışı](Images/141.jpg)
+![4 sayı örneği](Images/142.jpg)
+![Çok fazla sayı…](Images/143.jpg)
+
+<a id="od-sliding-window"></a>
+
+### Kayan Pencere (Sliding Window)
+
+Fikir:
+
+- Görüntünün birçok farklı bölgesine bir CNN uygulayıp her bölgeyi “nesne / arka plan” olarak sınıflandırmak.
+
+Sorun:
+
+- Olası kutu sayısı çok hızlı büyür.
+
+Bir $H\times W$ görüntüde, $h\times w$ boyutlu tek bir pencere için olası konum sayısı:
+
+$$N = (W - w + 1)(H - h + 1)$$
+
+Farklı boyutlarda çok sayıda pencere düşünülünce kombinasyon patlar (örn. 800×600 için on milyonlar mertebesi).
+
+Görseller:
+
+![Sliding Window 1](Images/144.jpg)
+![Sliding Window 2](Images/145.jpg)
+![Sliding Window 3](Images/146.jpg)
+![Sliding Window 4](Images/147.jpg)
+![Kutu Sayısı Soru](Images/148.jpg)
+![Kutu Sayısı Patlaması](Images/149.jpg)
+
+<a id="od-region-proposals"></a>
+
+### Bölge Önerileri (Region Proposals)
+
+Amaç:
+
+- Tüm olası kutuları denemek yerine, “muhtemelen nesneleri kapsayan” **küçük bir kutu adayları** seti üretmek.
+
+Notlar:
+
+- Genelde sezgisel yöntemlere dayanır.
+- Örn. **Selective Search** ~2000 bölge önerisi üretebilir (CPU’da saniyeler içinde).
+
+Görseller:
+
+![Region Proposals](Images/150.jpg)
+![Selective Search](Images/151.jpg)
+
+<a id="od-rcnn-family"></a>
+
+### R-CNN Ailesi: R-CNN → Fast → Faster
+
+**R-CNN (Region‑Based CNN)**
+
+- (1) Region proposal ile ~2000 bölge çıkar.
+- (2) Her bölgeyi 224×224’e getir.
+- (3) Her bölgeyi CNN’den **ayrı ayrı** geçir.
+- (4) Sınıf skorları + bbox dönüşümü tahmin et.
+- (5) Skorlara göre en iyi kutuları seç, ground‑truth ile karşılaştır.
+
+Ana problem: Çok yavaş (görüntü başına binlerce forward pass).
+
+Görseller:
+
+![R-CNN](Images/152.jpg)
+![R-CNN Pipeline](Images/153.jpg)
+![R-CNN Detay](Images/154.jpg)
+![R-CNN Çok Yavaş](Images/175.jpg)
+
+**Fast R-CNN**
+
+- CNN özellik çıkarımı (backbone) görüntü için **bir kez** yapılır.
+- Region’lar, özellik haritası üzerinden seçilir (ROI temelli).
+- Böylece tekrar eden hesap yükü ciddi azalır.
+
+Görseller:
+
+![Fast R-CNN](Images/177.jpg)
+![Fast R-CNN Şema](Images/178.jpg)
+![Fast R-CNN Detay 1](Images/179.jpg)
+![Fast R-CNN Detay 2](Images/180.jpg)
+![Fast R-CNN Detay 3](Images/181.jpg)
+![Fast R-CNN Detay 4](Images/182.jpg)
+![Fast R-CNN Detay 5](Images/183.jpg)
+![Fast R-CNN Not](Images/184.jpg)
+![Fast R-CNN Backbone](Images/185.jpg)
+![Backbone: ResNet](Images/186.jpg)
+![Fast vs Slow](Images/187.jpg)
+![Fast vs Slow 2](Images/188.jpg)
+
+**Faster R-CNN**
+
+- Region proposal adımını da öğrenilebilir hale getirir: **Region Proposal Network (RPN)**.
+- Özellik haritasının her konumunda **anchor box**(lar) üzerinden:
+  - “Nesne var mı?” (classification)
+  - “Kutuyu nasıl düzeltmeliyim?” (bbox regression)
+
+Görseller:
+
+![Faster R-CNN](Images/189.jpg)
+![Faster R-CNN Şema](Images/190.jpg)
+![Anchor Boxes](Images/191.jpg)
+![Anchor Objectness](Images/192.jpg)
+![BBox Regression 1](Images/193.jpg)
+![BBox Regression 2](Images/194.jpg)
+![K Anchor](Images/195.jpg)
+![Learnable Region Proposals](Images/196.jpg)
+![Loss Bileşimi](Images/197.jpg)
+![Faster R-CNN Özet](Images/198.jpg)
+![Faster R-CNN Detay](Images/199.jpg)
+
+<a id="od-iou"></a>
+
+### Kutuları Karşılaştırma: IoU
+
+**Intersection over Union (IoU)** (Jaccard similarity/index):
+
+$$\mathrm{IoU}(A,B)=\frac{|A\cap B|}{|A\cup B|}$$
+
+Yorum:
+
+- IoU > 0.5: iyi
+- IoU > 0.7: oldukça iyi
+- IoU > 0.9: neredeyse mükemmel
+
+Görseller:
+
+![IoU 1](Images/155.jpg)
+![IoU 2](Images/156.jpg)
+![IoU 3](Images/157.jpg)
+![IoU 4](Images/158.jpg)
+![IoU 5](Images/159.jpg)
+![IoU 6](Images/160.jpg)
+
+<a id="od-nms"></a>
+
+### Örtüşen Kutular: NMS (Non‑Maximum Suppression)
+
+Sorun:
+
+- Dedektörler aynı nesne için birçok **örtüşen** kutu üretebilir.
+
+Çözüm: **NMS** (özet algoritma)
+
+1) En yüksek skorlu kutuyu seç.
+2) IoU’su eşikten büyük olan diğer kutuları ele (örn. 0.7).
+3) Kutu kalırsa 1’e dön.
+
+Görseller:
+
+![Overlapping Boxes](Images/161.jpg)
+![NMS 1](Images/162.jpg)
+![NMS 2](Images/163.jpg)
+![NMS 3](Images/164.jpg)
+
+<a id="od-map"></a>
+
+### Başarı Ölçümü: mAP (COCO)
+
+- Nesne tespitinde yaygın metrik: **mAP (mean Average Precision)**.
+- Genel fikir:
+  1) Test görüntülerinde dedektörü çalıştır (NMS sonrası kutular).
+  2) Her sınıf için tahminleri skora göre sırala.
+  3) IoU eşiğine göre TP/FP kararlarıyla **Precision–Recall** eğrisi çıkar.
+  4) Eğri altı alan: **AP**.
+  5) Sınıflar üzerinde ortalama: **mAP**.
+
+COCO mAP notu:
+
+- Tek bir IoU eşiği yerine, IoU = 0.50, 0.55, …, 0.95 eşiklerinde hesaplanan AP’lerin ortalaması kullanılır.
+
+Görseller:
+
+![mAP 1](Images/165.jpg)
+![mAP 2](Images/166.jpg)
+![mAP 3](Images/167.jpg)
+![mAP 4](Images/168.jpg)
+![mAP 5](Images/169.jpg)
+![mAP 6](Images/170.jpg)
+![mAP 7](Images/171.jpg)
+![mAP 8](Images/173.jpg)
+![COCO mAP Eşikler](Images/174.jpg)
+
+<a id="od-single-stage"></a>
+
+### Tek Aşamalı Dedektörler ve YOLO
+
+İki yaklaşım:
+
+- **İki aşamalı (two‑stage)**: Önce region proposal (RPN vb.), sonra sınıflandırma/regresyon (R‑CNN ailesi).
+- **Tek aşamalı (single‑stage)**: Doğrudan yoğun tahmin (dense prediction) ile kutu + sınıf üretir (daha hızlı).
+
+Görseller:
+
+![Single-Stage Object Detection 1](Images/200.jpg)
+![Single-Stage Object Detection 2](Images/201.jpg)
+
+YOLO (You Only Look Once):
+
+- Tek aşamalı, gerçek zamanlıya yakın çalışan popüler bir dedektör ailesidir.
+
+Görseller:
+
+![YOLO 1](Images/202.jpg)
+![YOLO 2](Images/203.jpg)
+![YOLO 3](Images/204.jpg)
+![YOLO 4](Images/205.jpg)
+![YOLO 5](Images/206.jpg)
+![YOLO 6](Images/207.jpg)
+![YOLO 7](Images/208.jpg)
+![YOLO 8](Images/209.jpg)
+![YOLO 9](Images/210.jpg)
+![YOLO 10](Images/211.jpg)
+![YOLO 11](Images/212.jpg)
+![YOLO 12](Images/213.jpg)
+
+### Hızlı Sorular
+
+1) Nesne tespitinde neden “değişken sayıda çıktı” problemi vardır?
+2) Sliding window yaklaşımı neden pratikte pahalıdır?
+3) IoU neyi ölçer ve neden kullanılır?
+4) NMS neden gereklidir?
+5) COCO mAP neden birden fazla IoU eşiği üzerinden ortalama alır?
+
+<a id="semantic-segmentation"></a>
+
+## Semantic Segmentation
+
+<a id="seg-definition"></a>
+
+### Tanım ve Sezgi
+
+- Semantic segmentation, görüntüdeki **her piksele** bir sınıf etiketi atar.
+- Amaç “pikseller hangi sınıfa ait?” sorusudur; **farklı nesne örneklerini ayırmak** (hangi piksel hangi ineğe ait?) hedef değildir.
+
+Görseller:
+
+![Semantic Segmentation 1](Images/214.jpg)
+![Semantic Segmentation 2](Images/215.jpg)
+![Semantic Segmentation 3](Images/216.jpg)
+
+Naif yaklaşım (pratik değil):
+
+- Her piksel için çevresinden bir yama (patch) alıp ayrı ayrı sınıflandırmak.
+- Prensipte mümkün; ancak gerçek hayatta çok maliyetli olduğu için tercih edilmez.
+
+Görseller:
+
+![Patch-based fikir](Images/217.jpg)
+
+<a id="seg-fcn"></a>
+
+### Fully Convolutional Network (FCN)
+
+- FCN, tam bağlı (FC) katmanlar yerine ağırlıkla **evrişimli katmanlardan** oluşarak tüm pikseller için aynı anda tahmin üretmeyi hedefler.
+- Kayıp: **piksel başına cross-entropy** (çok sınıflı ise `CrossEntropy`, ikili ise `BCEWithLogitsLoss` gibi).
+
+Sorunlar:
+
+- Derinleştikçe receptive field artışı için tasarım zorlaşır.
+- Büyük çözünürlükte doğrudan konvolüsyon maliyetlidir.
+
+Bu yüzden pratikte daha yaygın tasarım: **Downsampling → Upsampling** (encoder–decoder) yapılarıdır.
+
+Görseller:
+
+![FCN](Images/218.jpg)
+![FCN Problemler](Images/219.jpg)
+![Downsampling/ Upsampling fikri](Images/220.jpg)
+
+<a id="seg-down-up"></a>
+
+### Downsampling → Upsampling Tasarımları
+
+- Downsampling (pooling / strided conv) ile uzaysal boyutu azaltıp hesaplamadan kazanırız.
+- Upsampling ile tekrar orijinal çözünürlüğe yaklaşır ve piksel çıktısı üretiriz.
+
+Görseller:
+
+![Downsampling için yöntemler](Images/221.jpg)
+![Upsampling sorusu](Images/222.jpg)
+
+<a id="seg-upsampling"></a>
+
+### Upsampling Yöntemleri
+
+1) **Unpooling** (özellikle max-unpooling)
+2) **Interpolasyon** (bilinear / bicubic)
+3) **Learnable upsampling: Transposed Convolution**
+
+**Max unpooling sezgisi**:
+
+- Max pooling sırasında “en büyük değerin konumu” tutulur.
+- Unpooling sırasında değerler o konumlara geri yerleştirilir.
+
+Görseller:
+
+![Unpooling](Images/223.jpg)
+![Unpooling 2](Images/224.jpg)
+![Bilinear](Images/225.jpg)
+![Bicubic](Images/226.jpg)
+![Max Unpooling](Images/227.jpg)
+![Max Unpooling 2](Images/228.jpg)
+
+**Transposed convolution** (öğrenilebilir büyütme):
+
+- Stride/padding değerleriyle çıktı boyutu büyütülür; çakışan yerlerde toplama olur.
+- “Deconvolution / Upconvolution / Fractionally-strided convolution” gibi isimlerle de geçer.
+
+Görseller:
+
+![Transposed Conv 1](Images/229.jpg)
+![Transposed Conv 2](Images/230.jpg)
+![Transposed Conv 3](Images/231.jpg)
+![Transposed Conv 4](Images/232.jpg)
+![Transposed Conv 5](Images/233.jpg)
+![Transposed Conv 6](Images/234.jpg)
+![Transposed Conv çakışma](Images/235.jpg)
+![Transposed Conv kırpma](Images/236.jpg)
+
+<a id="unet"></a>
+
+### U-Net
+
+U‑Net (2015, Ronneberger ve arkadaşları), özellikle tıbbi görüntülerde **az etiketli veriyle** yüksek hassasiyetli segmentasyon ihtiyacından doğan encoder–decoder mimarisidir.
+
+Temel fikir:
+
+- **Encoder (contracting path)**: “ne var?” bağlamsal bilgiyi çıkarır (downsampling ile H,W azalır; kanal sayısı artar).
+- **Decoder (expansive path)**: “nerede?” bilgisini piksel düzeyinde geri kurar (upsampling ile H,W artar; kanal sayısı azalır).
+- **Skip connections**: encoder’ın erken katmanlarındaki yüksek çözünürlüklü detayları decoder’a taşıyarak sınırları keskinleştirir.
+
+Görseller:
+
+![U-Net ihtiyaç ve motivasyon](Images/237.jpg)
+![U-Net mimarisi](Images/238.jpg)
+![Encoder yolu](Images/239.jpg)
+![Decoder yolu](Images/240.jpg)
+![Skip Connections](Images/241.jpg)
+![Tıbbi uygulamalar](Images/242.jpg)
+![U-Net Ailesi](Images/243.jpg)
+
+<a id="seg-losses"></a>
+
+### Kayıp Fonksiyonları
+
+- **Binary Cross-Entropy (BCE)**: ikili segmentasyon için standart başlangıç.
+- **Dice loss / IoU loss**: Örtüşmeyi doğrudan optimize eder; sınıf dengesizliğine (küçük tümör vs büyük arka plan) daha dayanıklıdır.
+- **Focal loss**: Zor örneklere (yanlış sınıflanan piksellere) daha fazla ağırlık vererek dengesizlikte yardımcı olabilir.
+
+Görseller:
+
+![Loss Functions](Images/244.jpg)
+
+<a id="seg-metrics"></a>
+
+### Değerlendirme Metrikleri
+
+- **IoU / Jaccard**: $\frac{|A\cap B|}{|A\cup B|}$ (1’e yakın daha iyi)
+- **Dice**: $\frac{2|A\cap B|}{|A|+|B|}$ (IoU ile yakından ilişkilidir)
+
+Görseller:
+
+![Evaluation Metrics](Images/245.jpg)
+
+<a id="seg-taxonomy"></a>
+
+### Semantic vs Instance vs Panoptic
+
+- **Nesne tespiti**: kutu verir (çoğunlukla “things”).
+- **Semantic segmentation**: piksel başına etiket verir, örnekleri ayırmaz (“things” + “stuff”).
+
+Things vs Stuff:
+
+- **Things**: örneklere ayrılabilir nesneler (insan, araba, kedi)
+- **Stuff**: örneklere ayrılması anlamsız sınıflar (gökyüzü, çimen, su)
+
+Görseller:
+
+![Detection vs Semantic](Images/246.jpg)
+![Things vs Stuff](Images/247.jpg)
+![Things/Stuff vurgusu](Images/248.jpg)
+
+<a id="instance-seg"></a>
+
+### Instance Segmentation ve Mask R-CNN
+
+- **Instance segmentation**: görüntüdeki her nesneyi bulur ve her nesne için **piksel maskesi** üretir (yalnızca “things”).
+- Yaygın yaklaşım: önce nesne algılama, sonra her ROI için maske tahmini.
+- R‑CNN ailesine instance segmentation için ek bir “mask head” eklenebilir → **Mask R‑CNN** fikri.
+
+Görseller:
+
+![Instance Segmentation tanım](Images/249.jpg)
+![Instance Segmentation yaklaşım](Images/250.jpg)
+![R-CNN + mask head](Images/251.jpg)
+![Instance Segmentation](Images/252.jpg)
+![Eğitim çıktıları 1](Images/253.jpg)
+![Eğitim çıktıları 2](Images/254.jpg)
+![Eğitim çıktıları 3](Images/255.jpg)
+![Eğitim çıktıları 4](Images/256.jpg)
+![Mask R-CNN çıktıları](Images/257.jpg)
+
+<a id="panoptic"></a>
+
+### Panoptic Segmentation
+
+- **Panoptic segmentation**: tüm pikseller etiketlenir (things + stuff) ve ayrıca thing sınıfları **örneklere ayrılır**.
+
+Görseller:
+
+![Panoptic Segmentation](Images/258.jpg)
+
+<a id="keypoint"></a>
+
+### Keypoint / Pose Estimation
+
+- Keypoint / pose estimation, nesne üzerinde ana noktaları (örn. insan eklemleri) tahmin eder.
+- Uygulamada instance segmentation ile birlikte veya ayrı bir “pose head” ile ele alınabilir.
+
+Görseller:
+
+![Keypoint 1](Images/259.jpg)
+![Keypoint 2](Images/260.jpg)
+![Keypoint 3](Images/261.jpg)
+![Instance Segmentation and Pose](Images/262.jpg)
+![Pose Estimation](Images/263.jpg)
+![Pose Estimation 2](Images/264.jpg)
+
+### Hızlı Sorular
+
+1) Semantic segmentation ile instance segmentation arasındaki temel fark nedir?
+2) Downsampling neden tercih edilir, neyi “kaybettirir”?
+3) Skip connections U‑Net’te hangi problemi çözer?
+4) Dice/IoU türü kayıplar sınıf dengesizliğinde neden faydalı olabilir?
+5) Panoptic segmentation semantic + instance’dan hangi ek bilgiyi ister?
+
+<a id="rnn"></a>
+
+## Tekrarlayan Sinir Ağları (RNN)
+
+<a id="rnn-why"></a>
+
+### Neden RNN? Sıralı Veriler
+
+- Tüm problemler sabit uzunlukta giriş/çıkışlarla iyi ifade edilemez.
+- Konuşma tanıma, zaman serileri, metin gibi görevlerde **geçmiş bilgi** önemlidir.
+- Standart ANN/CNN, girdilerin bağımsız olduğunu varsayma eğilimindedir; sıralı veride bu varsayım kırılır.
+
+Örnekler:
+
+- Cümle: “Bugün hava çok …” (sonraki kelime önceklere bağlı)
+- Borsa: dünkü fiyat bugünü etkiler
+- Video: sonraki kare önceki karelerin devamıdır
+
+İhtiyaç: Geçmiş bilgiyi tutan bir **hafıza** (hidden state).
+
+Görseller:
+
+![RNN Giriş Motivasyonu](Images/265.jpg)
+![Sıralı Veri Örnekleri](Images/266.jpg)
+
+<a id="rnn-hidden"></a>
+
+### Döngüsel Yapı ve Hidden State
+
+- RNN, önceki adımın gizli durumunu (hidden state) mevcut girdiye ekleyerek tekrar kendine besler.
+- Gizli durum $h_t$, modelin o ana kadar gördüklerinin sıkıştırılmış özetidir.
+
+Sezgisel denklem:
+
+$$h_t = f(x_t, h_{t-1})$$
+
+- Aynı fonksiyon ve aynı parametreler her zaman adımında paylaşılır.
+
+Görseller:
+
+![RNN Döngü](Images/267.jpg)
+![Unrolled RNN](Images/268.jpg)
+![RNN Çıkış Bağımlılığı](Images/269.jpg)
+![Ağırlık Paylaşımı](Images/270.jpg)
+![Hidden State Etkisi](Images/271.jpg)
+![RNN Şema 1](Images/272.jpg)
+
+<a id="rnn-bptt"></a>
+
+### BPTT ve Vanishing Gradient
+
+- RNN eğitimi, **Backpropagation Through Time (BPTT)** ile yapılır.
+- Hata sinyali zaman adımları boyunca geriye yayılır.
+
+Ana sorun:
+
+- **Vanishing gradient**: Zincir kuralı ile çok sayıda küçük türev çarpıldığında gradyan sıfıra yaklaşır; uzak geçmişten öğrenmek zorlaşır.
+
+Görseller:
+
+![BPTT](Images/273.jpg)
+![Vanishing Gradient](Images/274.jpg)
+
+<a id="rnn-windowing"></a>
+
+### Zaman Serileri: Windowing (Pencereleme)
+
+Tek sütunlu bir zaman serisinden (örn. günlük yolcu sayısı) eğitim örnekleri üretmek için yaygın yöntem:
+
+- Geçmiş $k$ adımı girdi ($X$) yap,
+- Hemen sonraki değeri veya sonraki $N$ değeri hedef ($y$) yap.
+
+Örnek (k=3):
+
+- $X=[112,118,132] \rightarrow y=129$
+- $X=[118,132,129] \rightarrow y=121$
+
+Görseller:
+
+![Windowing Örnek](Images/275.jpg)
+![Pencerenin Kayması](Images/276.jpg)
+
+<a id="rnn-horizon"></a>
+
+### Sequence Length ve Prediction Horizon
+
+- **Sequence length (input window)**: Modelin kaç geçmiş adımı “hatırladığı” (pencere genişliği).
+  - Kısa pencere: yakın geçmişe duyarlı
+  - Uzun pencere: mevsimsellik/uzun bağımlılık yakalayabilir; maliyet artar
+- **Prediction horizon (output window)**: kaç adım ileri tahmin.
+  - Single-step: bir sonraki adım (many-to-one)
+  - Multi-step: gelecek $N$ adım (many-to-many)
+
+Görseller:
+
+![Sequence Length / Horizon](Images/277.jpg)
+
+<a id="rnn-tensors"></a>
+
+### Tensor Boyutları ve Data Leakage
+
+Windowing sonrası RNN girdisi tipik olarak 3 boyutludur:
+
+$$[\text{Batch Size},\; \text{Sequence Length},\; \text{Input Size}]$$
+
+- Batch size: aynı anda kaç pencere
+- Sequence length: pencere genişliği
+- Input size: her adımda özellik sayısı (örn. 1)
+
+Kritik uyarı (zaman serisi):
+
+- Train/test ayırırken ve windowing yaparken **shuffle yapılmaz**.
+- Shuffle, testte “geleceği” sızdırır → **data leakage**.
+
+Görseller:
+
+![RNN Tensor Boyutları](Images/278.jpg)
+![Zaman Serisinde Shuffle Olmaz](Images/279.jpg)
+
+### Hızlı Sorular
+
+1) RNN’lerin ANN/CNN’e göre temel avantajı nedir?
+2) Hidden state $h_t$ neyi temsil eder?
+3) BPTT neden vanishing gradient sorununu büyütebilir?
+4) Zaman serisinde shuffle neden data leakage doğurur?
+
+<a id="lstm"></a>
+
+## LSTM (Long Short-Term Memory)
+
+<a id="lstm-why"></a>
+
+### Motivasyon: Uzun Vadeli Bağımlılık
+
+- Standart RNN, yakın geçmişi hatırlayıp uzak geçmişi unutmaya eğilimlidir.
+- Uzak bilgi kritik olduğunda (özellikle dilde) bu “unutkanlık” ciddi sorun yaratır.
+- LSTM (1997, Hochreiter & Schmidhuber), RNN’in uzun bağımlılık sorununu hafifletmek için geliştirilmiştir.
+
+Görseller:
+
+![Uzun Vadeli Unutkanlık](Images/280.jpg)
+![LSTM Motivasyon](Images/281.jpg)
+
+<a id="lstm-gates"></a>
+
+### Cell State ve Kapılar
+
+- **Cell state ($C_t$)**: bilginin uzun süre taşınabildiği “otoban”.
+- **Kapılar (gates)**: hangi bilginin silineceğini/ekleneceğini kontrol eder (sigmoid ile 0–1).
+
+Ana kapılar:
+
+1) **Forget gate**: gereksiz bilgiyi siler
+2) **Input gate**: yeni bilgiyi ekler
+3) **Output gate**: bir sonraki adıma aktarılacak çıktıyı belirler
+
+Görseller:
+
+![LSTM Şema](Images/282.jpg)
+![Cell State ve Gates](Images/283.jpg)
+![Forget Gate](Images/284.jpg)
+![Input Gate](Images/285.jpg)
+![Output Gate](Images/286.jpg)
+
+<a id="rnn-apps"></a>
+
+### Uygulamalar
+
+- Sentiment classification
+- Image captioning (CNN + RNN/LSTM)
+
+Görseller:
+
+![RNN/LSTM Uygulamaları](Images/287.jpg)
+![Sentiment Classification](Images/288.jpg)
+![Image Captioning](Images/289.jpg)
+
+### Hızlı Sorular
+
+1) LSTM’de cell state neden uzun bağımlılıkları taşımaya uygundur?
+2) Forget gate neyi kontrol eder?
+3) CNN + LSTM hangi görevde sık kullanılır?
+
+<a id="text-vectorization"></a>
+
+## Metin Vektörleştirme ve Embedding
+
+<a id="one-hot"></a>
+
+### Vocabulary ve One-Hot
+
+- **Vocabulary (sözlük)**: veri setindeki tüm kelimelerin tekrarsız listesi.
+- One-hot: sözlük boyutu kadar uzunlukta bir vektörde, kelimenin indeksine 1, diğerlerine 0.
+
+Sorunlar:
+
+1) **Boyut**: sözlük 100k ise 100k boyutlu seyrek vektör.
+2) **Anlamsal yakınlık yok**: “otel” ve “motel” one-hot’ta eşit uzaklıkta.
+
+Görseller:
+
+![Text Vectorization](Images/290.jpg)
+
+<a id="word-embeddings"></a>
+
+### Word Embeddings
+
+- One-hot yerine kelimeleri daha küçük (örn. 50/100/300) boyutlu, yoğun (float) vektörlerle temsil ederiz.
+- Bu vektörler **eğitim sırasında öğrenilir**; benzer kelimeler uzayda birbirine yaklaşır.
+
+<a id="nn-embedding"></a>
+
+### PyTorch: nn.Embedding
+
+`nn.Embedding`, pratikte eğitilebilir büyük bir tablo (matris) gibi çalışır:
+
+- Girdi: kelime ID’si (`LongTensor`)
+- Çıktı: o ID’ye karşılık gelen embedding vektörü
+
+Örnek:
+
+```python
+import torch
+import torch.nn as nn
+
+embed_layer = nn.Embedding(num_embeddings=1000, embedding_dim=50)
+
+word_index = torch.tensor([5], dtype=torch.long)
+vector = embed_layer(word_index)
+print(vector.shape)  # torch.Size([1, 50])
+```
+
+Not:
+
+- Bu embedding vektörleri genellikle RNN/LSTM gibi sıralı modellere giriş olarak verilir.
+
+Görseller:
+
+![nn.Embedding](Images/291.jpg)
+
+### Hızlı Sorular
+
+1) One-hot neden verimsizdir?
+2) Embedding neden anlamsal benzerlik yakalayabilir?
+3) `nn.Embedding` katmanı backprop ile nasıl öğrenir?
+
+<a id="transformers"></a>
+
+## Transformer Mimarisi
+
+<a id="why-transformers"></a>
+
+### Transformer’a Geçiş (Neden?)
+
+- RNN tabanlı modellerde uzun cümlelerde **uzak bağımlılıkları (long-range dependency)** öğrenmek zordur.
+- RNN tabanlı modellerin **paralelleştirilmesi güçtür**; her adım bir önceki adıma bağımlıdır.
+- Eğitim süreci uzundur; derinleştikçe **gradyan kaybolması/taşması** gibi problemler artar.
+
+Görseller:
+
+![Transformer’a geçiş](Images/292.jpg)
+
+<a id="transformer-architecture"></a>
+
+### Genel Mimari: Encoder–Decoder
+
+- Transformer, temel olarak bir **temsil öğrenme (representation learning)** mimarisidir. İlk olarak 2017’de yayımlanan *“Attention is All you Need”* çalışmasıyla tanıtılmıştır.
+- Amaç: Her kelimeyi yalnızca kendisiyle değil, **diğer tüm kelimelerle olan ilişkisiyle birlikte** temsil etmek.
+- Geleneksel embedding yöntemlerinde (Word2Vec/GloVe) bağlam sabitken, Transformer’da bağlam **dinamik** olarak değişir.
+
+Encoder:
+
+- Girdi dizisindeki tüm kelimeleri **paralel** işler.
+- Her kelime için zengin, bağlam bilgisine sahip bir vektör çıktısı üretir.
+
+Encoder çıktısı ne işe yarar?
+
+- Decoder’a aktarılır (**encoder–decoder attention / cross-attention**).
+- Cümlenin tamamına yönelik bir “bilgi haritası” olarak düşünülebilir.
+- BERT gibi sadece encoder kullanan modellerde görev çıktısı olarak doğrudan kullanılabilir.
+
+Görseller:
+
+![Transformer genel şema](Images/293.jpg)
+![Encoder çıktısının rolü](Images/294.jpg)
+
+<a id="self-attention"></a>
+
+### Self-Attention: Query, Key, Value
+
+- Encoder’ın en kritik bileşeni: **Multi-Head Self-Attention**.
+- Girdideki her kelime, diğer tüm kelimelere bakarak ilişkilerini hesaplar.
+- Her token için 3 vektör üretilir:
+  - **Query (Q)**
+  - **Key (K)**
+  - **Value (V)**
+
+Temel fikir:
+
+- Her token’ın Query’si ile tüm token’ların Key’leri arasında benzerlik ölçülür.
+- Elde edilen skorlar **softmax** ile olasılığa çevrilir.
+- Bu olasılıklar ile Value vektörleri **ağırlıklı toplanır**.
+- Sonuç: modelin o konumda hangi bilgilere odaklandığı.
+
+Görseller:
+
+![Encoder katmanı bileşenleri](Images/295.jpg)
+![Multi-Head Attention yapısı](Images/296.jpg)
+![Q, K, V vektörleri](Images/297.jpg)
+
+<a id="scaled-dot-product-attention"></a>
+
+### Scaled Dot-Product Attention
+
+Dot-product / scaled attention genel formu:
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right) V$$
+
+- $QK^\top$: hangi kelimenin hangisine ne kadar dikkat edeceği.
+- $\sqrt{d_k}$ ile ölçekleme: skorların çok büyümesini engelleyerek softmax’ı daha stabil hale getirir.
+
+Görseller:
+
+![Scaled dot-product attention](Images/298.jpg)
+
+<a id="multi-head-attention"></a>
+
+### Multi-Head Attention
+
+- Tek bir dikkat hesabı yerine, birden çok “head” ile farklı alt uzaylarda dikkat hesaplanır.
+- Her head farklı tür ilişkileri öğrenebilir.
+
+Görseller:
+
+![Multi-head sezgisi](Images/299.jpg)
+
+<a id="add-norm"></a>
+
+### Add & Norm (Residual + LayerNorm)
+
+- Attention çıktısı, girişle toplanır (**residual connection**) ve **layer normalization** uygulanır.
+- Öğrenmeyi stabil hale getirir; derin mimaride gradyan kaybolmasını azaltır.
+- Modelin “orijinal bilgiyi” korumasına yardımcı olur.
+
+<a id="ffn"></a>
+
+### Feed Forward Network (FFN)
+
+- Her token embedding’i, iki katmanlı konum-bağımsız bir MLP’ye gider.
+- Yapı: `Linear → ReLU (veya GELU) → Linear`
+- Her pozisyonda aynı ağ çalışır (parametreler paylaşılır).
+
+<a id="decoder-masked-attention"></a>
+
+### Decoder: Masked Self-Attention
+
+- Decoder, çıktı dizisini soldan sağa üretir.
+- **Masked self-attention**: modelin henüz üretmediği “gelecek” kelimelere bakmasını engeller.
+- Maske olmazsa model “kopya çekmiş” olur.
+
+Görseller:
+
+![Decoder masked attention](Images/300.jpg)
+
+<a id="cross-attention"></a>
+
+### Cross-Attention (Encoder–Decoder)
+
+- Decoder, üretmeye çalıştığı kelime için encoder’daki tüm kelimelere bakar.
+- Önemli ayrıntı:
+  - Query → decoder’dan gelir
+  - Key & Value → encoder’dan gelir
+- Görevi: girdi cümlesi ile çıktı cümlesi arasında ilişki kurmak (örn. çeviri eşleştirmeleri).
+
+Görseller:
+
+![Encoder–Decoder attention](Images/301.jpg)
+
+Decoder’ın son aşaması:
+
+- Katmanlardan çıkan vektörler `Linear + Softmax` ile kelime dağarcığı üzerinde olasılığa çevrilir.
+- En olası kelime seçilir veya sampling yapılır.
+
+Görseller:
+
+![Linear + Softmax çıkışı](Images/302.jpg)
+
+<a id="transformer-apps"></a>
+
+### Kullanım Alanları
+
+NLP görevleri:
+
+- **Dil Anlama (Encoder modeller — BERT, RoBERTa)**: sınıflandırma, NER, extractive QA, cümle benzerliği.
+- **Dil Üretimi (Decoder modeller — GPT, LLaMA)**: metin üretimi/tamamlama, diyalog, abstraktif özetleme, kod üretimi.
+- **Encoder–Decoder (T5, BART)**: çeviri, paraphrasing, soru üretimi, özetleme.
+
+Görüntü ve multimodal:
+
+- **Bilgisayarlı görü (ViT, Swin, DETR)**: sınıflandırma, nesne tespiti, segmentasyon, medikal görüntü.
+- **Multimodal (CLIP, LLaVA, BLIP)**: görüntü–metin eşleştirme, captioning, text-to-image, video analizi.
+
+Ses ve konuşma:
+
+- **Speech Transformers (Whisper, wav2vec2.0, SpeechT5)**: STT, TTS, konuşmacı doğrulama, ses sınıflandırma.
+
+Görseller:
+
+![NLP kullanım alanları](Images/303.jpg)
+![Görüntü ve multimodal](Images/304.jpg)
+![Ses ve konuşma](Images/305.jpg)
+
+<a id="bert"></a>
+
+### BERT (Encoder-only)
+
+- **Bidirectional Encoder Representations from Transformers (BERT)**: Google tarafından geliştirilen Transformer tabanlı dil modeli.
+- Cümleyi iki yönlü (soldan sağa + sağdan sola) okur.
+- Önceden eğitilmiş (pretrained) gelir ve çoğu görev için **fine-tuning** ile uyarlanır.
+
+BERT’in uygulama alanları:
+
+- Metin sınıflandırma (duygu analizi, konu tespiti)
+- Soru-cevap (Question Answering)
+- Metin benzerliği / arama motorları
+
+Görseller:
+
+![BERT genel bakış](Images/306.jpg)
+![BERT uygulama alanları](Images/307.jpg)
+![BERT ile soru-cevap uygulaması](Images/308.jpg)
+
+<a id="gpt"></a>
+
+### GPT (Decoder-only)
+
+- **Generative Pre-trained Transformer (GPT)**: metin üretme ve dil modelleme için kullanılan bir dil modelidir.
+- GPT, metni sadece soldan sağa okur ve bir kelimeyi tahmin etmek için önceki kelimelere dayanır (**next token prediction**).
+
+Görseller:
+
+![GPT genel bakış](Images/309.jpg)
+![Next token prediction örneği](Images/310.jpg)
+
+GPT’nin tarihsel gelişimi (slayt özeti; sürüm/tarih detayları hızlı değişebilir):
+
+| Sürüm | Yıl | Parametre | Not |
+| --- | --- | ---: | --- |
+| GPT-1 | 2018 | 117M | İlk decoder-only model |
+| GPT-2 | 2019 | 1.5B | Zero-shot başarı, güvenlik tartışmaları |
+| GPT-3 | 2020 | 175B | Few-shot learning devrimi |
+| GPT-3.5 | 2022 | – | ChatGPT ilk sürüm |
+| GPT-4 | 2023 | – | Multimodal |
+| GPT-4o | 2024 | – | Real-time modal |
+| GPT-5/5.1 | 2024–25 | – | Uzun bağlam, reasoning, tool use |
+
+Görseller:
+
+![GPT tarihsel gelişim](Images/311.jpg)
+
+<a id="gpt-vs-bert"></a>
+
+### GPT vs BERT
+
+| Özellik | BERT | GPT |
+| --- | --- | --- |
+| Yapı | Encoder | Decoder |
+| Attention yönü | Bidirectional | Unidirectional (masked) |
+| Görev odağı | Anlama | Üretme |
+| Eğitim hedefi | Masked LM | Next token prediction |
+| Kullanım | Sınıflandırma/QA vb. | Metin üretimi/tamamlama |
+
+Görseller:
+
+![GPT vs BERT](Images/312.jpg)
+
+Uygulama fikirleri:
+
+- BERT ile soru-cevap
+- GPT ile soru-cevap
+- GPT ile metin üretimi
+
+Görseller:
+
+![GPT ile soru-cevap](Images/313.jpg)
+![GPT ile metin üretimi](Images/314.jpg)
+
+<a id="transformer-trends"></a>
+
+### Güncel Araştırmalar ve Gelecek Trendler (Özet)
+
+- Daha büyük bağlam pencereleri ve daha güçlü akıl yürütme
+- **Multimodality** (metin + görüntü + ses)
+- **RAG** ve harici bilgi kullanımı
+- Araç kullanan / adım planlayan **ajan** sistemler
+- Güvenlik, adalet, etik ve sorumluluk (örn. Constitutional AI)
+- Daha fazla dil ve düşük kaynaklı dillere destek
+
+<a id="nlp-platforms"></a>
+
+### NLP Platformları
+
+- **Hugging Face**: hazır Transformer modelleri, veri setleri; hızlı prototipleme ve fine-tuning.
+- **TensorFlow Hub**: yeniden kullanılabilir modül paylaşımı (örn. Universal Sentence Encoder gibi embedding modülleri).
+- **PyTorch Hub**: araştırma odaklı modellerin hızlı entegrasyonu; deneysel prototipler.
+
+Görseller:
+
+![NLP platformları](Images/315.jpg)
 
 <a id="regression-problem"></a>
 
